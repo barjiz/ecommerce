@@ -1,0 +1,42 @@
+.ordersuccess {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.ordersuccess .circle {
+    font-size: 7rem;
+    color: green;
+    margin: 30px 0;
+}
+
+.ordersuccess h1 {
+    color: black;
+    margin: 4px 0;
+    font-size: 1.8rem;
+    font-weight: bolder;
+}
+
+.ordersuccess h2 {
+    color: black;
+    margin: 7px 0;
+    font-size: 1.3rem;
+    font-weight: normal;
+}
+
+.ordersuccess button {
+    margin: 60px 0;
+    color: white;
+    padding: 13px 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: dodgerblue;
+}

@@ -1,0 +1,38 @@
+.radio_cards {
+    width: 100%;
+}
+
+
+label {
+    margin: 20px 0px;
+}
+
+
+.card_input {
+    width: 90%;
+    background-color: white;
+    box-shadow: 1px 1px 7px 0px #7090b050;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px auto;
+}
+
+.card_input .panel_body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card_input_element {
+    display: none;
+}
+
+.card_input_element:checked+.card_input {
+    border: 2px solid #ff2e63;
+}
+
+.card_input_element:checked+.card_input h4 {
+    background-color: #ff2e63;
+}

@@ -1,0 +1,15 @@
+.header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  top: 0;
+  left: 0;
+}
+
+.header i {
+  font-size: 2rem;
+  margin: 20px;
+}

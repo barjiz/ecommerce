@@ -1,0 +1,19 @@
+.add_address {
+    width: 100%;
+    background-color: rgb(244, 244, 244);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.address_holder {
+    width: 90%;
+    margin: auto;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(244, 244, 244);
+}

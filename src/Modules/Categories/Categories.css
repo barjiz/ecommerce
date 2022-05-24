@@ -1,0 +1,30 @@
+.categories {
+    padding-top: 120px;
+    padding-bottom: 50px;
+}
+
+
+.categories .categories_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: white;
+    width: 100%;
+    padding: 7px;
+}
+
+@media screen and (min-width:900px) {
+
+    .categories .categories_header {
+           flex-direction: row;
+   
+   
+    }
+
+
+}
