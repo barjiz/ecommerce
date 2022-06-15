@@ -4,6 +4,7 @@ import { Button } from '../../Components/Button/Button'
 import { Header } from '../../Components/Header/Header'
 import { H3 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
+import { ResponsiveWrap } from '../../Components/UI/ResponsiveWrap/ResponsiveWrap'
 import { UserAddress } from './UserAddress'
 
 export const Address = ({ nextPage, prevPage, setAddress }) => {
@@ -13,7 +14,7 @@ export const Address = ({ nextPage, prevPage, setAddress }) => {
 
     return (
 
-        <div>
+        <ResponsiveWrap>
 
             <Header justifyContent="space-between">
 
@@ -30,13 +31,11 @@ export const Address = ({ nextPage, prevPage, setAddress }) => {
             <UserAddress setAddress={setAddress} />
 
 
-            <Flex position="fixed" bottom="70px">
-
-                <Button color="dark" onClick={() => navigate('/profile')} width="100%" margin="10px">Back</Button>
-
-            </Flex>
+            <Button color="dark" onClick={() => navigate('/profile')} margin="10px auto">Back</Button>
 
 
-        </div>
+
+
+        </ResponsiveWrap>
     )
 }

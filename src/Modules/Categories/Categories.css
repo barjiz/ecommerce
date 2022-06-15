@@ -1,5 +1,4 @@
 .categories {
-    padding-top: 120px;
     padding-bottom: 50px;
 }
 
@@ -18,13 +17,16 @@
     padding: 7px;
 }
 
-@media screen and (min-width:900px) {
+@media screen and (max-width:600px) {
 
-    .categories .categories_header {
-           flex-direction: row;
-   
-   
+
+
+    .categories .nav_small {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px;
+
     }
-
 
 }

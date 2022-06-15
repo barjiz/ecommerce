@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../Components/Button/Button'
 import { Header } from '../../Components/Header/Header'
 import { H3 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
+import { ResponsiveWrap } from '../../Components/UI/ResponsiveWrap/ResponsiveWrap'
 import { UserAddress } from '../Address/UserAddress'
 
 export const ManageAddress = ({ nextPage, prevPage, setAddress }) => {
 
+    const [nextbtn, setNextBtn] = useState(true)
 
     return (
 
-        <div>
+        <ResponsiveWrap>
 
             <Header justifyContent="space-between">
 
@@ -25,18 +27,9 @@ export const ManageAddress = ({ nextPage, prevPage, setAddress }) => {
             </Header>
 
 
-            <UserAddress setAddress={setAddress} />
+            <UserAddress nextbtn={nextbtn} setAddress={setAddress} prevPage={prevPage} nextPage={nextPage} />
 
 
-            <Flex position="fixed" bottom="0" padding="60px 0">
-
-                <Button color="white" onClick={prevPage} width="50%" margin="10px">Back</Button>
-
-                <Button color="blue" onClick={nextPage} width="100%" margin="10px" >Next</Button>
-
-            </Flex>
-
-
-        </div>
+        </ResponsiveWrap>
     )
 }

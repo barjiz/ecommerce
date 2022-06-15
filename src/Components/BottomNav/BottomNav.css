@@ -29,7 +29,7 @@
 
 .bottom-nav .icon-active i {
   color: #7B68EE;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 
 }
 
@@ -43,9 +43,9 @@
 }
 
 
-.bottom-nav .icon-not-active {
+.bottom-nav .icon-not-active i {
   color: grey;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 

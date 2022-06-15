@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom'
 import { Products } from '../Products/Products'
 
 import { Grid } from "../../Components/UI/Grid/Grid"
-import { SearchBar } from '../../Components/SearchBar/SearchBar'
-import { Flex } from '../../Components/UI/Flex/Flex'
+
+import "./CategoriesDetails.css"
 
 export const CategoriesDetails = () => {
 
@@ -12,26 +12,18 @@ export const CategoriesDetails = () => {
 
 
     return (
-        <div >
+        <div className='categories_details' >
 
-            <Flex zIndex="100" position="fixed" top="0">
+            <Grid >
 
-                <SearchBar />
+                <Products
+                    width="100%"
+                    height="180px"
+                    class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2  col-xxl-2" category={id} />
 
-            </Flex>
-
-            <div style={{ margin: "60px 0" }}>
-
-                <Grid >
-
-                    <Products category={id} />
-
-                </Grid>
-
-            </div>
+            </Grid>
 
 
-
-        </div>
+        </div >
     )
 }

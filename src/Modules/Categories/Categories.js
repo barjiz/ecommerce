@@ -15,14 +15,6 @@ export const Categories = (props) => {
 
     <div className='categories'>
 
-      <div className='categories_header'>
-
-        <img width="80px" src={require("../../Assets/Images/logo/logo.png")} />
-
-        <SearchBar />
-
-      </div>
-
       {category.map(data =>
 
         <React.Fragment key={data.category}>
@@ -32,6 +24,7 @@ export const Categories = (props) => {
             <Flex margin="10px 0" flexDirection={props.flexDirection} backgroundColor="rgb(255, 245, 219)" justifyContent="space-between">
 
               <H5 fontWeight="bold" margin="10px">{data.product_name}</H5>
+
 
               <img width="30%" className="cate-img" src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
 

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Button } from '../../Components/Button/Button'
+import { Flex } from '../../Components/UI/Flex/Flex'
 
 import { Cart } from '../Cart/Cart'
 import { ConfirmOrder } from '../ConfirmOrder/ConfirmOrder'
@@ -9,18 +11,7 @@ export const DeliveryForm = () => {
     const [tabs, setTabs] = useState(1)
 
 
-    const [address, setAddress] = useState(
-        {
-            id: "1",
-            fullName: "barjiz",
-            phoneNumber: "94838383",
-            pinCode: "57464",
-            place: "mavoor"
-        }
-    );
-
-
-
+    const [address, setAddress] = useState([]);
 
     const nextPage = () => {
 
@@ -54,6 +45,7 @@ export const DeliveryForm = () => {
                             prevPage={prevPage}
                             setTabs={setTabs} /> : null
             }
+
 
         </div>
 

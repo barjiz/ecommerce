@@ -1,0 +1,34 @@
+.responsive_wrap {
+    width: 95%;
+    margin: auto;
+    margin-top: 100px;
+}
+
+
+@media screen and (min-width:400px) {
+
+    .responsive_wrap {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width:600px) {
+
+    .responsive_wrap {
+        width: 85%;
+    }
+}
+
+@media screen and (min-width:800px) {
+
+    .responsive_wrap {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width:1000px) {
+
+    .responsive_wrap {
+        width: 50%;
+    }
+}

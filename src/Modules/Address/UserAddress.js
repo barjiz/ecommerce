@@ -1,46 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react'
-
-
+import React, { useState } from 'react'
 import jwt_decode from "jwt-decode";
-import { useNavigate } from 'react-router-dom';
 import { fetchProfile } from '../Profile/Method';
-import { H2, H3, H4 } from '../../Components/Text/Text';
+import { H3, H4 } from '../../Components/Text/Text';
 import { Flex } from '../../Components/UI/Flex/Flex';
-import { Card } from '../../Components/Card/Card';
-import { Button, PrimaryBtn } from '../../Components/Button/Button';
-
+import { Button } from '../../Components/Button/Button';
 import { CreateAddress } from "../../Modules/Address/CreateAddress/CreateAddress"
-
 import "./UserAddress.css"
 import { RadioCard } from '../../Components/Radio/RadioCard';
 import { useQuery } from 'react-query';
+import { EditAddress } from './EditAddress/EditAddress';
 
-export const UserAddress = ({ setAddress }) => {
+export const UserAddress = ({ nextbtn, nextPage, prevPage, setAddress }) => {
 
 
     var token = localStorage.getItem("authToken");
     var decoded = jwt_decode(token);
-
-
-    // const navigate = useNavigate()
-
-    // const [profile, setProfile] = useState()
-
-
-    // const FetchAddress = useCallback(() => {
-
-    //     fetchProfile(decoded.id).then(res => setProfile(res.data.user))
-
-    // })
-
-
-
-    // useEffect(() => {
-
-    //     FetchAddress()
-
-    // }, [setProfile])
-
 
     const { refetch, data: loggedprofiles } = useQuery(['loggedprofiles', decoded.id], () => fetchProfile(decoded.id), {
 
@@ -56,6 +30,11 @@ export const UserAddress = ({ setAddress }) => {
     const [addAddress, setAddAddress] = useState(false)
 
 
+    const [editAddress, setEditAddress] = useState(false)
+
+    const Delete = () => {
+
+    }
 
     return (
         <div className='user_address'>
@@ -86,7 +65,7 @@ export const UserAddress = ({ setAddress }) => {
                             {profile?.address?.map(data =>
 
 
-                                <RadioCard onChange={(e) => { setAddress(data) }} id={data._id} value={data}>
+                                <RadioCard onChange={() => setAddress(data)} id={data._id} value={data}>
 
 
                                     <Flex padding="20px 10px" width="100%" flexDirection="column" alignItems="flex-start">
@@ -113,8 +92,8 @@ export const UserAddress = ({ setAddress }) => {
                                         </Flex>
 
                                         <Flex>
-                                            <Button width="100%" color="green" margin="20px 20px 0 0">Edit</Button>
-                                            <Button width="60%" color="red" margin="20px 0 0 0">Delete</Button>
+                                            <Button width="100%" color="green" margin="20px 20px 0 0" onClick={() => setEditAddress(true)}>Edit</Button>
+                                            <Button onClick={Delete} width="60%" color="red" margin="20px 0 0 0">Delete</Button>
                                         </Flex>
 
 
@@ -138,11 +117,28 @@ export const UserAddress = ({ setAddress }) => {
 
 
 
-                    <Button color="danger" width="95%" margin="10px auto"
-                        onClick={() => setAddAddress(true)}>Add New Address</Button>
+                    {profile?.address.length === 0 && <Button color="danger" margin="10px auto"
+                        onClick={() => setAddAddress(true)}>Add New Address</Button>}
+
+
+                    {nextbtn && profile?.address.length > 0 &&
+
+                        <Flex width="100%" position="fixed" bottom="0" left="0" padding="60px 0">
+
+                            <Button color="white" onClick={prevPage} margin="10px">Back</Button>
+
+                            <Button color="blue" onClick={nextPage} width="100%" margin="10px" >Next</Button>
+
+                        </Flex>}
+
 
                 </>
             }
+
+
+
+
+            {editAddress && <EditAddress profile={profile} refetch={refetch} setEditAddress={setEditAddress} />}
 
         </div>
     )

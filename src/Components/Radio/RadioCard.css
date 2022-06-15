@@ -4,12 +4,12 @@
 
 
 label {
-    margin: 20px 0px;
+    width: 100%;
 }
 
 
 .card_input {
-    width: 90%;
+    width: 100%;
     background-color: white;
     box-shadow: 1px 1px 7px 0px #7090b050;
     display: flex;

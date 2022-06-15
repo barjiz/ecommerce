@@ -1,0 +1,14 @@
+.categories_details {
+    margin-top: 100px;
+}
+
+
+@media screen and (max-width:600px) {
+
+
+    .categories_details {
+        margin-top: 0;
+        margin-bottom: 60px;
+    }
+
+}

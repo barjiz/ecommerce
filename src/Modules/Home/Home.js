@@ -1,106 +1,136 @@
-import React from 'react'
-import { Header } from '../../Components/Header/Header'
-import { Flex, FlexRow } from '../../Components/UI/Flex/Flex'
+import React, { useState } from 'react'
+import { Flex } from '../../Components/UI/Flex/Flex'
 import { category } from '../../LocalData/Category'
-import { Categories } from '../Categories/Categories'
-
 import { Products } from '../Products/Products'
-
-import { Grid } from "../../Components/UI/Grid/Grid"
-
 import './Home.css'
-import { H2, H3, H5, H6, H7 } from '../../Components/Text/Text'
-
+import { H3, H5, H6 } from '../../Components/Text/Text'
 import { SearchBar } from '../../Components/SearchBar/SearchBar'
 import { useNavigate } from 'react-router-dom'
 import { Navigator } from '../../Components/Route/Router'
+import { Grid } from '../../Components/UI/Grid/Grid'
+import { SwiperSlide } from 'swiper/react'
+import { SwiperCarousel } from '../../Components/Slider/SwiperCarousel/SwiperCarousel'
 
 const Home = () => {
 
   const navigate = useNavigate()
+
+  const [menuBar, setMenuBar] = useState(false)
+
+
+  const style = {
+    left: "-260px"
+  }
+
+  if (menuBar) {
+    style.left = "0"
+  }
+  else {
+    style.left = "-100%"
+  }
+
+
+  const banner = [
+    {
+      image: "vegitablesbanner.jpg",
+
+    },
+    {
+      image: "bakerycakebanner.jpg",
+
+    },
+    {
+      image: "foodgrainsoilbanner.jpg",
+
+    }
+  ]
 
   return (
 
     <div className='home'>
 
 
-      <div className='home_header'>
+      <div className='nav_small'>
 
-        <img width="80px" src={require("../../Assets/Images/logo/logo.png")} />
+        <img style={{ margin: "0 10px" }} width="80px" src={require("../../Assets/Images/logo/logo.png")} />
 
         <SearchBar />
 
       </div>
 
 
+      <SwiperCarousel>
 
 
-      <img style={{ width: "100%", height: "200px", objectFit: "cover", marginBottom: "50px" }} src={require(`../../Assets/Images/product_banner/vegitablesbanner.jpg`)} alt="" />
+        {banner.map(data => (
+
+          <SwiperSlide>
+
+            <img width="100%" height="200px"
+              src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
+
+          </SwiperSlide>
+
+        ))}
+
+
+      </SwiperCarousel>
 
 
       <H3 margin="20px 10px">Shop By Categories</H3>
 
 
-      <div className='category_list' >
-
+      <Grid>
 
         {category.map(data =>
 
-          <React.Fragment key={data.category}>
-
+          <div className='col-4 col-sm-3 col-md-3 col-lg-3 col-xl-2  col-xxl-2'>
             <Navigator route={`/categories/${data.category}`}>
+              <img width="100%" className="cate-img" src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
 
-              <div>
-
-                <img width="100px" height="100px" className="cate-img" src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
-
-                <H7 fontWeight="bold" margin="10px 0">{data.product_name}</H7>
-
-              </div>
+              <H6 fontWeight="bold" margin="10px 0">{data.product_name}</H6>
 
             </Navigator>
 
-          </React.Fragment >
+          </div>
 
         )}
 
-
-      </div>
-
+      </Grid>
 
 
       {category.map(cate => (
 
         <div className='category' key={cate.category}>
 
-          <Navigator route={`/categories/${cate.category}`}>
 
-            <img style={{ width: "100%", height: "200px", objectFit: "cover" }} src={require(`../../Assets/Images/product_banner/${cate.banner_wide}`)} alt="" />
-
-          </Navigator>
+          <img width="100%" height="170px" onClick={() => navigate(`/categories/${cate.category}`)} style={{ cursor: "pointer" }} src={require(`../../Assets/Images/product_banner/${cate.banner_wide}`)} alt="" />
 
 
           <Flex>
 
-            <H5 fontWeight="bold" margin="10px">{cate.product_name}</H5>
+            <H3 fontWeight="bold" margin="10px">{cate.product_name}</H3>
 
-            <H5 color="tomato" fontWeight="bold" margin="10px" onClick={() => navigate(`categories/${cate.category}`)}>Load More</H5>
+            <H5 color="tomato" fontWeight="bold" margin="10px" onClick={() => navigate(`/categories/${cate.category}`)}>Load More</H5>
 
           </Flex>
 
 
           <Flex overflowX="scroll" >
 
-            <Products category={cate.category} flexDirection="column" />
+            <Products
+              width="120px"
+              height="120px"
+              category={cate.category} flexDirection="column" />
 
           </Flex>
 
         </div >
 
-      ))}
+      ))
+      }
 
-
-    </div>
+    </div >
 
   )
 }

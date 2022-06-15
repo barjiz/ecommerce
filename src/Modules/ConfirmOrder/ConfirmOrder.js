@@ -16,18 +16,15 @@ import { RadioCard } from '../../Components/Radio/RadioCard';
 
 export const ConfirmOrder = ({ prevPage, address }) => {
 
-    const cart = useSelector((state) => state.cart.cartItems)
+    const cart = useSelector((state) => state.cart)
 
-    const getSumByKey = (arr, key) => {
-        return cart.reduce((accumulator, current) => accumulator + Number(current[key]), 0)
-    }
-
-    const total = getSumByKey(cart, 'price') // 9
 
     const navigate = useNavigate()
 
     var token = localStorage.getItem("authToken");
     var decoded = jwt_decode(token);
+
+
     const PlaceOrder = () => {
 
         axios.post(`${BASE_URL}order`, {
@@ -37,13 +34,8 @@ export const ConfirmOrder = ({ prevPage, address }) => {
             user_id: decoded.id,
 
             cart: {
-                product: cart,
-
-                quantity: "quantity",
-
-                cartlength: cart.length,
-
-                total: total
+                product: cart.cartItems,
+                total: cart.cartTotalAmount
             },
             address: address,
 
@@ -80,15 +72,14 @@ export const ConfirmOrder = ({ prevPage, address }) => {
             </RadioCard >
 
 
-            <Flex position="fixed" bottom="0" padding="60px 0">
+            <Flex width="100%" position="fixed" bottom="0" left="0" padding="60px 0">
 
+                <Button color="white" onClick={prevPage} margin="10px">Back</Button>
 
-                <Button color="white" onClick={prevPage} width="50%" margin="10px">Back</Button>
-
-
-                <Button color="blue" margin="10px " width="100%" onClick={PlaceOrder}>Confirm Order</Button>
+                <Button color="blue" onClick={PlaceOrder} width="100%" margin="10px" >Confirm Order</Button>
 
             </Flex>
+
 
         </div>
 

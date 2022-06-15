@@ -34,7 +34,7 @@ export const Login = () => {
 
     localStorage.setItem("authToken", data.token);
 
-  
+
     navigate('/')
 
     window.location.reload()
@@ -51,9 +51,11 @@ export const Login = () => {
 
         <Header position="fixed">
 
-          <i onClick={() => navigate('/')} class="fa-solid fa-chevron-left"></i>
+          <i onClick={() => navigate('/')} class="fa-solid fa-close"></i>
 
         </Header>
+
+        <i onClick={() => navigate('/')} class="fa-solid fa-close close_auth"></i>
 
         <H2 color="#7B68EE" margin="20px 0">Login</H2>
 

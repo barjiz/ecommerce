@@ -6,7 +6,7 @@ export const H1 = (props) => {
 
     return (
 
-        <h1 className='font_size h1' style={{
+        <h1 className='font_size s1' style={{
 
             flex: props.flex,
             textTransform: props.textTransform,
@@ -26,7 +26,7 @@ export const H2 = (props) => {
 
     return (
 
-        <h1 className='font_size h2' style={{
+        <h1 className='font_size s2' style={{
 
             flex: props.flex,
             textTransform: props.textTransform,
@@ -46,7 +46,7 @@ export const H2 = (props) => {
 export const H3 = (props) => {
 
     return (
-        <h1 className='font_size h3' style={{
+        <h1 className='font_size s3' style={{
 
             flex: props.flex,
             textTransform: props.textTransform,
@@ -68,7 +68,7 @@ export const H4 = (props) => {
 
     return (
 
-        <h1 onClick={props.onClick} className='font_size h4' style={{
+        <h1 onClick={props.onClick} className='font_size s4' style={{
             width: props.width,
             backgroundColor: props.backgroundColor,
             borderRadius: props.borderRadius,
@@ -91,7 +91,10 @@ export const H5 = (props) => {
 
     return (
 
-        <h1 className='font_size h5' onClick={props.onClick} style={{
+        <h1 className='font_size s5' onClick={props.onClick} style={{
+            width: props.width,
+            backgroundColor: props.backgroundColor,
+            borderRadius: props.borderRadius,
             flex: props.flex,
             textTransform: props.textTransform,
             color: props.color,
@@ -101,6 +104,7 @@ export const H5 = (props) => {
             maxWidth: props.maxWidth,
             maxHeight: props.maxHeight,
             fontWeight: props.fontWeight,
+            cursor: props.cursor
 
         }}>{props.children}</h1>
     )
@@ -110,8 +114,11 @@ export const H6 = (props) => {
 
     return (
 
-        <h1 className='font_size h6' style={{
+        <h1 className='font_size s6' style={{
 
+            width: props.width,
+            backgroundColor: props.backgroundColor,
+            borderRadius: props.borderRadius,
             flex: props.flex,
             textTransform: props.textTransform,
             color: props.color,
@@ -132,8 +139,11 @@ export const H7 = (props) => {
 
     return (
 
-        <h1 className='font_size h7' style={{
+        <h1 className='font_size s7' style={{
 
+            width: props.width,
+            backgroundColor: props.backgroundColor,
+            borderRadius: props.borderRadius,
             flex: props.flex,
             textTransform: props.textTransform,
             color: props.color,

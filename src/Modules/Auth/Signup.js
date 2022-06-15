@@ -8,7 +8,7 @@ import { Password, Text } from '../../Components/Input/Input'
 import { H2, H5 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
 import { BASE_URL } from '../../url'
-
+import * as yup from 'yup';
 
 import "./Auth.css"
 
@@ -38,12 +38,14 @@ export const Signup = () => {
 
     localStorage.setItem("authToken", data.token);
 
-  
+
     navigate('/')
 
     window.location.reload()
 
   };
+
+
 
   return (
 
@@ -53,17 +55,31 @@ export const Signup = () => {
 
         <Header position="fixed">
 
-          <i onClick={() => navigate('/')} class="fa-solid fa-chevron-left"></i>
+          <i onClick={() => navigate('/')} class="fa-solid fa-close"></i>
 
         </Header>
 
+
+        <i onClick={() => navigate('/')} class="fa-solid fa-close close_auth"></i>
+
         <H2 color="#7B68EE" margin="20px 0">Sign Up</H2>
 
-        <Text placeholder="Enter your Name"
-          type="email" onChange={(e) => setUsername(e.target.value)} />
+        <Text
+          placeholder="Enter your Name"
+          id="name"
+          type="name"
+          onChange={(e) => setUsername(e.target.value)} />
 
-        <Text placeholder="Enter your Email"
-          type="email" onChange={(e) => setEmail(e.target.value)} />
+
+
+
+
+        <Text
+          placeholder="Enter your Email"
+          id="email"
+          type="email"
+
+          onChange={(e) => setEmail(e.target.value)} />
 
 
         <Password placeholder="Password"

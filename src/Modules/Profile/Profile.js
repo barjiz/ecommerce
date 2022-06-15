@@ -16,6 +16,7 @@ import "./Profile.css"
 
 import jwt_decode from "jwt-decode";
 import { useQuery } from 'react-query'
+import { ResponsiveWrap } from "../../Components/UI/ResponsiveWrap/ResponsiveWrap"
 
 
 export const Profile = () => {
@@ -26,9 +27,6 @@ export const Profile = () => {
 
 
     const navigate = useNavigate()
-
-
-    const id = "626db0930ca36f7401cd608d"
 
 
     const { data: loggedprofiles } = useQuery(['loggedprofiles', decoded.id], () => fetchProfile(decoded.id), {
@@ -53,7 +51,7 @@ export const Profile = () => {
 
     return (
 
-        <div className='profile'>
+        <ResponsiveWrap>
 
 
             <Header justifyContent="space-between">
@@ -66,6 +64,7 @@ export const Profile = () => {
 
 
             </Header>
+
 
 
             <Flex width="100%">
@@ -90,14 +89,6 @@ export const Profile = () => {
             </Flex>
 
 
-
-            {/* {profile?.phone_number ? <H4 margin="10px">{profile?.phone_number}</H4> : null}
-
-            {profile?.gender ? <H4 margin="10px">{profile?.gender}</H4> : null}
-
-            {profile?.dob ? <H4 margin="10px">{profile?.dob}</H4> : null}
- */}
-
             <Flex width="fit-content" onClick={() => navigate('/orders')}>
                 <IconRound backgroundColor="tomato" margin="10px" icon="fa-solid fa-clock"></IconRound>
 
@@ -112,9 +103,23 @@ export const Profile = () => {
 
             </Flex>
 
-            <Button color="dark" width="95%" margin="10px auto" onClick={logout} fontWeight="bold">Log Out</Button>
+
+            <Flex width="fit-content" onClick={() => navigate('/address')}>
+                <IconRound backgroundColor="orange" margin="10px" icon="fa-solid fa-headset"></IconRound>
+
+                <H4 fontWeight="bold">Customer Service</H4>
+
+            </Flex>
 
 
-        </div >
+            <Flex width="fit-content" onClick={logout}>
+                <IconRound backgroundColor="black" margin="10px" icon="fa-solid fa-right-from-bracket"></IconRound>
+
+                <H4 fontWeight="bold">Log Out</H4>
+
+            </Flex>
+
+            /
+        </ResponsiveWrap >
     )
 }

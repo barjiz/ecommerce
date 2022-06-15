@@ -52,24 +52,32 @@ export const OrderDetails = () => {
 
           <div className='order_address'>
 
-            <Flex>
-              <H4 margin="5px" color="brown" fontWeight="bold" flex="1">Name :</H4>
-              <H4 margin="5px" flex="3" fontWeight="bold">{data?.address.full_name}</H4>
-            </Flex>
+            {data?.address.map(dat => (
 
-            <Flex>
-              <H4 margin="5px" color="brown" fontWeight="bold" flex="1">Phone :</H4>
-              <H4 margin="5px" flex="3" fontWeight="bold">{data?.address.phone_number}</H4>
-            </Flex>
-            <Flex>
-              <H4 margin="5px" color="brown" fontWeight="bold" flex="1">Pincode :</H4>
-              <H4 margin="5px" flex="3" fontWeight="bold">{data?.address.pincode}</H4>
-            </Flex>
+              <>
 
-            <Flex>
-              <H4 margin="5px" color="brown" fontWeight="bold" flex="1">Place :</H4>
-              <H4 margin="5px" flex="3" fontWeight="bold">{data?.address.place}</H4>
-            </Flex>
+                <Flex>
+                  <H4 margin="5px" color="brown" fontWeight="bold" flex="1">Name :</H4>
+                  <H4 margin="5px" flex="3" fontWeight="bold">{dat.full_name}</H4>
+                </Flex>
+
+                <Flex>
+                  <H4 margin="5px" color="brown" fontWeight="bold" flex="1">Phone :</H4>
+                  <H4 margin="5px" flex="3" fontWeight="bold">{dat.phone_number}</H4>
+                </Flex>
+                <Flex>
+                  <H4 margin="5px" color="brown" fontWeight="bold" flex="1">Pincode :</H4>
+                  <H4 margin="5px" flex="3" fontWeight="bold">{dat.pincode}</H4>
+                </Flex>
+
+                <Flex>
+                  <H4 margin="5px" color="brown" fontWeight="bold" flex="1">Place :</H4>
+                  <H4 margin="5px" flex="3" fontWeight="bold">{dat.place}</H4>
+                </Flex>
+
+              </>
+
+            ))}
 
           </div>
 

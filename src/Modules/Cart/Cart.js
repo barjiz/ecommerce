@@ -5,56 +5,50 @@ import { Button } from '../../Components/Button/Button'
 import { Card } from '../../Components/Card/Card'
 import { H3, H4 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
-import { remove } from '../../Redux/cartSlice'
+import { addToCart, decreaseCart, getTotals } from '../../Redux/cartSlice'
 import { useDispatch } from 'react-redux'
-import { IconRound } from "../../Components/Icon/Icon"
 import { Header } from "../../Components/Header/Header"
-import { addToCart, cartQty } from '../../Redux/cartSlice'
 import "./Cart.css"
-import { DropDown, DropDown2 } from '../../Components/Input/Input'
 import { Navigator } from '../../Components/Route/Router'
+import { ResponsiveWrap } from '../../Components/UI/ResponsiveWrap/ResponsiveWrap'
+import { useEffect } from 'react'
 
 export const Cart = ({ nextPage }) => {
 
-  const cart = useSelector((state) => state.cart.cartItems)
+  const cart = useSelector((state) => state.cart)
 
-
-  const qtyy = useSelector((state) => state.cart.cartTotalQuantity)
 
 
   let navigate = useNavigate()
 
   const dispatch = useDispatch()
 
-  const [qty, setQty] = useState(1)
 
-  console.log("cart", cart)
+  useEffect(() => {
 
-  console.log("qtyy", qtyy)
+    dispatch(getTotals())
+
+  }, [cart, dispatch])
 
 
-
-
-  const getSumByKey = (arr, key) => {
-    return cart.reduce((accumulator, current) => accumulator + Number(current[key]), 0)
+  const handleDecreaseCart = (cartItem) => {
+    dispatch(decreaseCart(cartItem))
   }
 
-  const total = getSumByKey(cart, 'price') // 9
-
-  const handleAddToCart = (product) => {
-
-    dispatch(cartQty(product))
+  const handleIncreaseCart = (cartItem) => {
+    dispatch(addToCart(cartItem))
   }
 
 
+  const myCart = JSON.parse(localStorage.getItem("cartItems"))
 
 
   return (
 
-    <div className="cart">
+    <ResponsiveWrap>
 
 
-      <Header backgroundColor="white" justifyContent="space-between" position="fixed">
+      <Header>
 
         <i onClick={() => navigate('/')} class="fa-solid fa-chevron-left"></i>
 
@@ -62,9 +56,10 @@ export const Cart = ({ nextPage }) => {
 
         <i style={{ color: 'white' }} class="fa-solid fa-chevron-left"></i>
 
-
       </Header>
-      {cart.length === 0 ? (
+
+
+      {cart.cartItems.length === 0 ? (
 
         <div className="emptyCart">
 
@@ -81,52 +76,58 @@ export const Cart = ({ nextPage }) => {
         <div>
 
 
-          {cart?.map(da => (
+          {cart.cartItems.map(cartItem => (
 
-            <React.Fragment key={da._id}>
+            <React.Fragment key={cartItem._id}>
 
-              <Card >
+              <Card margin="10px 0" padding="10px 0" >
 
 
                 <Flex backgroundColor="white" width="100%" justifyContent="space-between">
 
 
-                  < Navigator route={`/productdetails/${da._id}`}>
+                  < Navigator route={`/product/${cartItem._id}`}>
 
                     <img style={{
                       width: "100px",
                       height: "100px",
                       objectFit: "cover",
                       flex: "1",
-                    }} src={da.product_image} class="card-img-top" alt="..." />
+                    }} src={cartItem.product_image} class="card-img-top" alt="..." />
 
                   </Navigator>
 
 
                   <Flex flex="3" width="fit-content" flexDirection="column" justifyContent="start" alignItems="start">
 
-                    <H4 maxWidth="100px" fontWeight="bold" maxHeight="1.4rem" margin="5px 20px">{da.product_name}</H4>
+                    <H4 maxWidth="100px" fontWeight="bold" maxHeight="1.2rem" margin="5px 20px">{cartItem.product_name}</H4>
 
 
                     <H4 margin="5px 20px" borderRadius="5px" padding="3px 10px"
-                      backgroundColor="rgba(255, 99, 71, 0.162)" textTransform="lowercase" color="tomato" fontWeight="bold" >{da.weight}</H4>
+                      backgroundColor="rgba(255, 99, 71, 0.162)" textTransform="lowercase" color="tomato" fontWeight="bold" >{cartItem.weight}</H4>
 
 
-                    <H4 fontWeight="bold" color="green" margin="5px 20px">₹ {qtyy * da.price}</H4>
+                    <H4 fontWeight="bold" color="green" margin="5px 20px">₹ {cartItem.price * cartItem.cartQuanity}</H4>
 
                   </Flex>
 
+                  <Flex  flex="3">
 
-                  <Button color="dodgerblue" width="10px" margin="10px" onClick={() => dispatch(cartQty(da.qty - 1))}>-</Button>
 
-                  {da.qty}
+                    <Button color="white" width="10px" margin="10px" onClick={() => handleDecreaseCart(cartItem)}>-</Button>
 
-                  <Button color="dodgerblue" width="10px" margin="10px" onClick={() => dispatch(cartQty(da.qty + 1))}>+</Button>
+                    {cartItem.cartQuanity}
 
-                  {/* <IconRound backgroundColor="red"
-                    width="44px" height="44px"
-                    margin="0"
-                    icon="fa-solid fa-trash" onClick={() => dispatch(remove(da))}></IconRound> */}
+        
+                    {cartItem.isQty ?
+
+                      <Button color="white" width="10px" margin="10px" onClick={() => handleIncreaseCart(cartItem)}>+</Button>
+                      :
+                      <Button width="10px" margin="10px">+</Button>
+                    }
+
+
+                  </Flex>
 
 
                 </Flex>
@@ -146,7 +147,7 @@ export const Cart = ({ nextPage }) => {
           <div className='check_out'>
 
 
-            <H3>Total: {total}</H3>
+            <H3>Total: {cart.cartTotalAmount} </H3>
 
             <Button width="fit-content" color="blue" onClick={nextPage}>Check out</Button>
 
@@ -160,6 +161,6 @@ export const Cart = ({ nextPage }) => {
       )
       }
 
-    </div >
+    </ResponsiveWrap >
   )
 }

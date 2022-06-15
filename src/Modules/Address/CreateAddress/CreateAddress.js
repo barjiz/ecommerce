@@ -11,33 +11,19 @@ import axios from 'axios';
 import jwt_decode from "jwt-decode";
 import { BASE_URL } from '../../../url';
 
-
+import { ResponsiveWrap } from "../../../Components/UI/ResponsiveWrap/ResponsiveWrap"
 
 import { v4 as uuidv4 } from 'uuid';
 import { Button } from '../../../Components/Button/Button';
+import { OpacityBg } from '../../../Components/UI/OpacityBg/OpacityBg';
 
 export const CreateAddress = ({ setAddAddress, refetch }) => {
 
-    const { id } = useParams()
-
-
-    const navigate = useNavigate()
 
     var token = localStorage.getItem("authToken");
     var decoded = jwt_decode(token);
 
     let myuuid = uuidv4();
-
-
-    const [full_name, setFullName] = useState();
-
-    const [phone_number, setPhoneNumber] = useState();
-
-    const [pincode, setPinCode] = useState();
-
-    const [place, setPlace] = useState();
-
-    const [address, setAddress] = useState([])
 
 
     useEffect(() => {
@@ -49,59 +35,97 @@ export const CreateAddress = ({ setAddAddress, refetch }) => {
 
     const onSubmit = () => {
 
-        // setAddress([...address, {
-        //     _id: myuuid,
-        //     full_name: full_name,
-        //     phone_number: phone_number,
-        //     pincode: pincode,
-        //     place: place,
-        // }])
-
-
         axios.patch(`${BASE_URL}user/${decoded.id}`, {
-            address: {
-                _id: myuuid,
-                full_name: full_name,
-                phone_number: phone_number,
-                pincode: pincode,
-                place: place,
-            }
+            address: address
+
         }).then(() => {
             setAddAddress(false)
             refetch()
         })
+    }
 
 
 
+    const input = [
+        {
+            id: 1,
+            name: "full_name",
+            placeholder: "Full Name",
+            type: "text",
+        },
+        {
+            id: 2,
+            name: "phone_number",
+            placeholder: "Phone Number",
+            type: "number",
+        },
+        {
+            id: 3,
+            name: "place",
+            placeholder: "Place",
+            type: "text",
+        },
+        {
+            id: 4,
+            name: "pincode",
+            placeholder: "Pincode",
+            type: "number",
+        }
+    ]
 
+
+    const initialvalue = [
+        {
+            full_name: "",
+            phone_number: "",
+            pincode: "",
+            place: "",
+        },
+    ]
+
+
+    const [address, setInputField] = useState(initialvalue)
+
+
+    const handleChangeInput = (index, event) => {
+        const values = [...address]
+        values[index][event.target.name] = event.target.value
+        setInputField(values)
     }
 
 
 
     return (
 
-        <div className='add_address'>
 
-            <div className='address_holder'>
+        <OpacityBg>
+
+            <div className='create_address'>
+
 
                 <H3 margin="30px">Add Shipping Address</H3>
 
-                < Text onChange={(e) => setFullName(e.target.value)} width="100%" placeholder="full name" />
 
-                < Text type="number" onChange={(e) => setPhoneNumber(e.target.value)} width="100%" placeholder="phone number" />
 
-                <DropDown onChange={(e) => setPinCode(e.target.value)} width="100%">
 
-                    <option selected="true" disabled>Pincode</option>
+                {address.map((inputField, index) => (
 
-                    <option value="67312">67312</option>
-                    <option value="67312">67312</option>
-                    <option value="67312">67312</option>
-                    <option value="67312">67312</option>
+                    <>
 
-                </DropDown>
+                        {input.map(data => (
 
-                < Text onChange={(e) => setPlace(e.target.value)} width="100%" placeholder="flat, house" />
+                            <Text name={data.name} type={data.type}
+                                width="100%" placeholder={data.placeholder}
+                                onChange={event => handleChangeInput(index, event)} />
+
+                        ))}
+
+                    </>
+
+                ))}
+
+
+
 
 
 
@@ -115,10 +139,9 @@ export const CreateAddress = ({ setAddAddress, refetch }) => {
 
                 </Flex>
 
-
             </div>
 
-        </div >
+        </OpacityBg >
 
     );
 };

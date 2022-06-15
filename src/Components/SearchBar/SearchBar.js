@@ -2,14 +2,15 @@ import { useEffect, useState } from "react"
 import { useQuery } from "react-query";
 import { fetchAllProduct } from "../../Modules/Products/Method";
 import { H4 } from "../Text/Text";
-
+import { Button } from "../Button/Button";
 import { Flex } from "../../Components/UI/Flex/Flex"
 
 import "./SearchBar.css"
 import { useNavigate } from "react-router-dom";
 
+import { OpacityBg } from "../../Components/UI/OpacityBg/OpacityBg"
 
-export const SearchBar = () => {
+export const SearchBar = (props) => {
 
     const [searchTerm, SetSearchTerm] = useState("");
 
@@ -28,18 +29,24 @@ export const SearchBar = () => {
 
 
     const searchResult = {
-        display: "none"
+        display: "none",
+        marginTop: "60px"
     }
 
+    const searchResult2 = {
+        display: "none",
+    }
 
     if (searchState === true) {
 
         searchResult.display = "block"
+        searchResult2.display = "block"
         closeStyle.display = "inline"
     }
 
     if (searchTerm === "") {
         searchResult.display = "none"
+        searchResult2.display = "none"
         closeStyle.display = "none"
     }
 
@@ -49,58 +56,65 @@ export const SearchBar = () => {
 
         setSearchState(true)
 
+
+        document.body.style.overflow = "hidden"
+
     }
 
     const clearSearch = (e) => {
         SetSearchTerm("")
+
+        document.body.style.overflow = "scroll"
+
     }
 
 
-
     return (
-        <div className="searchbar">
+        <div className="search_bar">
 
             <div className="search" >
 
-                <i class="fas fa-search"></i>
+                <div className="search_input">
 
-                <input type="text" placeholder="Search" value={searchTerm}
+                    <input type="text" placeholder="Search for products" value={searchTerm}
+                        onChange={theSearch} />
 
-                    onChange={theSearch} />
+                    <i style={closeStyle} onClick={clearSearch} class="fas fa-times"></i>
 
-                <i style={closeStyle} onClick={clearSearch} class="fas fa-times"></i>
+                </div>
 
-            </div>
 
-            <div style={searchResult} className="searchResult">
+                <Button color="green" width="fit-content" margin="0 10px">Search</Button>
 
-                {product?.product?.filter((data) => {
-                    if (searchTerm === "") {
-                        return <h2>val</h2>
-                    } else if (data.product_name.toString().toLowerCase().includes(searchTerm.toLowerCase())) {
-                        return <h2>val</h2>
-                    }
-                }).map((data, key) => (
-                    <Flex flexDirection="column" alignItems="flex-start">
-                        <H4 onClick={() => navigate(`product/${data._id}`)} fontWeight="bold" margin="10px 15px">{data.product_name}</H4>
-                    </Flex>
-
-                )
-                )}
 
             </div>
 
-            {/* 
-            <div className="mypost">
-                {stories.map(mystories => (
+            <OpacityBg style={searchResult}>
 
-                    <div className="stories">
-                        <img src={require(`./images/${mystories.image}`).default} alt="img" />
-                    </div>
+                <div style={searchResult2} className="searchResult">
 
-                ))}
-            </div> */}
+                    {product?.product?.filter((data) => {
+                        if (searchTerm === "") {
+                            return <h2>val</h2>
+                        } else if (data.product_name.toString().toLowerCase().includes(searchTerm.toLowerCase())) {
+                            return <h2>val</h2>
+                        }
+                    }).map((data, key) => (
+                        <Flex flexDirection="column" alignItems="flex-start">
+                            <H4 onClick={() => navigate(`product/${data._id}`)} fontWeight="bold" margin="10px 15px">{data.product_name}</H4>
+                        </Flex>
 
-        </div>
+                    )
+                    )}
+
+                </div>
+
+
+
+            </OpacityBg>
+
+
+
+        </div >
     )
 }
