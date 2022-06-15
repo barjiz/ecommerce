@@ -1,32 +1,20 @@
 import React from 'react'
-
-import { fetchAllProduct, fetchAllProductImage } from './Method'
 import { Button } from "../../Components/Button/Button"
-
 import { Navigator } from '../../Components/Route/Router'
 import { addToCart, decreaseCart, removeFromCart } from '../../Redux/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import "./Products.css"
 import { H5 } from '../../Components/Text/Text'
-
-import { useQuery } from 'react-query'
 import { Flex } from '../../Components/UI/Flex/Flex'
+import { useQueryFetch } from '../../Utils/useQueryFetch'
 
 export const Products = (props) => {
 
   const cart = useSelector((state) => state.cart.cartItems)
 
-  const { data: product } = useQuery('product', fetchAllProduct, {
+  const product = useQueryFetch("product")
 
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  })
-
-  const { data: product_image, } = useQuery('product_image', fetchAllProductImage, {
-
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  })
+  const product_image = useQueryFetch("productimage")
 
 
   const dispatch = useDispatch()
@@ -47,7 +35,6 @@ export const Products = (props) => {
   const handleIncreaseCart = (cartItem) => {
     dispatch(addToCart(cartItem))
   }
-
 
 
 

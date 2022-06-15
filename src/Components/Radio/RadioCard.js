@@ -10,7 +10,7 @@ export const RadioCard = (props) => {
         <div className='radio_cards'>
             <label className="thelabel" >
 
-                <input value={props.value} className="card_input_element"
+                <input checked={props.checked} value={props.value} className="card_input_element"
                     type="radio" id={props.id} name="{props.name}" onChange={props.onChange} />
 
                 <div className="card_input">{props.children}</div>

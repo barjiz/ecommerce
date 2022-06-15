@@ -9,7 +9,7 @@ import { UserAddress } from '../Address/UserAddress'
 
 export const ManageAddress = ({ nextPage, prevPage, setAddress }) => {
 
-    const [nextbtn, setNextBtn] = useState(true)
+    const nextbtn = true;
 
     return (
 

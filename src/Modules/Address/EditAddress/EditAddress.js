@@ -1,41 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
-import { DropDown, Text } from '../../../Components/Input/Input';
+import React, { useState } from 'react'
+import {  Text } from '../../../Components/Input/Input';
 import { Flex } from '../../../Components/UI/Flex/Flex';
 import { H3 } from "../../../Components/Text/Text"
-
 import './EditAddress.css'
 import axios from 'axios';
-
-
-import jwt_decode from "jwt-decode";
 import { BASE_URL } from '../../../url';
-
-import { ResponsiveWrap } from "../../../Components/UI/ResponsiveWrap/ResponsiveWrap"
-
-import { v4 as uuidv4 } from 'uuid';
 import { Button } from '../../../Components/Button/Button';
 import { OpacityBg } from '../../../Components/UI/OpacityBg/OpacityBg';
+import { decodeJwtToken } from '../../../Utils/decode.jwt';
 
-export const EditAddress = ({ profile, setEditAddress, refetch }) => {
-
-
-    var token = localStorage.getItem("authToken");
-    var decoded = jwt_decode(token);
-
-    let myuuid = uuidv4();
+export const EditAddress = ({ setEditAddress, refetch }) => {
 
 
-    useEffect(() => {
+    const user_id = decodeJwtToken();
 
-
-
-    })
 
 
     const onSubmit = () => {
 
-        axios.patch(`${BASE_URL}user/${decoded.id}`, {
+        axios.patch(`${BASE_URL}user/${user_id}`, {
             address: address
 
         }).then(() => {
@@ -105,8 +88,7 @@ export const EditAddress = ({ profile, setEditAddress, refetch }) => {
                 <H3 margin="30px">Edit Shipping Address</H3>
 
 
-                {/* {console.log("profile profile", profile?.address?.map(data => data.full_name))} */}
-
+           
                 {address.map((inputField, index) => (
 
                     <>

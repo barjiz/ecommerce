@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { fetchAllOrders, fetchAllProfile } from './Method'
-
+import React from 'react'
+import { fetchAllOrders, } from './Method'
 import { Flex } from "../../Components/UI/Flex/Flex"
-
-import { H2, H3, H4, H5 } from "../../Components/Text/Text"
-
-import jwt_decode from "jwt-decode";
-import { Button, SecondaryBtn } from "../../Components/Button/Button"
+import { H2, H3, H4 } from "../../Components/Text/Text"
+import { Button,} from "../../Components/Button/Button"
 
 import "./Order.css"
 import { Header } from '../../Components/Header/Header';
 import { useNavigate } from 'react-router-dom';
-import { Navigator } from '../../Components/Route/Router';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import { BASE_URL } from '../../url';
 import { ResponsiveWrap } from '../../Components/UI/ResponsiveWrap/ResponsiveWrap';
 import { IconRound } from '../../Components/Icon/Icon';
+import { decodeJwtToken } from '../../Utils/decode.jwt';
 
 export const Order = () => {
 
-  var token = localStorage.getItem("authToken");
-  var decoded = jwt_decode(token);
+  const user_id = decodeJwtToken();
+
 
   const navigate = useNavigate()
 
@@ -50,7 +46,7 @@ export const Order = () => {
 
       </Header>
 
-      {orders?.data?.orders?.filter(fil => fil.user_id === decoded.id).length === 0 ?
+      {orders?.data?.orders?.filter(fil => fil.user_id === user_id).length === 0 ?
 
 
         <div className='empty_order'>
@@ -63,7 +59,7 @@ export const Order = () => {
 
         :
 
-        orders?.data?.orders?.filter(fil => fil.user_id === decoded.id).map((data, index) =>
+        orders?.data?.orders?.filter(fil => fil.user_id === user_id).map((data, index) =>
 
           <div className="order_items">
 

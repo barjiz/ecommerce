@@ -1,18 +1,15 @@
 import React from 'react'
 import { Button } from '../../Components/Button/Button'
 import axios from 'axios';
-
-
-import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { H3, H5 } from '../../Components/Text/Text';
-
 import "./ConfirmOrder.css"
 import { BASE_URL } from '../../url';
 import { Flex } from '../../Components/UI/Flex/Flex';
 import { Header } from '../../Components/Header/Header';
 import { RadioCard } from '../../Components/Radio/RadioCard';
+import { decodeJwtToken } from '../../Utils/decode.jwt';
 
 export const ConfirmOrder = ({ prevPage, address }) => {
 
@@ -21,8 +18,7 @@ export const ConfirmOrder = ({ prevPage, address }) => {
 
     const navigate = useNavigate()
 
-    var token = localStorage.getItem("authToken");
-    var decoded = jwt_decode(token);
+    const user_id = decodeJwtToken();
 
 
     const PlaceOrder = () => {
@@ -31,7 +27,7 @@ export const ConfirmOrder = ({ prevPage, address }) => {
 
             date: Date(),
 
-            user_id: decoded.id,
+            user_id: user_id,
 
             cart: {
                 product: cart.cartItems,

@@ -1,32 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, DangerBtn, PrimaryBtn, SecondaryBtn, WhiteBtn, } from '../../Components/Button/Button'
-
-import { H3, H4, H5, H6 } from '../../Components/Text/Text'
+import { Button } from '../../Components/Button/Button'
+import { H3 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
-
-import { fetchProfile, fetchUserData } from './Method'
-
 import "./EditProfile.css"
-
-
-import jwt_decode from "jwt-decode";
 import { DropDown, Text } from '../../Components/Input/Input'
 import axios from 'axios'
 import { BASE_URL } from '../../url'
 import { Header } from '../../Components/Header/Header'
-import { useQuery } from 'react-query'
+import { decodeJwtToken } from '../../Utils/decode.jwt'
+import { ResponsiveWrap } from '../../Components/UI/ResponsiveWrap/ResponsiveWrap'
+import { useQueryFetchId } from '../../Utils/useQueryFetch'
 
 
 export const EditProfile = () => {
 
-
-    var token = localStorage.getItem("authToken");
-    var decoded = jwt_decode(token);
-
-
     const navigate = useNavigate()
-
 
     const [user_name, setUserName] = useState()
 
@@ -39,12 +28,9 @@ export const EditProfile = () => {
     const [dob, setDob] = useState()
 
 
-    const { data: loggedprofiles } = useQuery(['loggedprofiles', decoded.id], () => fetchProfile(decoded.id), {
+    const user_id = decodeJwtToken();
 
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-    })
-
+    const loggedprofiles = useQueryFetchId("user", user_id)
 
 
     const profile = loggedprofiles?.data?.user
@@ -52,7 +38,7 @@ export const EditProfile = () => {
 
     const onSubmit = () => {
 
-        axios.patch(`${BASE_URL}user/${decoded.id}`, {
+        axios.patch(`${BASE_URL}user/${user_id}`, {
             user_name,
             email,
             phone_number,
@@ -65,7 +51,7 @@ export const EditProfile = () => {
 
     return (
 
-        <div className='edit_profile'>
+        <ResponsiveWrap>
 
 
 
@@ -121,6 +107,6 @@ export const EditProfile = () => {
             </Flex>
 
 
-        </div >
+        </ResponsiveWrap >
     )
 }

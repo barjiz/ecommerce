@@ -1,43 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button } from '../../Components/Button/Button'
-
 import { H3, H4 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
-
-import { fetchProfile } from './Method'
-
-import { Icon, IconRound } from '../../Components/Icon/Icon'
-
+import { IconRound } from '../../Components/Icon/Icon'
 import { Header } from '../../Components/Header/Header'
-
 import "./Profile.css"
-
-
-import jwt_decode from "jwt-decode";
-import { useQuery } from 'react-query'
 import { ResponsiveWrap } from "../../Components/UI/ResponsiveWrap/ResponsiveWrap"
-
+import { decodeJwtToken } from '../../Utils/decode.jwt'
+import { useQueryFetchId } from '../../Utils/useQueryFetch'
 
 export const Profile = () => {
 
-
-    var token = localStorage.getItem("authToken");
-    var decoded = jwt_decode(token);
-
-
     const navigate = useNavigate()
 
+    const user_id = decodeJwtToken();
 
-    const { data: loggedprofiles } = useQuery(['loggedprofiles', decoded.id], () => fetchProfile(decoded.id), {
-
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-    })
+    const loggedprofiles = useQueryFetchId("user", user_id)
 
 
+    const profile = loggedprofiles?.fetchedData?.data?.user;
 
-    const profile = loggedprofiles?.data?.user;
+    console.log("loggedprofiles", loggedprofiles.refetchData)
 
     const logout = () => {
 
@@ -47,6 +30,42 @@ export const Profile = () => {
         window.location.reload()
 
     }
+
+    const list = [
+
+        {
+            id: 1,
+            navigate: "/profile/edit",
+            icon: "fa-solid fa-pen-to-square",
+            icon_color: "orange",
+            text: "Edit Profile",
+        },
+        {
+            id: 2,
+            navigate: "/orders",
+            icon: "fa-solid fa-clock",
+            icon_color: "purple",
+            text: "Order History",
+        },
+        {
+            id: 3,
+            navigate: "/address",
+            icon: "fa-solid fa-location-dot",
+            icon_color: "green",
+            text: "Address",
+        },
+        {
+            id: 4,
+            navigate: "/service",
+            icon: "fa-solid fa-headset",
+            icon_color: "red",
+            text: "Customer Service",
+        }
+
+    ]
+
+    const id = "id";
+
 
 
     return (
@@ -65,6 +84,7 @@ export const Profile = () => {
 
             </Header>
 
+          
 
 
             <Flex width="100%">
@@ -72,45 +92,26 @@ export const Profile = () => {
                 <img style={{ margin: "10px", width: "100px", height: "100px", borderRadius: "100%" }}
                     src={require("../../Assets/Images/profile/profile.jpg")} />
 
-
-
-                <Flex justifyContent="flex-start" alignItems="flex-start">
-
-                    <Flex flexDirection="column" alignItems="flex-start">
-                        <H3 margin="5px 10px">{profile?.user_name}</H3>
-                        <H4 textTransform='lowercase' margin="5px 10px">{profile?.email}</H4>
-                    </Flex>
-
-                    <Icon color="grey" onClick={() => navigate('/profile/edit')} margin="10px" icon="fa-solid fa-pen-to-square"></Icon>
+                <Flex flexDirection="column" alignItems="flex-start">
+                    <H3 margin="5px 10px">{profile?.user_name}</H3>
+                    <H4 textTransform='lowercase' margin="5px 10px">{profile?.email}</H4>
 
                 </Flex>
 
-
             </Flex>
 
 
-            <Flex width="fit-content" onClick={() => navigate('/orders')}>
-                <IconRound backgroundColor="tomato" margin="10px" icon="fa-solid fa-clock"></IconRound>
+            {list.map(data =>
 
-                <H4 fontWeight="bold">Order History</H4>
+                < Flex width="fit-content" onClick={() => navigate(data.navigate)}>
+                    <IconRound backgroundColor={data.icon_color} margin="10px"
+                        icon={data.icon}></IconRound>
 
-            </Flex>
+                    <H4 fontWeight="bold">{data.text}</H4>
 
-            <Flex width="fit-content" onClick={() => navigate('/address')}>
-                <IconRound backgroundColor="green" margin="10px" icon="fa-solid fa-location-dot"></IconRound>
+                </Flex>
 
-                <H4 fontWeight="bold">Address</H4>
-
-            </Flex>
-
-
-            <Flex width="fit-content" onClick={() => navigate('/address')}>
-                <IconRound backgroundColor="orange" margin="10px" icon="fa-solid fa-headset"></IconRound>
-
-                <H4 fontWeight="bold">Customer Service</H4>
-
-            </Flex>
-
+            )}
 
             <Flex width="fit-content" onClick={logout}>
                 <IconRound backgroundColor="black" margin="10px" icon="fa-solid fa-right-from-bracket"></IconRound>
@@ -119,7 +120,6 @@ export const Profile = () => {
 
             </Flex>
 
-            /
         </ResponsiveWrap >
     )
 }

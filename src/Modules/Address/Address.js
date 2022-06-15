@@ -11,6 +11,7 @@ export const Address = ({ nextPage, prevPage, setAddress }) => {
 
     const navigate = useNavigate()
 
+    const nextbtn = false;
 
     return (
 
@@ -28,7 +29,7 @@ export const Address = ({ nextPage, prevPage, setAddress }) => {
             </Header>
 
 
-            <UserAddress setAddress={setAddress} />
+            <UserAddress nextbtn={nextbtn} setAddress={setAddress} />
 
 
             <Button color="dark" onClick={() => navigate('/profile')} margin="10px auto">Back</Button>
