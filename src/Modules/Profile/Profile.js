@@ -15,15 +15,16 @@ export const Profile = () => {
 
     const user_id = decodeJwtToken();
 
-    const loggedprofiles = useQueryFetchId("user", user_id)
+    const { fetchData: loggedprofiles } = useQueryFetchId("user", user_id)
+
+    
+    const profile = loggedprofiles?.data?.user;
 
 
-    const profile = loggedprofiles?.fetchedData?.data?.user;
+    console.log("loggedprofiles", loggedprofiles)
 
-    console.log("loggedprofiles", loggedprofiles.refetchData)
 
     const logout = () => {
-
 
         localStorage.removeItem("authToken")
 
@@ -64,9 +65,6 @@ export const Profile = () => {
 
     ]
 
-    const id = "id";
-
-
 
     return (
 
@@ -83,7 +81,7 @@ export const Profile = () => {
 
                 <Flex flexDirection="column" alignItems="flex-start">
                     <H3 margin="5px 10px">{profile?.user_name}</H3>
-                    <H4 textTransform='lowercase' margin="5px 10px">{profile?.email}</H4>
+                    <H4 textTransform='lowercase' margin="5px 10px">{profile?.phone_number}</H4>
 
                 </Flex>
 

@@ -40,8 +40,6 @@ export const Cart = ({ nextPage }) => {
   }
 
 
-  const myCart = JSON.parse(localStorage.getItem("cartItems"))
-
 
   return (
 

@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
-import { fetchAllProductImage, fetchOneProduct } from './Method'
-
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import "./ProductDetails.css"
@@ -21,10 +18,6 @@ export const ProductDetails = () => {
 
 
   const { fetchData: product } = useQueryFetchId('product', id)
-
-
-  const { fetchData: product_image } = useQueryFetch('productimage')
-
 
 
   const dispatch = useDispatch()
@@ -66,7 +59,6 @@ export const ProductDetails = () => {
     <div className='product_details' key={productdetails?._id}>
 
 
-      {product_image?.product_image?.filter(fil => fil.product_id === productdetails?.product_id).map(img =>
 
         <div className='product_holder'>
 
@@ -81,8 +73,7 @@ export const ProductDetails = () => {
 
             <H3 fontWeight="bold" color="green" margin="15px">₹ {price}</H3>
 
-            <img src={img.productImage} />
-
+            <img src={productdetails?.productImage} />
 
           </div>
 
@@ -105,8 +96,7 @@ export const ProductDetails = () => {
                 <H4 fontWeight="bold" color="green" margin="10px 5px">₹ {pr.price}</H4>
 
               </RadioCard>
-
-
+              
             )}
 
 
@@ -123,7 +113,7 @@ export const ProductDetails = () => {
 
                   _id: productdetails?._id,
                   isQty: productdetails?.qty,
-                  product_image: img.productImage,
+                  product_image: productdetails?.productImage,
                   product_name: productdetails?.product_name,
                   price: price,
                   weight: weight,
@@ -136,8 +126,7 @@ export const ProductDetails = () => {
 
         </div >
 
-      )}
-
+  
     </div >
 
   )

@@ -1,13 +1,10 @@
 import React from 'react'
-import { fetchAllOrders, } from './Method'
 import { Flex } from "../../Components/UI/Flex/Flex"
-import { H2, H3, H4 } from "../../Components/Text/Text"
+import { H2, H4 } from "../../Components/Text/Text"
 import { Button, } from "../../Components/Button/Button"
-
 import "./Order.css"
 import { Header } from '../../Components/Header/Header';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from 'react-query';
 import axios from 'axios';
 import { BASE_URL } from '../../url';
 import { ResponsiveWrap } from '../../Components/UI/ResponsiveWrap/ResponsiveWrap';

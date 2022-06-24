@@ -15,7 +15,6 @@ export const Products = (props) => {
   const { fetchData: product } = useQueryFetch('product')
 
 
-
   const dispatch = useDispatch()
 
   const handleAddToCart = (data) => {

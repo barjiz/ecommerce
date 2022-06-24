@@ -1,10 +1,6 @@
 import React from 'react'
-import { fetchAllOrders } from './Method'
-
 import { Flex } from "../../Components/UI/Flex/Flex"
-
 import { H3, H4 } from "../../Components/Text/Text"
-
 import "./OrderDetails.css"
 import { Header } from '../../Components/Header/Header';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -18,13 +14,7 @@ export const OrderDetails = () => {
 
   const navigate = useNavigate()
 
-
-
-  const { data: orders } = useQuery(['orders', id], () => fetchAllOrders(id), {
-
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  })
+  const { fetchData: orders } = useQuery('orders', id)
 
 
   return (
@@ -46,7 +36,7 @@ export const OrderDetails = () => {
       </Header>
 
 
-      {orders?.data?.orders?.filter(fil => fil._id === id).map(data =>
+      {orders?.data?.order?.filter(fil => fil._id === id).map(data =>
 
         <div className="order_items">
 

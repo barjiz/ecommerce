@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react"
-import { useQuery } from "react-query";
-import { fetchAllProduct } from "../../Modules/Products/Method";
+import { useState } from "react"
 import { H4 } from "../Text/Text";
 import { Button } from "../Button/Button";
 import { Flex } from "../../Components/UI/Flex/Flex"
-
 import "./SearchBar.css"
 import { useNavigate } from "react-router-dom";
-
 import { OpacityBg } from "../../Components/UI/OpacityBg/OpacityBg"
+import { useQueryFetch } from "../../Utils/useQueryFetch";
 
-export const SearchBar = (props) => {
+export const SearchBar = () => {
 
     const [searchTerm, SetSearchTerm] = useState("");
 
@@ -18,7 +15,8 @@ export const SearchBar = (props) => {
     const [searchState, setSearchState] = useState(false)
 
 
-    const { data: product } = useQuery('product', fetchAllProduct)
+    const { fetchData: product } = useQueryFetch('product')
+
 
     const navigate = useNavigate()
 

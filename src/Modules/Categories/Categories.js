@@ -15,9 +15,9 @@ export const Categories = (props) => {
 
     <div className='categories'>
 
-      {category.map(data =>
+      <Header icon={false} title="Categories" />
 
-        <React.Fragment key={data.category}>
+      {category.map(data =>
 
           <Navigator route={`/categories/${data.category}`}>
 
@@ -31,8 +31,6 @@ export const Categories = (props) => {
             </Flex>
 
           </Navigator>
-
-        </React.Fragment >
 
       )}
 
