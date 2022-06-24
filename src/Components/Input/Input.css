@@ -8,6 +8,7 @@
     box-sizing: border-box;
     font-size: 0.9rem;
     border-radius: 5px;
+    border: 1px solid #7B68EE;
 }
 
 
@@ -30,6 +31,7 @@
     margin: 10px 0;
     box-sizing: border-box;
     border-radius: 5px;
+    border: 1px solid #7B68EE;
 }
 
 .password input {
@@ -39,4 +41,8 @@
     outline: none;
     font-size: 0.9rem;
     background-color: white;
+}
+
+.password i {
+    font-size: 1.1rem;
 }

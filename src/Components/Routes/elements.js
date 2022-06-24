@@ -2,6 +2,7 @@ import { Address } from "../../Modules/Address/Address"
 import { CreateAddress } from "../../Modules/Address/CreateAddress/CreateAddress"
 import { Login } from "../../Modules/Auth/Login"
 import { Signup } from "../../Modules/Auth/Signup"
+import { StepForm } from "../../Modules/Auth/StepForm"
 import { Categories } from "../../Modules/Categories/Categories"
 import { CategoriesDetails } from "../../Modules/Categories/CategoriesDetails"
 import { DeliveryForm } from "../../Modules/DeliveryForm/DeliveryForm"
@@ -39,13 +40,13 @@ export const elements = [
     },
     {
         isAuth: false,
-        path: "/login",
-        element: <Login />
+        path: "/signup",
+        element: <StepForm />
     },
     {
         isAuth: false,
-        path: "/signup",
-        element: <Signup />
+        path: "/login",
+        element: <Login />
     },
     {
         isAuth: true,

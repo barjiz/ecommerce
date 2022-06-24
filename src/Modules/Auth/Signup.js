@@ -17,7 +17,6 @@ export const Signup = () => {
   const navigate = useNavigate()
 
   const [user_name, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirm, setConfirmPassword] = useState("");
 
@@ -30,7 +29,6 @@ export const Signup = () => {
       `${BASE_URL}user/signup`,
       {
         user_name,
-        email,
         password,
         password_confirm
       },
@@ -55,7 +53,7 @@ export const Signup = () => {
 
         <Header position="fixed">
 
-          <i onClick={() => navigate('/')} class="fa-solid fa-close"></i>
+          <i onClick={() => navigate('/login')} class="fa-solid fa-close"></i>
 
         </Header>
 
@@ -69,17 +67,6 @@ export const Signup = () => {
           id="name"
           type="name"
           onChange={(e) => setUsername(e.target.value)} />
-
-
-
-
-
-        <Text
-          placeholder="Enter your Email"
-          id="email"
-          type="email"
-
-          onChange={(e) => setEmail(e.target.value)} />
 
 
         <Password placeholder="Password"

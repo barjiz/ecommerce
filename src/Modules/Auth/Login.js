@@ -5,7 +5,7 @@ import { Button } from '../../Components/Button/Button'
 import { Header } from '../../Components/Header/Header'
 
 import { Password, Text } from '../../Components/Input/Input'
-import { H2, H3, H5 } from '../../Components/Text/Text'
+import { H2, H3, H4, H5 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
 import { BASE_URL } from '../../url'
 
@@ -18,7 +18,7 @@ export const Login = () => {
 
   const navigate = useNavigate()
 
-  const [email, setEmail] = useState("");
+  const [phone_number, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
 
 
@@ -27,7 +27,7 @@ export const Login = () => {
     const { data } = await axios.post(
       `${BASE_URL}user/login`,
       {
-        email,
+        phone_number,
         password,
       },
     );
@@ -59,8 +59,8 @@ export const Login = () => {
 
         <H2 color="#7B68EE" margin="20px 0">Login</H2>
 
-        <Text placeholder="Enter your Email"
-          type="email" onChange={(e) => setEmail(e.target.value)} />
+        <Text placeholder="Phone Number"
+          type="email" onChange={(e) => setPhoneNumber(e.target.value)} />
 
 
         <Password placeholder="Password"
@@ -68,10 +68,14 @@ export const Login = () => {
           onClick={() => setHide(!hide)} icon={hide ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}
         />
 
+        <Flex width="100%" justifyContent='flex-end'>
+
+          <H4 color="dodgerblue">forget password</H4>
+
+        </Flex>
 
         <Button color="primary" width="100%" onClick={onSubmit} margin="30px 0">Login</Button>
-
-
+        
 
         <Flex width="100%" justifyContent="center">
 
