@@ -73,18 +73,7 @@ export const Profile = () => {
         <ResponsiveWrap>
 
 
-            <Header justifyContent="space-between">
-
-                <i onClick={() => navigate('/')} class="fa-solid fa-chevron-left"></i>
-
-                <H3 fontWeight="bold" >My Profile</H3>
-
-                <i style={{ color: 'white' }} class="fa-solid fa-chevron-left"></i>
-
-
-            </Header>
-
-          
+            <Header icon={true} title="my profile" />
 
 
             <Flex width="100%">

@@ -13,14 +13,14 @@ export const useQueryFetch = (url) => {
 
     }
 
-    const { data: fetchedData, } = useQuery(url, AsyncFetch, {
+    const { refetch: refetchData, data: fetchData } = useQuery(url, AsyncFetch, {
 
         refetchOnWindowFocus: false,
         refetchOnMount: false,
     })
 
 
-    return fetchedData
+    return { fetchData, refetchData }
 }
 
 
@@ -33,11 +33,11 @@ export const useQueryFetchId = (url, id) => {
 
     }
 
-    const { refetch: refetchData, data: fetchedData } = useQuery([url, id], () => AsyncFetch(id), {
+    const { refetch: refetchData, data: fetchData } = useQuery([url, id], () => AsyncFetch(id), {
 
         refetchOnWindowFocus: false,
         refetchOnMount: false,
     })
 
-    return { fetchedData, refetchData }
+    return { fetchData, refetchData }
 }

@@ -16,10 +16,7 @@ export const CategoriesDetails = () => {
 
             <Grid >
 
-                <Products
-                    width="100%"
-                    height="180px"
-                    class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2  col-xxl-2" category={id} />
+                <Products width="100%" height="180px" className="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2  col-xxl-2" category={id} />
 
             </Grid>
 

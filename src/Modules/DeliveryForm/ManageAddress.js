@@ -26,6 +26,9 @@ export const ManageAddress = ({ nextPage, prevPage, setAddress }) => {
 
             </Header>
 
+            <Header  title="my orders" />
+
+
 
             <UserAddress nextbtn={nextbtn} setAddress={setAddress} prevPage={prevPage} nextPage={nextPage} />
 

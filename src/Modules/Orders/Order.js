@@ -2,7 +2,7 @@ import React from 'react'
 import { fetchAllOrders, } from './Method'
 import { Flex } from "../../Components/UI/Flex/Flex"
 import { H2, H3, H4 } from "../../Components/Text/Text"
-import { Button,} from "../../Components/Button/Button"
+import { Button, } from "../../Components/Button/Button"
 
 import "./Order.css"
 import { Header } from '../../Components/Header/Header';
@@ -13,6 +13,7 @@ import { BASE_URL } from '../../url';
 import { ResponsiveWrap } from '../../Components/UI/ResponsiveWrap/ResponsiveWrap';
 import { IconRound } from '../../Components/Icon/Icon';
 import { decodeJwtToken } from '../../Utils/decode.jwt';
+import { useQueryFetch } from '../../Utils/useQueryFetch'
 
 export const Order = () => {
 
@@ -21,11 +22,13 @@ export const Order = () => {
 
   const navigate = useNavigate()
 
-  const { refetch, data: orders } = useQuery('orders', fetchAllOrders, {
 
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  })
+
+  const { fetchData: orders, refetchData: refetch } = useQueryFetch('orders')
+
+
+  console.log("orders", orders?.data?.order?.filter(fil => fil.user_id === user_id).length)
+
 
   const onSubmit = (order_id) => {
 
@@ -39,14 +42,11 @@ export const Order = () => {
 
     <ResponsiveWrap>
 
-      <Header backgroundColor="white" justifyContent="center" >
+
+      <Header icon={true} title="my orders" />
 
 
-        <H3 fontWeight="bold" >My Orders</H3>
-
-      </Header>
-
-      {orders?.data?.orders?.filter(fil => fil.user_id === user_id).length === 0 ?
+      {orders?.data?.order?.filter(fil => fil.user_id === user_id).length === 0 ?
 
 
         <div className='empty_order'>
@@ -59,7 +59,7 @@ export const Order = () => {
 
         :
 
-        orders?.data?.orders?.filter(fil => fil.user_id === user_id).map((data, index) =>
+        orders?.data?.order?.filter(fil => fil.user_id === user_id).map((data, index) =>
 
           <div className="order_items">
 

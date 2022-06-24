@@ -19,7 +19,7 @@ export const StepForm = () => {
   }
 
 
-  const previousPage = () => {
+  const backPage = () => {
     setTabs(tabs - 1)
   }
 
@@ -31,19 +31,19 @@ export const StepForm = () => {
         phone_number={phone_number}
         setPhoneNumber={setPhoneNumber}
         nextPage={nextPage}
-        previousPage={previousPage} />}
+        backPage={backPage} />}
 
       {tabs === 2 && <OtpVerify
         phone_number={phone_number}
         setPhoneNumber={setPhoneNumber}
         nextPage={nextPage}
-        previousPage={previousPage} />}
+        backPage={backPage} />}
 
       {tabs === 3 && <Signup
         phone_number={phone_number}
         setPhoneNumber={setPhoneNumber}
         nextPage={nextPage}
-        previousPage={previousPage} />}
+        backPage={backPage} />}
 
     </div>
   )

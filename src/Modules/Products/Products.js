@@ -12,9 +12,8 @@ export const Products = (props) => {
 
   const cart = useSelector((state) => state.cart.cartItems)
 
-  const product = useQueryFetch("product")
+  const { fetchData: product } = useQueryFetch('product')
 
-  const product_image = useQueryFetch("productimage")
 
 
   const dispatch = useDispatch()
@@ -43,12 +42,12 @@ export const Products = (props) => {
     <React.Fragment>
 
       {product?.product?.filter(fil => fil.category === props.category).map(data => (
-        <div className={props.class} >
+        <div className={props.className} >
 
 
           <div key={data._id} class="card" style={{ display: "flex", flexDirection: "column", }}>
 
-            {product_image?.product_image?.filter(fil => fil.product_id === data.product_id).map(img =>
+          
               <>
 
                 <Navigator route={`/product/${data._id}`}>
@@ -61,7 +60,7 @@ export const Products = (props) => {
                       width: props.width,
                       height: props.height,
                       objectFit: "cover"
-                    }} src={img.productImage} class="card-img-top" alt="..." />
+                    }} src={data.productImage} class="card-img-top" alt="..." />
 
 
                   </div>
@@ -137,7 +136,7 @@ export const Products = (props) => {
 
                         _id: data?._id,
                         isQty: data.qty,
-                        product_image: img.productImage,
+                        product_image: data.productImage,
                         product_name: data?.product_name,
                         price: data.price.filter((fil, index) => index === 0).map(dd => parseInt(dd.price)),
                         weight: data.price.filter((fil, index) => index === 0).map(dd => dd.weight),
@@ -151,8 +150,6 @@ export const Products = (props) => {
 
 
               </>
-
-            )}
 
 
           </div>

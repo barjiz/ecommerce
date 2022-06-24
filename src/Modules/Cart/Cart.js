@@ -48,15 +48,7 @@ export const Cart = ({ nextPage }) => {
     <ResponsiveWrap>
 
 
-      <Header>
-
-        <i onClick={() => navigate('/')} class="fa-solid fa-chevron-left"></i>
-
-        <H3 fontWeight="bold" >Cart</H3>
-
-        <i style={{ color: 'white' }} class="fa-solid fa-chevron-left"></i>
-
-      </Header>
+      <Header icon={false} title="cart" />
 
 
       {cart.cartItems.length === 0 ? (
@@ -111,14 +103,14 @@ export const Cart = ({ nextPage }) => {
 
                   </Flex>
 
-                  <Flex  flex="3">
+                  <Flex flex="3">
 
 
                     <Button color="white" width="10px" margin="10px" onClick={() => handleDecreaseCart(cartItem)}>-</Button>
 
                     {cartItem.cartQuanity}
 
-        
+
                     {cartItem.isQty ?
 
                       <Button color="white" width="10px" margin="10px" onClick={() => handleIncreaseCart(cartItem)}>+</Button>

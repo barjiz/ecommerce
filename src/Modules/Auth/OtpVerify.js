@@ -5,7 +5,7 @@ import { Button } from '../../Components/Button/Button'
 import { Header } from '../../Components/Header/Header'
 
 import { Password, Text } from '../../Components/Input/Input'
-import { H2, H5 } from '../../Components/Text/Text'
+import { H2, H3, H5 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
 import { BASE_URL } from '../../url'
 import * as yup from 'yup';
@@ -39,6 +39,8 @@ export const OtpVerify = (props) => {
                 <i onClick={() => navigate('/')} class="fa-solid fa-close close_auth"></i>
 
                 <H2 color="#7B68EE" margin="20px 0">Enter Otp</H2>
+
+                <H3>OTP sent to {props.phone_number}</H3>
 
                 <Text
                     placeholder="Enter your Otp"

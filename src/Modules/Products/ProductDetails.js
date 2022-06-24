@@ -10,6 +10,7 @@ import { RadioCard } from '../../Components/Radio/RadioCard'
 import { useQuery } from 'react-query'
 import { addToCart, removeFromCart } from '../../Redux/cartSlice'
 import { Button } from '../../Components/Button/Button'
+import { useQueryFetch, useQueryFetchId } from '../../Utils/useQueryFetch'
 
 export const ProductDetails = () => {
 
@@ -18,17 +19,11 @@ export const ProductDetails = () => {
   const { id } = useParams()
 
 
-  const { data: product } = useQuery(['product', id], () => fetchOneProduct(id), {
 
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  })
+  const { fetchData: product } = useQueryFetchId('product', id)
 
-  const { data: product_image, } = useQuery('product_image', fetchAllProductImage, {
 
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  })
+  const { fetchData: product_image } = useQueryFetch('productimage')
 
 
 
