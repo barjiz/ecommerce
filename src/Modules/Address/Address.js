@@ -20,7 +20,9 @@ export const Address = ({ nextPage, prevPage }) => {
 
         <ResponsiveWrap>
 
-    
+
+
+            <Header icon={true} navigate="profile" title="Saved Address" />
 
 
             <UserAddress nextbtn={nextbtn} setAddress={setAddress} />

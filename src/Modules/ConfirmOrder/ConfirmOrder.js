@@ -3,13 +3,14 @@ import { Button } from '../../Components/Button/Button'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { H3, H5 } from '../../Components/Text/Text';
+import { H3, H4, H5 } from '../../Components/Text/Text';
 import "./ConfirmOrder.css"
 import { BASE_URL } from '../../url';
 import { Flex } from '../../Components/UI/Flex/Flex';
 import { Header } from '../../Components/Header/Header';
 import { RadioCard } from '../../Components/Radio/RadioCard';
 import { decodeJwtToken } from '../../Utils/decode.jwt';
+import { Card } from "../../Components/Card/Card"
 
 export const ConfirmOrder = ({ prevPage, address }) => {
 
@@ -19,6 +20,8 @@ export const ConfirmOrder = ({ prevPage, address }) => {
     const navigate = useNavigate()
 
     const user_id = decodeJwtToken();
+
+    const total = useSelector((state) => state.cart.cartTotalAmount)
 
 
     const PlaceOrder = () => {
@@ -49,23 +52,32 @@ export const ConfirmOrder = ({ prevPage, address }) => {
         <div className='confirmOrder'>
 
 
-            <Header justifyContent="space-between">
-
-                <i onClick={prevPage} class="fa-solid fa-chevron-left"></i>
-
-                <H3 fontWeight="bold" >Confirm Order</H3>
-
-                <i style={{ color: 'white' }} class="fa-solid fa-chevron-left"></i>
-
-
-            </Header>
+            <Header navigate="profile" title="confirm order" />
 
 
             <RadioCard  >
 
-                <H5>Cash on delivery</H5>
 
             </RadioCard >
+
+
+            <Card width="100%">
+
+                <Flex flexDirection="column" width="100%" >
+                    <Flex flexDirection="column" width="100%" >
+
+                        <H4 margin="10px" fontWeight="bold">Product Cost {total}</H4>
+                    </Flex>
+
+
+                    <H4 margin="10px" fontWeight="bold">Delivery Charge 10</H4>
+
+                    <H4 margin="10px" fontWeight="bold">Total {total + 10}</H4>
+
+
+                </Flex>
+            </Card>
+
 
 
             <Flex width="100%" position="fixed" bottom="0" left="0" padding="60px 0">
@@ -77,7 +89,7 @@ export const ConfirmOrder = ({ prevPage, address }) => {
             </Flex>
 
 
-        </div>
+        </div >
 
 
 

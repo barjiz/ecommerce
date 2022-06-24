@@ -16,11 +16,10 @@ export const UserAddress = ({ nextbtn, nextPage, prevPage, setAddress }) => {
 
     const user_id = decodeJwtToken();
 
-    const loggedprofiles = useQueryFetchId("user", user_id)
+    const { fetchData: loggedprofiles, refetchData: refetch } = useQueryFetchId("user", user_id)
 
-    const refetch = loggedprofiles.refetchData;
 
-    const profile = loggedprofiles?.fetchedData?.data?.user;
+    const profile = loggedprofiles?.data?.user;
 
 
     const [addAddress, setAddAddress] = useState(false)

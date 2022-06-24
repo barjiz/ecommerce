@@ -21,10 +21,10 @@ export const Order = () => {
 
 
 
-  const { fetchData: orders, refetchData: refetch } = useQueryFetch('orders')
+  const { fetchData: orders, refetchData: refetch } = useQueryFetch('order')
 
 
-  console.log("orders", orders?.data?.order?.filter(fil => fil.user_id === user_id).length)
+  console.log("orders", orders?.order?.filter(fil => fil.user_id === user_id).length)
 
 
   const onSubmit = (order_id) => {
@@ -40,10 +40,10 @@ export const Order = () => {
     <ResponsiveWrap>
 
 
-      <Header icon={true} title="my orders" />
+      <Header title="my orders" />
 
 
-      {orders?.data?.order?.filter(fil => fil.user_id === user_id).length === 0 ?
+      {orders?.order?.filter(fil => fil.user_id === user_id).length === 0 ?
 
 
         <div className='empty_order'>
@@ -56,7 +56,7 @@ export const Order = () => {
 
         :
 
-        orders?.data?.order?.filter(fil => fil.user_id === user_id).map((data, index) =>
+        orders?.order?.filter(fil => fil.user_id === user_id).map((data, index) =>
 
           <div className="order_items">
 

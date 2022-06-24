@@ -6,6 +6,7 @@ import { Header } from '../../Components/Header/Header';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query'
 import { Button } from '../../Components/Button/Button'
+import { useQueryFetch } from '../../Utils/useQueryFetch';
 
 export const OrderDetails = () => {
 
@@ -14,7 +15,10 @@ export const OrderDetails = () => {
 
   const navigate = useNavigate()
 
-  const { fetchData: orders } = useQuery('orders', id)
+  const { fetchData: orders } = useQueryFetch('order')
+
+
+  console.log("orders", orders)
 
 
   return (
@@ -23,20 +27,10 @@ export const OrderDetails = () => {
     <div className='order_details'>
 
 
-
-      <Header justifyContent="space-between">
-
-        <i onClick={() => navigate('/orders')} class="fa-solid fa-chevron-left"></i>
-
-        <H3 fontWeight="bold" >Order Details</H3>
-
-        <i style={{ color: 'white' }} class="fa-solid fa-chevron-left"></i>
+      <Header icon={true} navigate="orders" title="order details" />
 
 
-      </Header>
-
-
-      {orders?.data?.order?.filter(fil => fil._id === id).map(data =>
+      {orders?.order?.filter(fil => fil._id === id).map(data =>
 
         <div className="order_items">
 
@@ -78,7 +72,7 @@ export const OrderDetails = () => {
               <div className="order_cart_items" >
                 <H4 flex="1" fontWeight="bold">{prod.product_name}</H4>
                 <H4 flex="1" color="green" fontWeight="bold">{"₹ " + prod.price}</H4>
-                <H4 flex="1" color="red" fontWeight="bold">{prod.weight + " g"}</H4>
+                <H4 flex="1" color="red" fontWeight="bold">{prod.weight}</H4>
 
               </div>
 

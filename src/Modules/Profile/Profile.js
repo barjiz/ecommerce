@@ -17,7 +17,7 @@ export const Profile = () => {
 
     const { fetchData: loggedprofiles } = useQueryFetchId("user", user_id)
 
-    
+
     const profile = loggedprofiles?.data?.user;
 
 
@@ -71,7 +71,7 @@ export const Profile = () => {
         <ResponsiveWrap>
 
 
-            <Header icon={true} title="my profile" />
+            <Header title="my profile" />
 
 
             <Flex width="100%">

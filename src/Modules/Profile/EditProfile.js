@@ -54,24 +54,14 @@ export const EditProfile = () => {
         <ResponsiveWrap>
 
 
+            <Header icon={true} navigate="profile" title="edit profile" />
 
-            <Header justifyContent="space-between">
-
-                <i onClick={() => navigate('/')} class="fa-solid fa-chevron-left"></i>
-
-                <H3 fontWeight="bold" >Edit Profile</H3>
-
-                <i style={{ color: 'transparent' }} class="fa-solid fa-chevron-left"></i>
-
-
-            </Header>
 
             <Flex width="90%" margin="0 auto" flexDirection="column" justifyContent="flex-start">
 
 
                 <img style={{ margin: "10px", width: "100px", height: "100px", borderRadius: "100%" }}
                     src={require("../../Assets/Images/profile/profile.jpg")} />
-
 
 
                 <Text onChange={(e) => setUserName(e.target.value)}
