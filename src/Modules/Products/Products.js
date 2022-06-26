@@ -15,6 +15,9 @@ export const Products = (props) => {
   const { fetchData: product } = useQueryFetch('product')
 
 
+
+
+
   const dispatch = useDispatch()
 
   const handleAddToCart = (data) => {
@@ -40,115 +43,116 @@ export const Products = (props) => {
 
     <React.Fragment>
 
-      {product?.product?.filter(fil => fil.category === props.category).map(data => (
+      {product?.filter(fil => fil.category === props.category).map(data => (
         <div className={props.className} >
 
 
           <div key={data._id} class="card" style={{ display: "flex", flexDirection: "column", }}>
 
-          
-              <>
 
-                <Navigator route={`/product/${data._id}`}>
+            <>
 
-                  <div style={{
-                    display: "flex", justifyContent: "center", alignItems: "center"
-                  }}>
+              <Navigator route={`/product/${data._id}`}>
 
-                    <img style={{
-                      width: props.width,
-                      height: props.height,
-                      objectFit: "cover"
-                    }} src={data.productImage} class="card-img-top" alt="..." />
+                <div style={{
+                  display: "flex", justifyContent: "center", alignItems: "center"
+                }}>
 
-
-                  </div>
+                  <img style={{
+                    width: props.width,
+                    height: props.height,
+                    objectFit: "cover"
+                  }} src={data.productImage} class="card-img-top" alt="..." />
 
 
-                  <H5 width="100%" maxWidth="100px" fontWeight="bold" maxHeight="1.4rem" margin="10px 5px">{data.product_name}</H5>
-
-                  {data.price.filter((fil, index) => index === 0).map(dd =>
-
-                    <>
-
-                      <H5 margin="15px 5px" borderRadius="5px" padding="3px 10px"
-                        backgroundColor="rgba(255, 99, 71, 0.162)" textTransform="lowercase" color="tomato" fontWeight="bold" >{dd.weight}</H5>
+                </div>
 
 
-                      {dd.offer.length > 0 ?
-                        <Flex margin="10px" justifyContent="flex-start">
-                          <H5 fontWeight="bold" color="green" > <del> ₹ {dd.price}</del></H5>
-                          <H5 borderRadius="30px" backgroundColor="#7B68EE" padding="2px 8px" fontWeight="bold" color="white" margin="0 10px">₹ {dd.offer}</H5>
-                        </Flex>
+                <H5 width="100%" maxWidth="100px" fontWeight="bold" maxHeight="1.4rem" margin="10px 5px">{data.product_name}</H5>
 
-                        :
+                {JSON.parse(data.price).filter((fil, index) => index === 0).map(dd =>
 
-                        <Flex margin="16px 10px" justifyContent="flex-start">
-                          <H5 fontWeight="bold" color="green">₹ {dd.price}</H5>
-                        </Flex>
+                  <>
 
-                      }
-
-                    </>
+                    <H5 margin="15px 5px" borderRadius="5px" padding="3px 10px"
+                      backgroundColor="rgba(255, 99, 71, 0.162)" textTransform="lowercase" color="tomato" fontWeight="bold" >{dd.weight}</H5>
 
 
-
-                  )}
-
-                </Navigator>
-
-                {cart.some(ca => ca._id === data._id) ?
-
-
-                  cart.filter(fil => fil._id === data._id).map(cartItem =>
-
-
-                    cartItem.isQty ?
-
-
-                      <Flex>
-
-                        <Button color="white" width="10px" onClick={() => handleDecreaseCart(data)}>-</Button>
-
-                        {cartItem.cartQuanity}
-
-                        <Button color="white" width="10px" onClick={() => handleIncreaseCart(data)}>+</Button>
-
+                    {dd.offer.length > 0 ?
+                      <Flex margin="10px" justifyContent="flex-start">
+                        <H5 fontWeight="bold" color="green" > <del> ₹ {dd.price}</del></H5>
+                        <H5 borderRadius="30px" backgroundColor="#7B68EE" padding="2px 8px" fontWeight="bold" color="white" margin="0 10px">₹ {dd.offer}</H5>
                       </Flex>
-
 
                       :
 
-                      <Button width="100%" color="white" onClick={() => handleRemoveFromCart(data)}> Remove</Button>
+                      <Flex margin="16px 10px" justifyContent="flex-start">
+                        <H5 fontWeight="bold" color="green">₹ {dd.price}</H5>
+                      </Flex>
+
+                    }
+
+                  </>
 
 
 
-                  )
+                )}
 
-                  :
+              </Navigator>
 
-                  <Flex>
-
-                    <Button width="100%" color="danger"
-
-                      onClick={() => handleAddToCart({
-
-                        _id: data?._id,
-                        isQty: data.qty,
-                        product_image: data.productImage,
-                        product_name: data?.product_name,
-                        price: data.price.filter((fil, index) => index === 0).map(dd => parseInt(dd.price)),
-                        weight: data.price.filter((fil, index) => index === 0).map(dd => dd.weight),
-
-                      })}>Add</Button>
-
-                  </Flex>
+              {cart.some(ca => ca._id === data._id) ?
 
 
-                }
+                cart.filter(fil => fil._id === data._id).map(cartItem =>
 
 
-              </>
+                  cartItem.isQty ?
+
+
+                    <Flex>
+
+                      <Button color="white" width="10px" onClick={() => handleDecreaseCart(data)}>-</Button>
+
+                      {cartItem.cartQuanity}
+
+                      <Button color="white" width="10px" onClick={() => handleIncreaseCart(data)}>+</Button>
+
+                    </Flex>
+
+
+                    :
+
+                    <Button width="100%" color="white" onClick={() => handleRemoveFromCart(data)}> Remove</Button>
+
+
+
+                )
+
+                :
+
+                <Flex>
+
+                  <Button width="100%" color="danger"
+
+                    onClick={() => handleAddToCart({
+
+                      _id: data?._id,
+                      isQty: data.qty,
+                      product_image: data.productImage,
+                      product_name: data?.product_name,
+                      price: JSON.parse(data.price).filter((fil, index) => index === 0).map(dd => parseInt(dd.price)),
+                      weight: JSON.parse(data.price).filter((fil, index) => index === 0).map(dd => dd.weight),
+
+                    })}>Add</Button>
+
+                </Flex>
+
+
+              }
+              
+
+
+            </>
 
 
           </div>

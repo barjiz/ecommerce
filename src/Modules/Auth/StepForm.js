@@ -31,12 +31,17 @@ export const StepForm = () => {
         phone_number={phone_number}
         setPhoneNumber={setPhoneNumber}
         nextPage={nextPage}
+        setHash={setHash}
         backPage={backPage} />}
 
       {tabs === 2 && <OtpVerify
         phone_number={phone_number}
         setPhoneNumber={setPhoneNumber}
         nextPage={nextPage}
+        otp={otp}
+        hash={hash}
+        setHash={setHash}
+        setOtp={setOtp}
         backPage={backPage} />}
 
       {tabs === 3 && <Signup

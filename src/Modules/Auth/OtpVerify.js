@@ -16,12 +16,23 @@ export const OtpVerify = (props) => {
 
     const navigate = useNavigate()
 
-    const [user_name, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [password_confirm, setConfirmPassword] = useState("");
+    const { phone_number, hash, otp, setOtp, nextPage, backPage } = props
 
-    const [hide, setHide] = useState(true)
+    const ConfrimOtp = () => {
 
+        axios.post("https://emart-one-touch.herokuapp.com/verifyotp", {
+
+            phone: phone_number,
+            hash: hash,
+            otp: otp
+
+        }).then((res) => {
+            console.log(res)
+
+            nextPage();
+
+        })
+    }
 
     return (
 
@@ -46,13 +57,13 @@ export const OtpVerify = (props) => {
                     placeholder="Enter your Otp"
                     id="name"
                     type="number"
-                    onChange={(e) => setUsername(e.target.value)} />
+                    onChange={(e) => setOtp(e.target.value)} />
 
                 <Flex>
 
-                    <Button color="white" width="100%" onClick={props.backPage} margin="30px 0 30px 0">Back</Button>
+                    <Button color="white" width="100%" onClick={backPage} margin="30px 0 30px 0">Back</Button>
 
-                    <Button color="primary" width="100%" onClick={props.nextPage} margin="30px 0 30px 20px">Confirm Otp</Button>
+                    <Button color="primary" width="100%" onClick={ConfrimOtp} margin="30px 0 30px 20px">Confirm Otp</Button>
 
                 </Flex>
 

@@ -16,11 +16,31 @@ export const ProductDetails = () => {
   const { id } = useParams()
 
 
-
   const { fetchData: product } = useQueryFetchId('product', id)
 
 
   const dispatch = useDispatch()
+
+
+  const thePrice = product?.data && JSON.parse(product?.data?.price)
+
+  const [price, setPrice] = useState()
+
+  const [weight, setWeight] = useState()
+
+
+  useEffect(() => {
+
+    if (price?.length === undefined) {
+
+      setPrice(thePrice?.filter((fil, index) => index === 0).map(pr => pr.price))
+
+      setWeight(thePrice?.filter((fil, index) => index === 0).map(pr => pr.weight))
+
+    }
+
+  })
+
 
   const handleAddToCart = (productdetails) => {
     dispatch(addToCart(productdetails))
@@ -32,101 +52,81 @@ export const ProductDetails = () => {
   }
 
 
-  const productdetails = product?.data?.product
-
-  const [price, setPrice] = useState()
-
-  const [weight, setWeight] = useState()
-
-
-  useEffect(() => {
-
-    if (price?.length === undefined) {
-
-      setPrice(productdetails?.price.filter((fil, index) => index === 0).map(pr => pr.price))
-
-      setWeight(productdetails?.price.filter((fil, index) => index === 0).map(pr => pr.weight))
-
-    }
-
-  })
-
-
 
   return (
 
 
-    <div className='product_details' key={productdetails?._id}>
+    <div className='product_details' key={product?.data?._id}>
 
 
 
-        <div className='product_holder'>
+      <div className='product_holder'>
 
 
-          <div className='product_items'>
+        <div className='product_items'>
 
-            <H3 fontWeight="bold" margin="15px">{productdetails?.product_name}</H3>
+          <H3 fontWeight="bold" margin="15px">{product?.data?.product_name}</H3>
 
-            <H4 margin="15px" borderRadius="5px" padding="3px 10px"
-              backgroundColor="rgba(255, 99, 71, 0.162)" textTransform="lowercase"
-              color="tomato" fontWeight="bold" >{weight}</H4>
+          <H4 margin="15px" borderRadius="5px" padding="3px 10px"
+            backgroundColor="rgba(255, 99, 71, 0.162)" textTransform="lowercase"
+            color="tomato" fontWeight="bold" >{weight}</H4>
 
-            <H3 fontWeight="bold" color="green" margin="15px">₹ {price}</H3>
+          <H3 fontWeight="bold" color="green" margin="15px">₹ {price}</H3>
 
-            <img src={productdetails?.productImage} />
+          <img src={product?.data?.productImage} />
 
-          </div>
+        </div>
 
-          <div className='product_items'>
+        <div className='product_items'>
 
-            {productdetails?.price.map(pr =>
+          {thePrice?.map(pr =>
 
-              <RadioCard onChange={(e) => {
+            <RadioCard onChange={(e) => {
 
-                setPrice(pr.price)
+              setPrice(pr.price)
 
-                setWeight(pr.weight)
+              setWeight(pr.weight)
 
-                handleRemoveFromCart(productdetails)
+              handleRemoveFromCart(product?.data)
 
-              }} id={pr._id} value={pr.price}>
+            }} id={pr._id} value={pr.price}>
 
-                <H4 textTransform="lowercase" color="tomato" fontWeight="bold" margin="10px 5px">{pr.weight}</H4>
+              <H4 textTransform="lowercase" color="tomato" fontWeight="bold" margin="10px 5px">{pr.weight}</H4>
 
-                <H4 fontWeight="bold" color="green" margin="10px 5px">₹ {pr.price}</H4>
+              <H4 fontWeight="bold" color="green" margin="10px 5px">₹ {pr.price}</H4>
 
-              </RadioCard>
-              
-            )}
+            </RadioCard>
 
-
-            {cart.some(ca => ca._id === productdetails._id) ?
+          )}
 
 
-              <Button width="100%" padding="10px" color="white" onClick={() => handleRemoveFromCart(productdetails)}> Remove</Button>
-
-              :
-
-              <Button width="100%" padding="10px" color="danger"
-
-                onClick={() => handleAddToCart({
-
-                  _id: productdetails?._id,
-                  isQty: productdetails?.qty,
-                  product_image: productdetails?.productImage,
-                  product_name: productdetails?.product_name,
-                  price: price,
-                  weight: weight,
-
-                })}>Add</Button>
-            }
+          {cart.some(ca => ca._id === product?.data._id) ?
 
 
-          </div>
+            <Button width="100%" padding="10px" color="white" onClick={() => handleRemoveFromCart(product?.data)}> Remove</Button>
 
-        </div >
+            :
 
-  
+            <Button width="100%" padding="10px" color="danger"
+
+              onClick={() => handleAddToCart({
+
+                _id: product?.data?._id,
+                isQty: product?.data?.qty,
+                product_image: product?.data?.productImage,
+                product_name: product?.data?.product_name,
+                price: price,
+                weight: weight,
+
+              })}>Add</Button>
+          }
+
+
+        </div>
+
+      </div >
+
+
     </div >
 
   )

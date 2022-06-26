@@ -14,10 +14,24 @@ import "./Auth.css"
 
 export const PhoneAuth = (props) => {
 
-
+    const { phone_number, setPhoneNumber, setHash, nextPage } = props
 
 
     const navigate = useNavigate()
+
+    const SentOtp = () => {
+
+        axios.post("https://emart-one-touch.herokuapp.com/sendotp", {
+
+            phone: phone_number
+
+        }).then((res) => {
+            console.log(res)
+            setHash(res.data.hash)
+            nextPage();
+
+        })
+    }
 
 
 
@@ -42,10 +56,10 @@ export const PhoneAuth = (props) => {
                     placeholder="Enter your Phone"
                     id="name"
                     type="number"
-                    onChange={(e) => props.setPhoneNumber(e.target.value)} />
+                    onChange={(e) => setPhoneNumber(e.target.value)} />
 
 
-                <Button color="primary" width="100%" onClick={props.nextPage} margin="30px 0">Sent Otp</Button>
+                <Button color="primary" width="100%" onClick={SentOtp} margin="30px 0">Sent Otp</Button>
 
                 <Flex width="100%" justifyContent="center">
 

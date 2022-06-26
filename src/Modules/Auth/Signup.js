@@ -12,7 +12,9 @@ import * as yup from 'yup';
 
 import "./Auth.css"
 
-export const Signup = () => {
+export const Signup = (props) => {
+
+  const { phone_number } = props;
 
   const navigate = useNavigate()
 
@@ -29,6 +31,7 @@ export const Signup = () => {
       `${BASE_URL}user/signup`,
       {
         user_name,
+        phone_number,
         password,
         password_confirm
       },
