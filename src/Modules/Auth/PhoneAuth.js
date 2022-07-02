@@ -23,7 +23,7 @@ export const PhoneAuth = (props) => {
 
         axios.post("https://emart-one-touch.herokuapp.com/sendotp", {
 
-            phone: phone_number
+            phone: '+91' + phone_number
 
         }).then((res) => {
             console.log(res)

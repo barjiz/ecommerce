@@ -1,3 +1,15 @@
+label {
+    width: 100%;
+}
+
+
+
+
+/* 
+
+
+
+
 .radio_cards {
     width: 100%;
 }
@@ -35,4 +47,4 @@ label {
 
 .card_input_element:checked+.card_input h4 {
     background-color: #ff2e63;
-}
+} */

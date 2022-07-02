@@ -9,13 +9,14 @@ import { Provider } from "react-redux"
 
 import cartReducer, { getTotals } from './Redux/cartSlice';
 import { BrowserRouter } from 'react-router-dom';
-import themeReducer from './Redux/themesSlice'
+import featuresSlice from './Redux/featuresSlice'
 import authSlice from './Redux/authSlice';
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration"
 
 const store = configureStore({
   reducer: {
     cart: cartReducer,
-    theme: themeReducer,
+    features: featuresSlice,
     auth: authSlice,
   }
 })
@@ -43,3 +44,6 @@ ReactDOM.render(
 
 reportWebVitals();
 
+
+
+// serviceWorkerRegistration.register();

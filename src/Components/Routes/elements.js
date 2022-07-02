@@ -6,6 +6,7 @@ import { StepForm } from "../../Modules/Auth/StepForm"
 import { Categories } from "../../Modules/Categories/Categories"
 import { CategoriesDetails } from "../../Modules/Categories/CategoriesDetails"
 import { DeliveryForm } from "../../Modules/DeliveryForm/DeliveryForm"
+import { DishesDetails } from "../../Modules/Dishes/DishesDetails"
 import Home from "../../Modules/Home/Home"
 import { Order } from "../../Modules/Orders/Order"
 import { OrderDetails } from "../../Modules/Orders/OrderDetails"
@@ -27,6 +28,11 @@ export const elements = [
         isAuth: false,
         path: "/product/:id",
         element: <ProductDetails />
+    },
+    {
+        isAuth: false,
+        path: "/dish/:id",
+        element: <DishesDetails />
     },
     {
         isAuth: false,

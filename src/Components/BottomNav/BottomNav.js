@@ -22,12 +22,12 @@ export const BottomNav = () => {
             icon: "fa-solid fa-house",
             url: '/'
         },
-        {
-            id: 2,
-            icon: "fa-solid fa-list",
-            url: '/categories',
-            url2: `/categories/${appId}`
-        },
+        // {
+        //     id: 2,
+        //     icon: "fa-solid fa-list",
+        //     url: '/categories',
+        //     url2: `/categories/${appId}`
+        // },
         {
             id: 3,
             icon: "fa-solid fa-cart-shopping",

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { OpacityBg } from "../../Components/UI/OpacityBg/OpacityBg"
 import { useQueryFetch } from "../../Utils/useQueryFetch";
 
-export const SearchBar = () => {
+export const SearchBar = (props) => {
 
     const [searchTerm, SetSearchTerm] = useState("");
 
@@ -68,22 +68,20 @@ export const SearchBar = () => {
 
 
     return (
-        <div className="search_bar">
+        <div style={{ margin: props.margin }} className="search_bar">
 
             <div className="search" >
 
                 <div className="search_input">
 
-                    <input type="text" placeholder="Search for products" value={searchTerm}
+                    <i class="fas fa-search"></i>
+
+                    <input type="text" placeholder={props.placeholder} value={searchTerm}
                         onChange={theSearch} />
 
                     <i style={closeStyle} onClick={clearSearch} class="fas fa-times"></i>
 
                 </div>
-
-
-                <Button color="green" width="fit-content" margin="0 10px">Search</Button>
-
 
             </div>
 

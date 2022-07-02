@@ -24,16 +24,6 @@ export const category = [
         banner_wide: "foodgrainsoilbanner.jpg",
         banner_square:"vegitablesbanner.jpg",
     },
-
-    {
-
-        category: "3",
-        product_name: "Fast foods",
-        image: "fastfood.jpg",
-        banner_wide: "fastfoodbanner.jpg",
-        banner_square:"vegitablesbanner.jpg",
-
-    },
     {
 
         category: "4",

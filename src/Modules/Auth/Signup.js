@@ -31,7 +31,7 @@ export const Signup = (props) => {
       `${BASE_URL}user/signup`,
       {
         user_name,
-        phone_number,
+        phone_number: '+91' + phone_number,
         password,
         password_confirm
       },

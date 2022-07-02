@@ -15,7 +15,8 @@ export const Button = (props) => {
         top: props.top,
         left: props.left,
         bottom: props.bottom,
-        padding: props.padding
+        padding: props.padding,
+        borderRadius: props.borderRadius,
     }
 
 

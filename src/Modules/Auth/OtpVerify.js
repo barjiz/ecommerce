@@ -22,7 +22,7 @@ export const OtpVerify = (props) => {
 
         axios.post("https://emart-one-touch.herokuapp.com/verifyotp", {
 
-            phone: phone_number,
+            phone: '+91' + phone_number,
             hash: hash,
             otp: otp
 

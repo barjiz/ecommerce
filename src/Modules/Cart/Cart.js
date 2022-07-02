@@ -12,6 +12,7 @@ import "./Cart.css"
 import { Navigator } from '../../Components/Route/Router'
 import { ResponsiveWrap } from '../../Components/UI/ResponsiveWrap/ResponsiveWrap'
 import { useEffect } from 'react'
+import { useLoading } from '../../Utils/useLoading'
 
 export const Cart = ({ nextPage }) => {
 
@@ -22,6 +23,9 @@ export const Cart = ({ nextPage }) => {
   let navigate = useNavigate()
 
   const dispatch = useDispatch()
+
+
+  const isLoading = useLoading()
 
 
   useEffect(() => {
@@ -39,7 +43,11 @@ export const Cart = ({ nextPage }) => {
     dispatch(addToCart(cartItem))
   }
 
-
+  const CheckOut = () => {
+    
+    isLoading(true)
+    nextPage()
+  }
 
   return (
 
@@ -139,7 +147,7 @@ export const Cart = ({ nextPage }) => {
 
             <H3>Total: {cart.cartTotalAmount} </H3>
 
-            <Button width="fit-content" color="blue" onClick={nextPage}>Check out</Button>
+            <Button width="fit-content" color="blue" onClick={CheckOut}>Check out</Button>
 
 
           </div>

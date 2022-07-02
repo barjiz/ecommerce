@@ -77,11 +77,9 @@ export const UserAddress = ({ nextbtn, nextPage, prevPage, setAddress }) => {
 
 
                                 <RadioCard checked={checked} onChange={checked && setAddress(data)} id={data._id} value={data}>
-                                    {console.log("profile", data)
-                                    }
+                                    {console.log("profile", data)}
 
                                     <Flex padding="20px 10px" width="100%" flexDirection="column" alignItems="flex-start">
-
 
                                         <Flex>
                                             <H4 flex="1" fontWeight="bold" margin="10px">Full Name :</H4>
@@ -108,21 +106,13 @@ export const UserAddress = ({ nextbtn, nextPage, prevPage, setAddress }) => {
                                             <Button onClick={Delete} width="60%" color="red" margin="20px 0 0 0">Delete</Button>
                                         </Flex>
 
-
-
                                     </Flex>
-
-
 
                                 </RadioCard>
 
-
                             )}
 
-
                         </div>
-
-
                     }
 
 
@@ -143,13 +133,11 @@ export const UserAddress = ({ nextbtn, nextPage, prevPage, setAddress }) => {
                                 <Button color="blue" onClick={nextPage} width="100%" margin="10px" >Next</Button>
 
                             }
-                        </Flex>}
 
+                        </Flex>}
 
                 </>
             }
-
-
 
 
             {editAddress && <EditAddress profile={profile} refetch={refetch} setEditAddress={setEditAddress} />}

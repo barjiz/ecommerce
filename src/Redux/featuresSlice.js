@@ -8,10 +8,11 @@ const initialState = {
     },
     mobile: "768px",
     darkmode: false,
+    isGrocery: true,
 };
 
-const themeSlice = createSlice({
-    name: "theme",
+const featuresSlice = createSlice({
+    name: "features",
     initialState,
     reducers: {
         setDarkTheme(state) {
@@ -19,9 +20,13 @@ const themeSlice = createSlice({
             // state.colors.body = state.darkmode ? "#445155" : "#fff";
             state.darkmode = !state.darkmode;
         },
+        setGrocery(state, actions) {
+
+            state.isGrocery = actions.payload;
+        }
     },
 });
 
-export const { setDarkTheme } = themeSlice.actions;
+export const { setDarkTheme, setGrocery } = featuresSlice.actions;
 
-export default themeSlice.reducer;
+export default featuresSlice.reducer;

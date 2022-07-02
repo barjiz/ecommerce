@@ -10,125 +10,52 @@ import { Navigator } from '../../Components/Route/Router'
 import { Grid } from '../../Components/UI/Grid/Grid'
 import { SwiperSlide } from 'swiper/react'
 import { SwiperCarousel } from '../../Components/Slider/SwiperCarousel/SwiperCarousel'
+import { Button } from '../../Components/Button/Button'
+import { Grocery } from '../Grocery/Grocery'
+import { Fastfood } from '../Fastfood/Fastfood'
+import { useDispatch, useSelector } from 'react-redux'
+import { setGrocery } from '../../Redux/featuresSlice'
 
 const Home = () => {
 
-  const navigate = useNavigate()
-
-  const [menuBar, setMenuBar] = useState(false)
+  const [tabs, setTabs] = useState(1)
 
 
-  const style = {
-    left: "-260px"
-  }
+  const dispatch = useDispatch();
 
-  if (menuBar) {
-    style.left = "0"
-  }
-  else {
-    style.left = "-100%"
-  }
+  const isGrocery = useSelector((state) => state.features.isGrocery)
 
+  console.log("isGrocery", isGrocery)
 
-  const banner = [
-    {
-      image: "vegitablesbanner.jpg",
-
-    },
-    {
-      image: "bakerycakebanner.jpg",
-
-    },
-    {
-      image: "foodgrainsoilbanner.jpg",
-
-    }
-  ]
 
   return (
 
     <div className='home'>
 
 
-      <div className='nav_small'>
-
-        <img style={{ margin: "0 10px" }} width="80px" src={require("../../Assets/Images/logo/logo.png")} />
-
-        <SearchBar />
-
-      </div>
+      <Flex width="100%">
 
 
-      <SwiperCarousel>
+        <Button
+          onClick={() => dispatch(setGrocery(true))}
+          borderRadius="0"
+          color={isGrocery === true ? "green" : "gray"}
+          width="100%">grocery</Button>
 
 
-        {banner.map(data => (
+        <Button
+          onClick={() => dispatch(setGrocery(false))}
+          borderRadius="0"
+          color={isGrocery === false ? "danger" : "gray"}
+          width="100%">fast food</Button>
 
-          <SwiperSlide>
-
-            <img width="100%" height="200px"
-              src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
-
-          </SwiperSlide>
-
-        ))}
+      </Flex>
 
 
-      </SwiperCarousel>
+      {isGrocery ? <Grocery /> : <Fastfood />}
 
+      {console.log("windwo", window.innerWidth)}
 
-      <H3 margin="20px 10px">Shop By Categories</H3>
-
-
-      <Grid>
-
-        {category.map(data =>
-
-          <div className='col-4 col-sm-3 col-md-3 col-lg-3 col-xl-2  col-xxl-2'>
-            <Navigator route={`/categories/${data.category}`}>
-              <img width="100%" className="cate-img" src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
-
-              <H6 fontWeight="bold" margin="10px 0">{data.product_name}</H6>
-
-            </Navigator>
-
-          </div>
-
-        )}
-
-      </Grid>
-
-
-      {category.map(cate => (
-
-        <div className='category' key={cate.category}>
-
-
-          <img width="100%" height="170px" onClick={() => navigate(`/categories/${cate.category}`)} style={{ cursor: "pointer" }} src={require(`../../Assets/Images/product_banner/${cate.banner_wide}`)} alt="" />
-
-
-          <Flex>
-
-            <H3 fontWeight="bold" margin="10px">{cate.product_name}</H3>
-
-            <H5 color="tomato" fontWeight="bold" margin="10px" onClick={() => navigate(`/categories/${cate.category}`)}>Load More</H5>
-
-          </Flex>
-
-
-          <Flex overflowX="scroll" >
-
-            <Products
-              width="120px"
-              height="120px"
-              category={cate.category} flexDirection="column" />
-
-          </Flex>
-
-        </div >
-
-      ))
-      }
 
     </div >
 

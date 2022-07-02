@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import "./ProductDetails.css"
 import { H3, H4 } from '../../Components/Text/Text'
 import { RadioCard } from '../../Components/Radio/RadioCard'
 import { useQuery } from 'react-query'
@@ -9,22 +8,21 @@ import { addToCart, removeFromCart } from '../../Redux/cartSlice'
 import { Button } from '../../Components/Button/Button'
 import { useQueryFetch, useQueryFetchId } from '../../Utils/useQueryFetch'
 import { useLoading } from '../../Utils/useLoading'
-import { Header } from '../../Components/Header/Header'
 import { Flex } from '../../Components/UI/Flex/Flex'
+import { Header } from '../../Components/Header/Header'
+import "./DishDetails.css"
 
-export const ProductDetails = () => {
+export const DishesDetails = (props) => {
+
+  const { dish_id, setDishDetails } = props
 
   const cart = useSelector((state) => state.cart.cartItems)
 
-  const { id } = useParams()
 
-
-  const { fetchData: product } = useQueryFetchId('product', id)
+  const { fetchData: product } = useQueryFetchId('product', dish_id)
 
 
   const dispatch = useDispatch()
-
-  const navigate = useNavigate()
 
 
   const thePrice = product?.data && JSON.parse(product?.data?.price)
@@ -65,44 +63,26 @@ export const ProductDetails = () => {
   return (
 
 
-    <div className='product_details' key={product?.data?._id}>
+    <div onClick={setDishDetails(true)} className='dish_details' key={product?.data?._id}>
 
-      <i style={{ color: "black" }} onClick={() => navigate("/")} class="fa-solid fa-angle-left"></i>
-
-
-      <div className='product_holder'>
-
-        <img src={product?.data?.productImage} />
+      <Flex>
 
 
-        <Flex width="100%">
+        <H3 fontWeight="bold" margin="15px">{product?.data?.product_name}</H3>
 
+        <div onClick={() => setDishDetails(false)} style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "40px", height: "40px", borderRadius: "100%", margin: "20px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
 
-          <Flex>
+          <i style={{ fontSize: "2rem" }} class="fa-solid fa-xmark"></i>
 
-            <H3 fontWeight="bold" margin="15px">{product?.data?.product_name}</H3>
-
-          </Flex>
-
-          <Flex>
-
-            <H3 fontWeight="bold" color="green" margin="15px">₹ {price}</H3>
-
-            <H4 margin="15px" borderRadius="5px" padding="3px 10px"
-              backgroundColor="rgba(255, 99, 71, 0.162)" textTransform="lowercase"
-              color="tomato" fontWeight="bold" >{weight}</H4>
-
-
-          </Flex>
+        </div>
 
 
 
-        </Flex>
+      </Flex>
 
-      </div>
 
-      <div className='product_items'>
-        
+      <div className='dish_items'>
+
         {thePrice?.map(pr =>
 
           <RadioCard onChange={(e) => {
@@ -124,18 +104,21 @@ export const ProductDetails = () => {
         )}
 
 
+        <Flex backgroundColor="white" position="fixed" bottom="0" left="0" justifyContent="space-between" alignItems="center">
 
-        <Flex position="fixed" bottom="0" left="0" margin="10px 0"
-          justifyContent="center" alignItems="center">
+
+          <H3 margin="15px" fontWeight="bold" color="green" >₹ {price}</H3>
+
 
           {cart.some(ca => ca._id === product?.data._id) ?
 
 
-            <Button width="96%" borderRadius="15px" color="white" onClick={() => handleRemoveFromCart(product?.data)}> Remove</Button>
+            <Button width="60%" borderRadius="15px"
+              color="white" onClick={() => handleRemoveFromCart(product?.data)}> Remove</Button>
 
             :
 
-            <Button width="96%" borderRadius="15px" color="green"
+            <Button width="60%" borderRadius="15px" color="dark" margin="15px"
 
               onClick={() => handleAddToCart({
 
@@ -146,14 +129,13 @@ export const ProductDetails = () => {
                 price: price,
                 weight: weight,
 
-              })}>Add</Button>
+              })}>Add to cart</Button>
           }
 
         </Flex>
 
 
-      </div>
-
+      </div >
 
 
     </div >
