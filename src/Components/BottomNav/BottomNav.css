@@ -18,10 +18,16 @@
   background-color: white;
 }
 
+.bottom-nav h6 {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
 .bottom-nav .icon-active {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
   width: 100%;
   height: 60px;
 
@@ -30,15 +36,23 @@
 .bottom-nav .icon-active i {
   color: #7B68EE;
   font-size: 1.4rem;
+  margin-top: 8px;
+}
 
+.bottom-nav .icon-active h6 {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #7B68EE;
 }
 
 .bottom-nav .icon-not-active {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
   width: 100%;
   height: 60px;
+
 
 }
 
@@ -46,8 +60,14 @@
 .bottom-nav .icon-not-active i {
   color: grey;
   font-size: 1.3rem;
+  margin-top: 8px;
 }
 
+.bottom-nav .icon-not-active h6 {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: grey;
+}
 
 @media screen and (min-width:800px) {
 

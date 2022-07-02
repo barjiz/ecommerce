@@ -7,13 +7,12 @@ import { H4, H5 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
 import { useQueryFetch } from '../../Utils/useQueryFetch'
 import { useNavigate } from 'react-router-dom'
-import { useLoading } from '../../Utils/useLoading'
+import { useDetailLoading } from '../../Utils/useLoading'
 
 
 export const Dishes = (props) => {
 
   const cart = useSelector((state) => state.cart.cartItems)
-
 
   const { category, flexDirection, className, setDishDetails, setDishId } = props;
 
@@ -21,7 +20,7 @@ export const Dishes = (props) => {
 
   const navigate = useNavigate();
 
-  const isLoading = useLoading()
+  const isDetailLoading = useDetailLoading()
 
 
   const dispatch = useDispatch()
@@ -64,7 +63,7 @@ export const Dishes = (props) => {
 
             <img onClick={() => {
               setDishDetails(true)
-              // isLoading(true);
+              isDetailLoading(true);
               setDishId(data._id)
 
             }

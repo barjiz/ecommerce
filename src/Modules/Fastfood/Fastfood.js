@@ -12,12 +12,13 @@ import { Dishes } from '../Dishes/Dishes'
 import { dishescategories } from '../../LocalData/dishescategories'
 import { DishesDetails } from '../Dishes/DishesDetails'
 import { OpacityBg } from '../../Components/UI/OpacityBg/OpacityBg'
+import { useDetailLoading } from '../../Utils/useLoading'
 
 
 export const Fastfood = () => {
 
 
-    const navigate = useNavigate()
+    const isDetailLoading = useDetailLoading()
 
     const [menuBar, setMenuBar] = useState(false)
 
@@ -131,6 +132,7 @@ export const Fastfood = () => {
                         // width="120px"
                         width={window.innerWidth <= 460 ? "130px" : "160px"}
                         height="180px"
+
                         category="3" flexDirection="column" />
 
                 </Flex>
@@ -142,6 +144,7 @@ export const Fastfood = () => {
                         // width="120px"
                         width={window.innerWidth <= 460 ? "130px" : "160px"}
                         height="180px"
+
                         category="3" flexDirection="row" />
 
                 </Flex>
@@ -153,9 +156,12 @@ export const Fastfood = () => {
 
                 <>
 
-                    <OpacityBg onClick={() => setDishDetails(false)} />
+                    <OpacityBg onClick={() => {
+                        setDishDetails(false)
+                        isDetailLoading(false)
+                    }} />
 
-                    <DishesDetails setDishDetails={setDishDetails} dish_id={dish_id} />
+                    <DishesDetails cartColor="dark" setDishDetails={setDishDetails} dish_id={dish_id} />
 
                 </>
 

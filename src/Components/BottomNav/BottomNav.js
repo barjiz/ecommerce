@@ -4,6 +4,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import './BottomNav.css'
 
+import { H4 } from "../Text/Text"
+
+
 export const BottomNav = () => {
 
     let navigate = useNavigate()
@@ -15,10 +18,12 @@ export const BottomNav = () => {
     var appId = pathname.split('/')[2];
 
 
+
     const navigation = [
 
         {
             id: 1,
+            title: "Home",
             icon: "fa-solid fa-house",
             url: '/'
         },
@@ -30,18 +35,21 @@ export const BottomNav = () => {
         // },
         {
             id: 3,
+            title: "Cart",
             icon: "fa-solid fa-cart-shopping",
             url: '/cart'
 
         },
         {
             id: 4,
+            title: "Orders",
             icon: "fa-solid fa-clock",
             url: '/orders',
             url2: `/orders/${appId}`
         },
         {
             id: 5,
+            title: "Profile",
             icon: "fa-solid fa-user",
             url: '/profile',
             url2: '/profile/edit',
@@ -60,10 +68,12 @@ export const BottomNav = () => {
                     {location.pathname === data.url || location.pathname === data.url2 || location.pathname === data.url3 ?
                         <div className="icon-active" onClick={() => navigate(data.url)}>
                             <i class={data.icon}></i>
+                            <h6>{data.title}</h6>
                         </div>
                         :
                         <div className="icon-not-active" onClick={() => navigate(data.url)}>
                             <i class={data.icon}></i>
+                            <h6>{data.title}</h6>
                         </div>
                     }
                 </div>

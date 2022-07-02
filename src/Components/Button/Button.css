@@ -23,6 +23,7 @@
 
 .green {
     background-color: rgb(0, 183, 0);
+    border: 1px solid rgb(0, 183, 0);
 }
 
 .dodgerblue {
@@ -38,6 +39,7 @@
 
 .dark {
     background-color: black;
+    border: 1px solid black;
 }
 
 .danger {

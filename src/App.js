@@ -5,15 +5,16 @@ import { QueryClient, QueryClientProvider } from "react-query"
 import { NavBar } from './Components/NavBar/NavBar';
 import { AllRoutes } from './Components/Routes/Routes';
 import { useSelector } from 'react-redux';
-import { LoadingPage } from "./Components/LoadingPage/LoadingPage"
+import { DetailLoadingPage, MainLoadingPage } from "./Components/LoadingPage/LoadingPage"
 
 const queryClient = new QueryClient();
 
 function App() {
 
 
-  const isLoading = useSelector((state) => state.cart.loadingState)
+  const isMainLoading = useSelector((state) => state.features.mainloadingState)
 
+  const isDetailLoading = useSelector((state) => state.features.detailLoading)
 
   return (
 
@@ -22,7 +23,9 @@ function App() {
 
       <div className='App'>
 
-        {isLoading && <LoadingPage />}
+        {isMainLoading && <MainLoadingPage />}
+
+        {isDetailLoading && <DetailLoadingPage />}
 
         <NavBar />
 

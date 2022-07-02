@@ -10,10 +10,15 @@ import { Grid } from '../../Components/UI/Grid/Grid'
 import { SwiperSlide } from 'swiper/react'
 import { SwiperCarousel } from '../../Components/Slider/SwiperCarousel/SwiperCarousel'
 import { Button } from '../../Components/Button/Button'
-
+import { OpacityBg } from '../../Components/UI/OpacityBg/OpacityBg'
+import { DishesDetails } from '../Dishes/DishesDetails'
+import { useDetailLoading } from '../../Utils/useLoading'
 
 
 export const Grocery = () => {
+
+
+    const isDetailLoading = useDetailLoading()
 
 
     const navigate = useNavigate()
@@ -21,6 +26,10 @@ export const Grocery = () => {
     const [menuBar, setMenuBar] = useState(false)
 
     const [tabs, setTabs] = useState()
+
+    const [dishDetails, setDishDetails] = useState(false)
+
+    const [dish_id, setDishId] = useState();
 
 
     const style = {
@@ -126,7 +135,9 @@ export const Grocery = () => {
                         <Flex overflowX="scroll" >
 
                             <Products
-                                // width="120px"
+                                // width="120px" 
+                                setDishId={setDishId}
+                                setDishDetails={setDishDetails}
                                 width={window.innerWidth <= 460 ? "130px" : "160px"}
                                 height="180px"
                                 category={cate.category} flexDirection="column" />
@@ -136,6 +147,23 @@ export const Grocery = () => {
                     </div >
 
                 ))
+            }
+
+
+
+            {dishDetails &&
+
+                <>
+
+                    <OpacityBg onClick={() => {
+                        setDishDetails(false)
+                        isDetailLoading(false)
+                    }} />
+
+                    <DishesDetails cartColor="green" setDishDetails={setDishDetails} dish_id={dish_id} />
+
+                </>
+
             }
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { setLoadingState } from '../Redux/cartSlice';
+import { setMainLoadingState, setDetailLoadingState, } from '../Redux/featuresSlice';
 
 
 export const useLoading = () => {
@@ -9,7 +9,21 @@ export const useLoading = () => {
 
     const handleLoading = (boolean) => {
 
-        dispatch(setLoadingState(boolean));
+        dispatch(setMainLoadingState(boolean));
+
+
+    }
+
+    return handleLoading;
+}
+
+export const useDetailLoading = () => {
+
+    const dispatch = useDispatch()
+
+    const handleLoading = (boolean) => {
+
+        dispatch(setDetailLoadingState(boolean));
 
 
     }

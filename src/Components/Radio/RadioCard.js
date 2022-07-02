@@ -8,22 +8,29 @@ import "./RadioCard.css"
 export const RadioCard = (props) => {
     return (
 
-        <label >
+        //     <label class="container">One
+        //     <input type="radio" checked="checked" name="radio"/>
+        //         <span class="checkmark"></span>
+        // </label>
+
+
+        <label className='the_label'>
 
             <Flex width="100%" justifyContent="space-between" margin="10px 0">
 
-                <Flex margin="0 30px" justifyContent="start" >
+                <Flex width="100%" margin="0 20px 0 30px" justifyContent="space-between">
 
                     {props.children}
 
                 </Flex>
 
-                <Flex margin="0 30px" justifyContent="end">
+                <label className="container">
 
-                    <input className='radio_input' checked={props.checked} value={props.value}
-                        type="radio" id={props.id} name="{props.name}" onChange={props.onChange} />
+                    <input type="radio" name="radio" id={props.id} onChange={props.onChange}
+                        defaultChecked={props.defaultChecked} value={props.value} />
+                    <span class="checkmark"></span>
 
-                </Flex>
+                </label>
 
 
             </Flex>

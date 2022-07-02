@@ -9,6 +9,8 @@ const initialState = {
     mobile: "768px",
     darkmode: false,
     isGrocery: true,
+    mainloadingState: false,
+    detailLoading: false,
 };
 
 const featuresSlice = createSlice({
@@ -23,10 +25,16 @@ const featuresSlice = createSlice({
         setGrocery(state, actions) {
 
             state.isGrocery = actions.payload;
+        },
+        setMainLoadingState(state, action) {
+            state.mainloadingState = action.payload
+        },
+        setDetailLoadingState(state, action) {
+            state.detailLoading = action.payload
         }
     },
 });
 
-export const { setDarkTheme, setGrocery } = featuresSlice.actions;
+export const { setDarkTheme, setGrocery, setMainLoadingState, setDetailLoadingState } = featuresSlice.actions;
 
 export default featuresSlice.reducer;

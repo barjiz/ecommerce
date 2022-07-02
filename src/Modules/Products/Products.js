@@ -7,10 +7,19 @@ import { H5 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
 import { useQueryFetch } from '../../Utils/useQueryFetch'
 import { useNavigate } from 'react-router-dom'
-import { useLoading } from '../../Utils/useLoading'
+import { useDetailLoading, useLoading } from '../../Utils/useLoading'
 
 
 export const Products = (props) => {
+
+
+  const { category, flexDirection, className, setDishDetails, setDishId } = props;
+
+
+
+  const isDetailLoading = useDetailLoading()
+
+
 
   const cart = useSelector((state) => state.cart.cartItems)
 
@@ -40,23 +49,24 @@ export const Products = (props) => {
     dispatch(addToCart(cartItem))
   }
 
-  
+
 
 
   return (
 
     <React.Fragment>
 
-      {product?.filter(fil => fil.category === props.category).map(data => (
+      {product?.filter(fil => fil.category === category).map(data => (
 
-        <div className={props.className} >
+        <div className={className} >
 
           <div key={data._id} class="card" style={{ display: "flex", flexDirection: "column", }}>
 
 
             <img onClick={() => {
-              navigate(`/product/${data._id}`)
-              isLoading(true);
+              setDishDetails(true)
+              isDetailLoading(true);
+              setDishId(data._id)
 
             }
 
@@ -81,12 +91,12 @@ export const Products = (props) => {
                 {dd.offer.length > 0 ?
                   <Flex margin="10px" justifyContent="flex-start">
                     <H5 fontWeight="bold" color="green" >
-                       {/* <del>  */}
+                      {/* <del>  */}
                       ₹ {dd.price}
                       {/* </del> */}
-                      </H5>
+                    </H5>
                     <H5 borderRadius="30px" backgroundColor="#7B68EE" padding="2px 8px" fontWeight="bold" color="white" margin="0 10px">₹ {dd.offer}</H5>
-              
+
                   </Flex>
 
                   :
@@ -136,16 +146,24 @@ export const Products = (props) => {
 
                 <Button width="100%" color="green"
 
-                  onClick={() => handleAddToCart({
+                  onClick={() => {
 
-                    _id: data?._id,
-                    isQty: data.qty,
-                    product_image: data.productImage,
-                    product_name: data?.product_name,
-                    price: JSON.parse(data.price).filter((fil, index) => index === 0).map(dd => parseInt(dd.price)),
-                    weight: JSON.parse(data.price).filter((fil, index) => index === 0).map(dd => dd.weight),
+                    // handleAddToCart({
+                    //   _id: data?._id,
+                    //   isQty: data.qty,
+                    //   product_image: data.productImage,
+                    //   product_name: data?.product_name,
+                    //   price: JSON.parse(data.price).filter((fil, index) => index === 0).map(dd => parseInt(dd.price)),
+                    //   weight: JSON.parse(data.price).filter((fil, index) => index === 0).map(dd => dd.weight),
 
-                  })}>Add</Button>
+                    // })
+
+                    setDishDetails(true)
+                    isDetailLoading(true);
+                    setDishId(data._id)
+
+                  }
+                  }>Add</Button>
 
               </Flex>
 

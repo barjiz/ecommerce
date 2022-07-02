@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { H3, H4 } from '../../Components/Text/Text'
 import { RadioCard } from '../../Components/Radio/RadioCard'
-import { useQuery } from 'react-query'
 import { addToCart, removeFromCart } from '../../Redux/cartSlice'
 import { Button } from '../../Components/Button/Button'
-import { useQueryFetch, useQueryFetchId } from '../../Utils/useQueryFetch'
-import { useLoading } from '../../Utils/useLoading'
+import { useQueryFetchId } from '../../Utils/useQueryFetch'
+import { useDetailLoading } from '../../Utils/useLoading'
 import { Flex } from '../../Components/UI/Flex/Flex'
-import { Header } from '../../Components/Header/Header'
 import "./DishDetails.css"
 
 export const DishesDetails = (props) => {
 
-  const { dish_id, setDishDetails } = props
+  const { dish_id, setDishDetails, cartColor } = props
 
   const cart = useSelector((state) => state.cart.cartItems)
 
@@ -31,7 +28,9 @@ export const DishesDetails = (props) => {
 
   const [weight, setWeight] = useState()
 
-  const isLoading = useLoading()
+  const isDetailLoading = useDetailLoading()
+
+
 
   useEffect(() => {
 
@@ -44,7 +43,9 @@ export const DishesDetails = (props) => {
 
     }
 
-    product?.data && isLoading(false)
+
+    product?.data && isDetailLoading(false)
+
 
   })
 
@@ -83,9 +84,9 @@ export const DishesDetails = (props) => {
 
       <div className='dish_items'>
 
-        {thePrice?.map(pr =>
+        {thePrice?.map((pr, index) =>
 
-          <RadioCard onChange={(e) => {
+          <RadioCard defaultChecked={index === 0 && "true"} onChange={(e) => {
 
             setPrice(pr.price)
 
@@ -95,9 +96,11 @@ export const DishesDetails = (props) => {
 
           }} id={pr._id} value={pr.price}>
 
-            <H4 flex="1" textTransform="lowercase" color="tomato" fontWeight="bold">{pr.weight}</H4>
+            <H4 backgroundColor="red" padding="5px 15px" borderRadius="10px"
+              textTransform="lowercase" color="white" fontWeight="bold">{pr.weight}</H4>
 
-            <H4 flex="1" fontWeight="bold" color="green">₹ {pr.price}</H4>
+            <H4 backgroundColor="black" padding="5px 15px" borderRadius="10px"
+              fontWeight="bolder" color="white">₹ {pr.price}</H4>
 
           </RadioCard>
 
@@ -107,18 +110,19 @@ export const DishesDetails = (props) => {
         <Flex backgroundColor="white" position="fixed" bottom="0" left="0" justifyContent="space-between" alignItems="center">
 
 
-          <H3 margin="15px" fontWeight="bold" color="green" >₹ {price}</H3>
+          <H3  padding="5px 20px" borderRadius="10px"
+            margin="15px" fontWeight="bold" color="black" >₹ {price}</H3>
 
 
           {cart.some(ca => ca._id === product?.data._id) ?
 
 
-            <Button width="60%" borderRadius="15px"
+            <Button width="60%" borderRadius="15px" margin="15px"
               color="white" onClick={() => handleRemoveFromCart(product?.data)}> Remove</Button>
 
             :
 
-            <Button width="60%" borderRadius="15px" color="dark" margin="15px"
+            <Button width="60%" borderRadius="15px" color={cartColor} margin="15px"
 
               onClick={() => handleAddToCart({
 
