@@ -112,33 +112,19 @@ export const Products = (props) => {
             )}
 
 
-            {cart.some(ca => ca._id === data._id) ?
+            {cart.some(ca => ca.product_id === data._id) ?
 
 
-              cart.filter(fil => fil._id === data._id).map(cartItem =>
+              <Button width="100%"
+                color="white"
+                onClick={() => {
 
+                  setDishDetails(true)
+                  isDetailLoading(true);
+                  setDishId(data._id)
 
-                cartItem.isQty ?
-
-
-                  <Flex>
-
-                    <Button color="white" width="10px" onClick={() => handleDecreaseCart(data)}>-</Button>
-
-                    {cartItem.cartQuanity}
-
-                    <Button color="white" width="10px" onClick={() => handleIncreaseCart(data)}>+</Button>
-
-                  </Flex>
-
-
-                  :
-
-                  <Button width="100%" color="white" onClick={() => handleRemoveFromCart(data)}> Remove</Button>
-
-
-
-              )
+                }
+                }> Remove</Button>
 
               :
 
@@ -147,16 +133,6 @@ export const Products = (props) => {
                 <Button width="100%" color="green"
 
                   onClick={() => {
-
-                    // handleAddToCart({
-                    //   _id: data?._id,
-                    //   isQty: data.qty,
-                    //   product_image: data.productImage,
-                    //   product_name: data?.product_name,
-                    //   price: JSON.parse(data.price).filter((fil, index) => index === 0).map(dd => parseInt(dd.price)),
-                    //   weight: JSON.parse(data.price).filter((fil, index) => index === 0).map(dd => dd.weight),
-
-                    // })
 
                     setDishDetails(true)
                     isDetailLoading(true);

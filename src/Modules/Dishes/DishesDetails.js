@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { H3, H4 } from '../../Components/Text/Text'
 import { RadioCard } from '../../Components/Radio/RadioCard'
-import { addToCart, removeFromCart } from '../../Redux/cartSlice'
+import { addToCart, decreaseCart, removeFromCart } from '../../Redux/cartSlice'
 import { Button } from '../../Components/Button/Button'
 import { useQueryFetchId } from '../../Utils/useQueryFetch'
 import { useDetailLoading } from '../../Utils/useLoading'
@@ -13,7 +13,7 @@ export const DishesDetails = (props) => {
 
   const { dish_id, setDishDetails, cartColor } = props
 
-  const cart = useSelector((state) => state.cart.cartItems)
+  const cart = useSelector((state) => state.cart)
 
 
   const { fetchData: product } = useQueryFetchId('product', dish_id)
@@ -24,6 +24,8 @@ export const DishesDetails = (props) => {
 
   const thePrice = product?.data && JSON.parse(product?.data?.price)
 
+  const [the_id, setTheId] = useState()
+
   const [price, setPrice] = useState()
 
   const [weight, setWeight] = useState()
@@ -31,10 +33,22 @@ export const DishesDetails = (props) => {
   const isDetailLoading = useDetailLoading()
 
 
+  let finalObj = {};
+
+  for(let i = 0; i < the_id?.length; i++ ) {
+    Object.assign(finalObj, the_id);
+  }
+  
+
+  console.log(finalObj);
+
+
 
   useEffect(() => {
 
     if (price?.length === undefined) {
+
+      setTheId(thePrice?.filter((fil, index) => index === 0).map((pr, index) => pr._id))
 
       setPrice(thePrice?.filter((fil, index) => index === 0).map(pr => pr.price))
 
@@ -55,9 +69,17 @@ export const DishesDetails = (props) => {
   }
 
 
-  const handleRemoveFromCart = (productdetails) => {
-    dispatch(removeFromCart(productdetails))
+  const handleDecreaseCart = (cartItem) => {
+    dispatch(decreaseCart(cartItem))
   }
+
+  console.log("thecart", cart)
+
+
+  console.log("thecart", cart)
+
+
+  console.log("myid", JSON.stringify(the_id))
 
 
 
@@ -92,7 +114,9 @@ export const DishesDetails = (props) => {
 
             setWeight(pr.weight)
 
-            handleRemoveFromCart(product?.data)
+            setTheId(pr._id)
+
+            // handleRemoveFromCart(product?.data)
 
           }} id={pr._id} value={pr.price}>
 
@@ -102,6 +126,7 @@ export const DishesDetails = (props) => {
             <H4 backgroundColor="black" padding="5px 15px" borderRadius="10px"
               fontWeight="bolder" color="white">₹ {pr.price}</H4>
 
+
           </RadioCard>
 
         )}
@@ -110,23 +135,28 @@ export const DishesDetails = (props) => {
         <Flex backgroundColor="white" position="fixed" bottom="0" left="0" justifyContent="space-between" alignItems="center">
 
 
-          <H3  padding="5px 20px" borderRadius="10px"
+          <H3 borderRadius="10px"
             margin="15px" fontWeight="bold" color="black" >₹ {price}</H3>
 
 
-          {cart.some(ca => ca._id === product?.data._id) ?
+{/* <H4>{finalObj}</H4> */}
 
+          {cart.cartItems.some(ca => ca._id === the_id) ?
 
-            <Button width="60%" borderRadius="15px" margin="15px"
-              color="white" onClick={() => handleRemoveFromCart(product?.data)}> Remove</Button>
+            cart && cart.cartItems.filter(fil => fil._id === the_id).map(cartItem => (
+
+              < Button width="50%" borderRadius="15px" margin="15px"
+                color="white" onClick={() => handleDecreaseCart(cartItem)}> Remove</Button>
+
+            ))
 
             :
 
-            <Button width="60%" borderRadius="15px" color={cartColor} margin="15px"
+            <Button width="50%" borderRadius="15px" color={cartColor} margin="15px"
 
               onClick={() => handleAddToCart({
-
-                _id: product?.data?._id,
+                product_id: product?.data?._id,
+                _id: the_id,
                 isQty: product?.data?.qty,
                 product_image: product?.data?.productImage,
                 product_name: product?.data?.product_name,
@@ -134,9 +164,11 @@ export const DishesDetails = (props) => {
                 weight: weight,
 
               })}>Add to cart</Button>
+
           }
 
         </Flex>
+
 
 
       </div >
