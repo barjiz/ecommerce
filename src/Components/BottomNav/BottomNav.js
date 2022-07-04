@@ -17,7 +17,6 @@ export const BottomNav = () => {
     var pathname = window.location.pathname;
     var appId = pathname.split('/')[1];
 
-    console.log("appId", appId)
 
     const navigation = [
 

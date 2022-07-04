@@ -24,8 +24,7 @@ export const Order = () => {
   const { fetchData: orders, refetchData: refetch } = useQueryFetch('order')
 
 
-  console.log("orders", orders?.order?.filter(fil => fil.user_id === user_id).length)
-
+ 
 
   const onSubmit = (order_id) => {
 

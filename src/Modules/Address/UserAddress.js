@@ -77,8 +77,7 @@ export const UserAddress = ({ nextbtn, nextPage, prevPage, setAddress }) => {
 
 
                                 <RadioCard checked={checked} onChange={checked && setAddress(data)} id={data._id} value={data}>
-                                    {console.log("profile", data)}
-
+                            
                                     <Flex padding="20px 10px" width="100%" flexDirection="column" alignItems="flex-start">
 
                                         <Flex>

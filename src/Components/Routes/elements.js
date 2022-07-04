@@ -1,7 +1,6 @@
 import { Address } from "../../Modules/Address/Address"
 import { CreateAddress } from "../../Modules/Address/CreateAddress/CreateAddress"
 import { Login } from "../../Modules/Auth/Login"
-import { Signup } from "../../Modules/Auth/Signup"
 import { StepForm } from "../../Modules/Auth/StepForm"
 import { Categories } from "../../Modules/Categories/Categories"
 import { CategoriesDetails } from "../../Modules/Categories/CategoriesDetails"
@@ -11,11 +10,8 @@ import Home from "../../Modules/Home/Home"
 import { Order } from "../../Modules/Orders/Order"
 import { OrderDetails } from "../../Modules/Orders/OrderDetails"
 import OrderSuccess from "../../Modules/OrderSuccess/OrderSuccess"
-import { ProductDetails } from "../../Modules/Products/ProductDetails"
 import { EditProfile } from "../../Modules/Profile/EditProfile"
 import { Profile } from "../../Modules/Profile/Profile"
-import { NotFound } from "./NotFound/NotFound"
-
 
 
 export const elements = [
@@ -23,11 +19,6 @@ export const elements = [
         isAuth: false,
         path: "/",
         element: <Home />
-    },
-    {
-        isAuth: false,
-        path: "/product/:id",
-        element: <ProductDetails />
     },
     {
         isAuth: false,

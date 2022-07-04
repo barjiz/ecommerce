@@ -84,6 +84,7 @@ export const Products = (props) => {
 
               <>
 
+
                 <H5 margin="15px 5px" borderRadius="5px" padding="3px 10px"
                   backgroundColor="rgba(255, 99, 71, 0.162)" textTransform="lowercase" color="tomato" fontWeight="bold" >{dd.weight}</H5>
 
@@ -107,45 +108,50 @@ export const Products = (props) => {
 
                 }
 
+
+
+
+                {cart.some(ca => ca.product_id === data._id) ?
+
+
+                  <Button width="100%"
+                    color="white"
+                    onClick={() => {
+
+                      setDishDetails(true)
+                      isDetailLoading(true);
+                      setDishId(data._id)
+
+                    }
+                    }> Remove</Button>
+
+                  :
+
+                  <Flex>
+
+                    <Button width="100%" color="green"
+
+                      onClick={() => handleAddToCart({
+                        product_id: data?._id,
+                        _id: dd._id,
+                        isQty: data?.qty,
+                        product_image: data?.productImage,
+                        product_name: data?.product_name,
+                        price: dd.price,
+                        weight: dd.weight,
+
+
+                      })
+                      }>Add</Button>
+
+                  </Flex>
+
+                }
               </>
 
             )}
-
-
-            {cart.some(ca => ca.product_id === data._id) ?
-
-
-              <Button width="100%"
-                color="white"
-                onClick={() => {
-
-                  setDishDetails(true)
-                  isDetailLoading(true);
-                  setDishId(data._id)
-
-                }
-                }> Remove</Button>
-
-              :
-
-              <Flex>
-
-                <Button width="100%" color="green"
-
-                  onClick={() => {
-
-                    setDishDetails(true)
-                    isDetailLoading(true);
-                    setDishId(data._id)
-
-                  }
-                  }>Add</Button>
-
-              </Flex>
-
-            }
-
           </div>
+
         </div>
       ))
       }

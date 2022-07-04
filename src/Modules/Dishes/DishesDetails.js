@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { H3, H4 } from '../../Components/Text/Text'
+import { H3, H4, H5 } from '../../Components/Text/Text'
 import { RadioCard } from '../../Components/Radio/RadioCard'
 import { addToCart, decreaseCart, removeFromCart } from '../../Redux/cartSlice'
-import { Button } from '../../Components/Button/Button'
+import { Button, ButtonText } from '../../Components/Button/Button'
 import { useQueryFetchId } from '../../Utils/useQueryFetch'
 import { useDetailLoading } from '../../Utils/useLoading'
 import { Flex } from '../../Components/UI/Flex/Flex'
@@ -30,25 +30,20 @@ export const DishesDetails = (props) => {
 
   const [weight, setWeight] = useState()
 
+  const [checked, setChecked] = useState(0);
+
   const isDetailLoading = useDetailLoading()
 
+  console.log("checked", checked)
 
-  let finalObj = {};
-
-  for(let i = 0; i < the_id?.length; i++ ) {
-    Object.assign(finalObj, the_id);
-  }
-  
-
-  console.log(finalObj);
-
+  console.log("the_id", the_id)
 
 
   useEffect(() => {
 
     if (price?.length === undefined) {
 
-      setTheId(thePrice?.filter((fil, index) => index === 0).map((pr, index) => pr._id))
+      setTheId(thePrice?.filter((fil, index) => index === 0).map((pr, index) => pr._id).toString())
 
       setPrice(thePrice?.filter((fil, index) => index === 0).map(pr => pr.price))
 
@@ -73,35 +68,50 @@ export const DishesDetails = (props) => {
     dispatch(decreaseCart(cartItem))
   }
 
-  console.log("thecart", cart)
-
-
-  console.log("thecart", cart)
-
-
-  console.log("myid", JSON.stringify(the_id))
 
 
 
   return (
 
-
     <div onClick={setDishDetails(true)} className='dish_details' key={product?.data?._id}>
 
-      <Flex>
+      <Flex width="100%"
+        justifyContent="space-between" alignItems="start">
 
+        <Flex width="fit-content" position="relative" margin="10px">
 
-        <H3 fontWeight="bold" margin="15px">{product?.data?.product_name}</H3>
+          <img className='product_image' src={product?.data?.productImage} alt="" />
 
-        <div onClick={() => setDishDetails(false)} style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "40px", height: "40px", borderRadius: "100%", margin: "20px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
+          <Flex position="absolute" top="0" left="0">
 
-          <i style={{ fontSize: "2rem" }} class="fa-solid fa-xmark"></i>
+            <H4 backgroundColor="red" padding="2px 10px" borderRadius="0"
+              textTransform="lowercase" color="white" fontWeight="bold">{weight}</H4>
 
-        </div>
+          </Flex>
 
+        </Flex>
 
+        <Flex margin="10px" width="fit-content" flexDirection="column" justifyContent="start" alignItems="start">
+
+          <H5 width="150px" margin="0px 10px" fontWeight="bold">{product?.data?.product_name}</H5>
+
+          <H4 margin="10px" textTransform="lowercase" fontWeight="bolder" color="black">₹ {price}</H4>
+
+        </Flex>
+
+        <Flex margin="10px" width="fit-content">
+
+          <div onClick={() => setDishDetails(false)} style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "40px", height: "40px", borderRadius: "100%", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
+
+            <i style={{ fontSize: "2rem" }} class="fa-solid fa-xmark"></i>
+
+          </div>
+
+        </Flex>
 
       </Flex>
+
+
 
 
       <div className='dish_items'>
@@ -116,60 +126,56 @@ export const DishesDetails = (props) => {
 
             setTheId(pr._id)
 
-            // handleRemoveFromCart(product?.data)
+            setChecked(index)
 
-          }} id={pr._id} value={pr.price}>
 
-            <H4 backgroundColor="red" padding="5px 15px" borderRadius="10px"
-              textTransform="lowercase" color="white" fontWeight="bold">{pr.weight}</H4>
+          }} id={pr._id}>
 
-            <H4 backgroundColor="black" padding="5px 15px" borderRadius="10px"
-              fontWeight="bolder" color="white">₹ {pr.price}</H4>
+
+            <Flex>
+
+              {/* {console.log("index", index === index && alert("hi"))} */}
+              <H4 textTransform="lowercase" color="red" fontWeight="bold">{pr.weight}</H4>
+
+              <H4 textTransform="lowercase" fontWeight="bolder" color="black">₹ {pr.price}</H4>
+
+
+
+              {cart.cartItems.some(ca => ca._id === pr._id) ?
+
+                cart && cart.cartItems.filter(fil => fil._id === pr._id).map(cartItem => (
+
+                  <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px"
+                    color="white" onClick={() => handleDecreaseCart(checked === index && cartItem)}> Remove</ButtonText>
+
+                ))
+
+                :
+
+                <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px" color={cartColor}
+
+                  onClick={() => handleAddToCart(checked === index && {
+                    product_id: product?.data?._id,
+                    _id: the_id,
+                    isQty: product?.data?.qty,
+                    product_image: product?.data?.productImage,
+                    product_name: product?.data?.product_name,
+                    price: price,
+                    weight: weight,
+
+                  })}>Add</ButtonText>
+
+              }
+
+
+
+
+            </Flex>
 
 
           </RadioCard>
 
         )}
-
-
-        <Flex backgroundColor="white" position="fixed" bottom="0" left="0" justifyContent="space-between" alignItems="center">
-
-
-          <H3 borderRadius="10px"
-            margin="15px" fontWeight="bold" color="black" >₹ {price}</H3>
-
-
-{/* <H4>{finalObj}</H4> */}
-
-          {cart.cartItems.some(ca => ca._id === the_id) ?
-
-            cart && cart.cartItems.filter(fil => fil._id === the_id).map(cartItem => (
-
-              < Button width="50%" borderRadius="15px" margin="15px"
-                color="white" onClick={() => handleDecreaseCart(cartItem)}> Remove</Button>
-
-            ))
-
-            :
-
-            <Button width="50%" borderRadius="15px" color={cartColor} margin="15px"
-
-              onClick={() => handleAddToCart({
-                product_id: product?.data?._id,
-                _id: the_id,
-                isQty: product?.data?.qty,
-                product_image: product?.data?.productImage,
-                product_name: product?.data?.product_name,
-                price: price,
-                weight: weight,
-
-              })}>Add to cart</Button>
-
-          }
-
-        </Flex>
-
-
 
       </div >
 
@@ -178,3 +184,4 @@ export const DishesDetails = (props) => {
 
   )
 }
+

@@ -13,8 +13,6 @@ export const DeliveryForm = () => {
 
     const [address, setAddress] = useState([]);
 
-    console.log("Addres", address)
-
     const nextPage = () => {
 
         setTabs(tabs + 1)

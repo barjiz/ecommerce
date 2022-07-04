@@ -25,7 +25,6 @@ const Home = () => {
 
   const isGrocery = useSelector((state) => state.features.isGrocery)
 
-  console.log("isGrocery", isGrocery)
 
 
   return (
@@ -46,15 +45,13 @@ const Home = () => {
         <Button
           onClick={() => dispatch(setGrocery(false))}
           borderRadius="0"
-          color={isGrocery === false ? "danger" : "gray"}
+          color={isGrocery === false ? "orange" : "gray"}
           width="100%">fast food</Button>
 
       </Flex>
 
 
       {isGrocery ? <Grocery /> : <Fastfood />}
-
-      {console.log("windwo", window.innerWidth)}
 
 
     </div >

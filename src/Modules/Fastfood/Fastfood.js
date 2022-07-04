@@ -26,8 +26,6 @@ export const Fastfood = () => {
 
     const [dish_id, setDishId] = useState();
 
-    console.log('dishDetails', dishDetails)
-    console.log('dish_id', dish_id)
 
     const style = {
         left: "-260px"
@@ -161,7 +159,7 @@ export const Fastfood = () => {
                         isDetailLoading(false)
                     }} />
 
-                    <DishesDetails cartColor="dark" setDishDetails={setDishDetails} dish_id={dish_id} />
+                    <DishesDetails cartColor="orange" setDishDetails={setDishDetails} dish_id={dish_id} />
 
                 </>
 

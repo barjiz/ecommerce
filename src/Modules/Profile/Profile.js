@@ -21,7 +21,6 @@ export const Profile = () => {
     const profile = loggedprofiles?.data?.user;
 
 
-    console.log("loggedprofiles", loggedprofiles)
 
 
     const logout = () => {

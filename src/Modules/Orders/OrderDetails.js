@@ -18,8 +18,6 @@ export const OrderDetails = () => {
   const { fetchData: orders } = useQueryFetch('order')
 
 
-  console.log("orders", orders)
-
 
   return (
 

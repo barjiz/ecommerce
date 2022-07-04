@@ -13,12 +13,14 @@
     padding: 12px 20px;
     z-index: 0;
     background-color: grey;
+    border: 1px solid grey;
 }
 
 
 
 .primary {
     background-color: #7B68EE;
+    border: 1px solid #7B68EE;
 }
 
 .green {
@@ -28,6 +30,7 @@
 
 .dodgerblue {
     background-color: dodgerblue;
+    border: 1px solid dodgerblue;
 }
 
 .white {
@@ -44,12 +47,20 @@
 
 .danger {
     background-color: tomato;
+    border: 1px solid tomato;
 }
 
 .blue {
     background-color: #7B68EE;
+    border: 1px solid #7B68EE;
 }
 
 .red {
     background-color: red;
+    border: 1px solid red;
+}
+
+.orange {
+    background-color: orange;
+    border: 1px solid orange;
 }
