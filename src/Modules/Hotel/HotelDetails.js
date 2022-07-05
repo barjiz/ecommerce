@@ -1,61 +1,70 @@
 import React, { useState } from 'react'
-import { Button } from "../../Components/Button/Button"
-import { Navigator } from '../../Components/Route/Router'
-import { addToCart, decreaseCart, removeFromCart } from '../../Redux/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { H5 } from '../../Components/Text/Text'
+import { useParams } from 'react-router-dom'
+import { Button } from '../../Components/Button/Button'
+import { H4, H5 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
-import { useQueryFetch } from '../../Utils/useQueryFetch'
-import { useNavigate } from 'react-router-dom'
-import { useDetailLoading, useLoading } from '../../Utils/useLoading'
+import { Grid } from '../../Components/UI/Grid/Grid'
 import { OpacityBg } from '../../Components/UI/OpacityBg/OpacityBg'
-import { GroceryDetails } from './GroceryDetails'
+import { addToCart } from '../../Redux/cartSlice'
+import { useDetailLoading } from '../../Utils/useLoading'
+import { useQueryFetchId } from '../../Utils/useQueryFetch'
+import { FastFoodDetails } from '../Fastfood/FastFoodDetails'
+
+export const HotelDetails = () => {
+
+    const cart = useSelector((state) => state.cart.cartItems)
 
 
-export const Grocery = (props) => {
-
-    const { category, className  } = props;
+    const { id } = useParams();
 
     const [dishDetails, setDishDetails] = useState(false)
 
     const [dish_id, setDishId] = useState();
 
 
+    const dispatch = useDispatch()
+
+
     const isDetailLoading = useDetailLoading()
 
-    const cart = useSelector((state) => state.cart.cartItems)
 
-    const { fetchData: product } = useQueryFetch('product')
+    const { fetchData: hotel } = useQueryFetchId("hotel", id)
 
-    const dispatch = useDispatch()
+    console.log("hotel detials")
+
 
     const handleAddToCart = (data) => {
         dispatch(addToCart(data))
     }
 
 
+
     return (
 
-        <React.Fragment>
+        <div>
 
-            {product?.filter(fil => fil.category === category).map(data => (
+            <Grid>
 
-                <div className={className} >
+                {hotel?.data.fastfoods.map(data =>
 
-                    <div key={data._id} class="card" style={{ display: "flex", flexDirection: "column", margin: props.margin }}>
+                    <div style={{ margin: "10px 0" }} className="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2  col-xxl-2" key={data._id} >
 
                         <img onClick={() => {
                             setDishDetails(true)
-                            isDetailLoading(true);
+                            // isDetailLoading(true);
                             setDishId(data._id)
                         }}
-                            style={{
-                                width: props.width,
-                                height: props.height,
-                                objectFit: "cover"
-                            }} src={data.productImage} class="card-img-top" alt="..." />
 
-                        <H5 width="100%" maxWidth="100px" fontWeight="bold" maxHeight="1.4rem" margin="10px 5px">{data.product_name}</H5>
+                            style={{
+                                width: "100%",
+                                height: "150px",
+                                backgroundColor: "Red",
+                                objectFit: "cover"
+                            }} src={data.productImage} className="card-img-top" alt="..." />
+
+
+                        <H4 fontWeight="bold" margin="10px 0">{data.product_name}</H4>
 
                         {JSON.parse(data.price).filter((fil, index) => index === 0).map(dd =>
 
@@ -63,7 +72,7 @@ export const Grocery = (props) => {
 
                                 <Flex onClick={() => {
                                     setDishDetails(true)
-                                    isDetailLoading(true);
+                                    // isDetailLoading(true);
                                     setDishId(data._id)
                                 }}
                                     backgroundColor="rgba(255, 99, 71, 0.162)" padding="3px 10px"
@@ -130,10 +139,13 @@ export const Grocery = (props) => {
 
                         )}
 
-                    </div>
-                </div>
 
-            ))}
+                    </div>
+
+                )}
+
+            </Grid>
+
 
 
             {dishDetails &&
@@ -145,14 +157,12 @@ export const Grocery = (props) => {
                         isDetailLoading(false)
                     }} />
 
-                    <GroceryDetails cartColor="green" setDishDetails={setDishDetails} dish_id={dish_id} />
+                    <FastFoodDetails cartColor="green" setDishDetails={setDishDetails} dish_id={dish_id} />
 
                 </>
-
             }
 
-
-        </React.Fragment >
+        </div>
 
     )
 }

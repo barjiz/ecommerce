@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { H3, H4, H5 } from '../../Components/Text/Text'
+import {  H4, H5 } from '../../Components/Text/Text'
 import { RadioCard } from '../../Components/Radio/RadioCard'
-import { addToCart, decreaseCart, removeFromCart } from '../../Redux/cartSlice'
-import { Button, ButtonText } from '../../Components/Button/Button'
+import { addToCart, decreaseCart } from '../../Redux/cartSlice'
+import { ButtonText } from '../../Components/Button/Button'
 import { useQueryFetchId } from '../../Utils/useQueryFetch'
 import { useDetailLoading } from '../../Utils/useLoading'
 import { Flex } from '../../Components/UI/Flex/Flex'
-import "./DishDetails.css"
 
-export const DishesDetails = (props) => {
+export const GroceryDetails = (props) => {
 
   const { dish_id, setDishDetails, cartColor } = props
 
@@ -17,6 +16,8 @@ export const DishesDetails = (props) => {
 
 
   const { fetchData: product } = useQueryFetchId('product', dish_id)
+
+  console.log("hotelsss", product)
 
 
   const dispatch = useDispatch()
@@ -33,12 +34,6 @@ export const DishesDetails = (props) => {
   const [checked, setChecked] = useState(0);
 
   const isDetailLoading = useDetailLoading()
-
-  console.log("checked", checked)
-
-  console.log("the_id", the_id)
-
-  console.log("Car", cart.cartItems)
 
 
   useEffect(() => {
@@ -139,7 +134,6 @@ export const DishesDetails = (props) => {
 
             <Flex>
 
-              {/* {console.log("index", index === index && alert("hi"))} */}
               <H4 textTransform="lowercase" color="red" fontWeight="bold">{pr.weight}</H4>
 
               <H4 textTransform="lowercase" fontWeight="bolder" color="black">₹ {pr.price}</H4>

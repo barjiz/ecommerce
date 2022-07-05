@@ -45,7 +45,7 @@ export const Cart = ({ nextPage }) => {
 
   const CheckOut = () => {
     
-    isLoading(true)
+
     nextPage()
   }
 

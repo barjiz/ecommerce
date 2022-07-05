@@ -5,8 +5,11 @@ import { StepForm } from "../../Modules/Auth/StepForm"
 import { Categories } from "../../Modules/Categories/Categories"
 import { CategoriesDetails } from "../../Modules/Categories/CategoriesDetails"
 import { DeliveryForm } from "../../Modules/DeliveryForm/DeliveryForm"
-import { DishesDetails } from "../../Modules/Dishes/DishesDetails"
+import {  FastFoodHome } from "../../Modules/Fastfood/FastFoodHome"
+import { GroceryHome } from "../../Modules/Grocery/GroceryHome"
 import Home from "../../Modules/Home/Home"
+import { Hotel } from "../../Modules/Hotel/Hotel"
+import { HotelDetails } from "../../Modules/Hotel/HotelDetails"
 import { Order } from "../../Modules/Orders/Order"
 import { OrderDetails } from "../../Modules/Orders/OrderDetails"
 import OrderSuccess from "../../Modules/OrderSuccess/OrderSuccess"
@@ -22,8 +25,23 @@ export const elements = [
     },
     {
         isAuth: false,
-        path: "/dish/:id",
-        element: <DishesDetails />
+        path: "fastfood",
+        element: <GroceryHome />
+    },
+    {
+        isAuth: false,
+        path: "fastfood",
+        element: <FastFoodHome />
+    },
+    {
+        isAuth: false,
+        path: "hotel",
+        element: <Hotel />
+    },
+    {
+        isAuth: false,
+        path: "hotel/:id",
+        element: <HotelDetails />
     },
     {
         isAuth: false,

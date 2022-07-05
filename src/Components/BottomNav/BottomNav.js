@@ -80,7 +80,7 @@ export const BottomNav = () => {
                         </div>
                     }
 
-                    {data.title === "Cart" &&
+                    {data.title === "Cart" && cart.length > 0 &&
                         <Flex backgroundColor="Red" width="20px" height="20px"
                             justifyContent="center" alignItems="center"
                             borderRadius="100%" position="absolute" top="0" right="25px" >
