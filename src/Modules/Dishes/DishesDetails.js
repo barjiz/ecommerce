@@ -38,6 +38,8 @@ export const DishesDetails = (props) => {
 
   console.log("the_id", the_id)
 
+  console.log("Car", cart.cartItems)
+
 
   useEffect(() => {
 
@@ -68,6 +70,9 @@ export const DishesDetails = (props) => {
     dispatch(decreaseCart(cartItem))
   }
 
+  const handleIncreaseCart = (cartItem) => {
+    dispatch(addToCart(cartItem))
+  }
 
 
 
@@ -140,13 +145,30 @@ export const DishesDetails = (props) => {
               <H4 textTransform="lowercase" fontWeight="bolder" color="black">₹ {pr.price}</H4>
 
 
-
               {cart.cartItems.some(ca => ca._id === pr._id) ?
 
                 cart && cart.cartItems.filter(fil => fil._id === pr._id).map(cartItem => (
 
-                  <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px"
-                    color="white" onClick={() => handleDecreaseCart(checked === index && cartItem)}> Remove</ButtonText>
+                  product?.data.qty === true ?
+
+                    <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px"
+                      color="white" onClick={() => checked === index && handleDecreaseCart(cartItem)}> Remove</ButtonText>
+
+                    :
+
+
+                    <Flex width="fit-content">
+
+                      <ButtonText borderRadius="0" padding="10px 20px" margin="5px"
+                        color="white" onClick={() => checked === index && handleDecreaseCart(cartItem)}>-</ButtonText>
+
+                      <H4 margin="0 10px">{cartItem.cartQuanity}</H4>
+
+                      <ButtonText borderRadius="0" padding="10px 20px" margin="5px"
+                        color="white" onClick={() => checked === index && handleIncreaseCart(cartItem)}>+</ButtonText>
+
+                    </Flex>
+
 
                 ))
 
@@ -154,7 +176,7 @@ export const DishesDetails = (props) => {
 
                 <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px" color={cartColor}
 
-                  onClick={() => handleAddToCart(checked === index && {
+                  onClick={() => checked === index && handleAddToCart({
                     product_id: product?.data?._id,
                     _id: the_id,
                     isQty: product?.data?.qty,

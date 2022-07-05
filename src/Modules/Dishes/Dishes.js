@@ -78,8 +78,6 @@ export const Dishes = (props) => {
 
             <H4 fontWeight="bolder" margin="10px 5px">{data.product_name}</H4>
 
-
-
           </div>
 
         </div>

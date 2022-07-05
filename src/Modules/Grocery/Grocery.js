@@ -17,15 +17,11 @@ import { useDetailLoading } from '../../Utils/useLoading'
 
 export const Grocery = () => {
 
-
     const isDetailLoading = useDetailLoading()
-
 
     const navigate = useNavigate()
 
     const [menuBar, setMenuBar] = useState(false)
-
-    const [tabs, setTabs] = useState()
 
     const [dishDetails, setDishDetails] = useState(false)
 
@@ -74,11 +70,11 @@ export const Grocery = () => {
 
                     <SwiperSlide>
 
-                        <Flex width="90%" justifyContent="center">
+                        <Flex width="98%" justifyContent="center">
 
-                            <img width="100%" height={window.innerWidth <= 460 ? "180px" : "320px"}
+                            <img width="100%" height={window.innerWidth <= 460 ? "200px" : "400px"}
 
-                                style={{ cursor: "pointer", borderRadius: "30px" }} src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
+                                style={{ cursor: "pointer", borderRadius: "10px" }} src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
 
                         </Flex>
 
@@ -99,7 +95,7 @@ export const Grocery = () => {
 
                     <div className='col-4 col-sm-3 col-md-3 col-lg-3 col-xl-2  col-xxl-2'>
                         <Navigator route={`/categories/${data.category}`}>
-                            <img width="100%" className="cate-img" src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
+                            <img width="90%" className="cate-img" src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
 
                             <H6 fontWeight="bold" margin="10px 0">{data.product_name}</H6>
 
@@ -115,12 +111,12 @@ export const Grocery = () => {
             {
                 category.map(cate => (
 
-                    <div className='category' key={cate.category}>
+                    <div key={cate.category}>
 
                         <Flex width="100%" justifyContent="center">
 
-                            <img width="90%" height={window.innerWidth <= 460 ? "180px" : "320px"} onClick={() => navigate(`/categories/${cate.category}`)}
-                                style={{ cursor: "pointer", borderRadius: "30px" }} src={require(`../../Assets/Images/product_banner/${cate.banner_wide}`)} alt="" />
+                            <img width="98%" height={window.innerWidth <= 460 ? "200px" : "400px"} onClick={() => navigate(`/categories/${cate.category}`)}
+                                style={{ cursor: "pointer", borderRadius: "10px" }} src={require(`../../Assets/Images/product_banner/${cate.banner_wide}`)} alt="" />
                         </Flex>
 
                         <Flex>
@@ -135,7 +131,7 @@ export const Grocery = () => {
                         <Flex overflowX="scroll" >
 
                             <Products
-                                // width="120px" 
+                                margin="5px"
                                 setDishId={setDishId}
                                 setDishDetails={setDishDetails}
                                 width={window.innerWidth <= 460 ? "130px" : "160px"}

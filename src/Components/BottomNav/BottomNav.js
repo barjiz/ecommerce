@@ -4,7 +4,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import './BottomNav.css'
 
-import { H4 } from "../Text/Text"
+import { H4, H5, H6 } from "../Text/Text"
+import { Flex } from '../UI/Flex/Flex';
+import { useSelector } from 'react-redux';
 
 
 export const BottomNav = () => {
@@ -16,6 +18,8 @@ export const BottomNav = () => {
 
     var pathname = window.location.pathname;
     var appId = pathname.split('/')[1];
+
+    const cart = useSelector((state) => state.cart.cartItems)
 
 
     const navigation = [
@@ -75,8 +79,20 @@ export const BottomNav = () => {
                             <h6>{data.title}</h6>
                         </div>
                     }
+
+                    {data.title === "Cart" &&
+                        <Flex backgroundColor="Red" width="20px" height="20px"
+                            justifyContent="center" alignItems="center"
+                            borderRadius="100%" position="absolute" top="0" right="25px" >
+                            <H6 color="white">{cart.length}</H6>
+                        </Flex>}
+
+
                 </div>
             )}
+
+
+
         </div>
     )
 }

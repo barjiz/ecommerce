@@ -7,7 +7,7 @@ export const Grid = (props) => {
 
     return (
 
-        <div className="container-fluid">
+        <div className="container-fluid" style={{ padding: "10px" }}>
             <div className="row">
 
                 {props.children}

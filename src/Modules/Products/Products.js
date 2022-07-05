@@ -60,23 +60,18 @@ export const Products = (props) => {
 
         <div className={className} >
 
-          <div key={data._id} class="card" style={{ display: "flex", flexDirection: "column", }}>
-
+          <div key={data._id} class="card" style={{ display: "flex", flexDirection: "column", margin: props.margin }}>
 
             <img onClick={() => {
               setDishDetails(true)
               isDetailLoading(true);
               setDishId(data._id)
-
-            }
-
-
-
-            } style={{
-              width: props.width,
-              height: props.height,
-              objectFit: "cover"
-            }} src={data.productImage} class="card-img-top" alt="..." />
+            }}
+              style={{
+                width: props.width,
+                height: props.height,
+                objectFit: "cover"
+              }} src={data.productImage} class="card-img-top" alt="..." />
 
             <H5 width="100%" maxWidth="100px" fontWeight="bold" maxHeight="1.4rem" margin="10px 5px">{data.product_name}</H5>
 
@@ -84,10 +79,18 @@ export const Products = (props) => {
 
               <>
 
+                <Flex onClick={() => {
+                  setDishDetails(true)
+                  isDetailLoading(true);
+                  setDishId(data._id)
+                }}
+                  backgroundColor="rgba(255, 99, 71, 0.162)" padding="3px 10px"
+                  margin="10px 0px" borderRadius="5px">
 
-                <H5 margin="15px 5px" borderRadius="5px" padding="3px 10px"
-                  backgroundColor="rgba(255, 99, 71, 0.162)" textTransform="lowercase" color="tomato" fontWeight="bold" >{dd.weight}</H5>
+                  <H5 textTransform="lowercase" color="tomato" fontWeight="bold" >{dd.weight}</H5>
+                  <i style={{ fontSize: "1rem" }} class="fa-solid fa-chevron-down"></i>
 
+                </Flex>
 
                 {dd.offer.length > 0 ?
                   <Flex margin="10px" justifyContent="flex-start">
@@ -109,10 +112,7 @@ export const Products = (props) => {
                 }
 
 
-
-
                 {cart.some(ca => ca.product_id === data._id) ?
-
 
                   <Button width="100%"
                     color="white"
@@ -122,8 +122,7 @@ export const Products = (props) => {
                       isDetailLoading(true);
                       setDishId(data._id)
 
-                    }
-                    }> Remove</Button>
+                    }}> Remove</Button>
 
                   :
 
@@ -140,9 +139,7 @@ export const Products = (props) => {
                         price: dd.price,
                         weight: dd.weight,
 
-
-                      })
-                      }>Add</Button>
+                      })}>Add</Button>
 
                   </Flex>
 
@@ -150,11 +147,11 @@ export const Products = (props) => {
               </>
 
             )}
-          </div>
 
+          </div>
         </div>
-      ))
-      }
+
+      ))}
 
     </React.Fragment >
 
