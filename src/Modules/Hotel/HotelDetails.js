@@ -8,8 +8,9 @@ import { Grid } from '../../Components/UI/Grid/Grid'
 import { OpacityBg } from '../../Components/UI/OpacityBg/OpacityBg'
 import { addToCart } from '../../Redux/cartSlice'
 import { useDetailLoading } from '../../Utils/useLoading'
-import { useQueryFetchId } from '../../Utils/useQueryFetch'
+import { useQueryFetch, useQueryFetchId } from '../../Utils/useQueryFetch'
 import { FastFoodDetails } from '../Fastfood/FastFoodDetails'
+import { Header } from "../../Components/Header/Header"
 
 export const HotelDetails = () => {
 
@@ -28,31 +29,39 @@ export const HotelDetails = () => {
 
     const isDetailLoading = useDetailLoading()
 
+    const { fetchData: hotelfoods } = useQueryFetch("hotelfoods")
 
     const { fetchData: hotel } = useQueryFetchId("hotel", id)
 
-    console.log("hotel detials")
-
+    const hotel_name = hotel?.data?.hotel_name
 
     const handleAddToCart = (data) => {
         dispatch(addToCart(data))
     }
 
 
+    console.log("dish_id", dish_id)
+
+    console.log("hotel", hotelfoods)
+
 
     return (
 
-        <div>
+        <div style={{ marginTop: "60px" }}>
+
+
+            <Header icon={true} navigate={``} title={hotel?.data?.hotel_name} />
+
 
             <Grid>
 
-                {hotel?.data.fastfoods.map(data =>
+                {hotelfoods?.hotelFood.filter(fil => fil.hotel_id === id).map(data =>
 
                     <div style={{ margin: "10px 0" }} className="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2  col-xxl-2" key={data._id} >
 
                         <img onClick={() => {
                             setDishDetails(true)
-                            // isDetailLoading(true);
+                            isDetailLoading(true);
                             setDishId(data._id)
                         }}
 
@@ -61,10 +70,10 @@ export const HotelDetails = () => {
                                 height: "150px",
                                 backgroundColor: "Red",
                                 objectFit: "cover"
-                            }} src={data.productImage} className="card-img-top" alt="..." />
+                            }} src={data.food_image} className="card-img-top" alt="..." />
 
 
-                        <H4 fontWeight="bold" margin="10px 0">{data.product_name}</H4>
+                        <H4 fontWeight="bold" margin="10px 0">{data.food_name}</H4>
 
                         {JSON.parse(data.price).filter((fil, index) => index === 0).map(dd =>
 
@@ -72,7 +81,7 @@ export const HotelDetails = () => {
 
                                 <Flex onClick={() => {
                                     setDishDetails(true)
-                                    // isDetailLoading(true);
+                                    isDetailLoading(true);
                                     setDishId(data._id)
                                 }}
                                     backgroundColor="rgba(255, 99, 71, 0.162)" padding="3px 10px"
@@ -119,14 +128,15 @@ export const HotelDetails = () => {
 
                                     <Flex>
 
-                                        <Button width="100%" color="green"
+                                        <Button width="100%" color="orange"
 
                                             onClick={() => handleAddToCart({
                                                 product_id: data?._id,
+                                                hotel_name: hotel_name,
                                                 _id: dd._id,
                                                 isQty: data?.qty,
-                                                product_image: data?.productImage,
-                                                product_name: data?.product_name,
+                                                product_image: data?.food_image,
+                                                product_name: data?.food_name,
                                                 price: dd.price,
                                                 weight: dd.weight,
 
@@ -142,9 +152,10 @@ export const HotelDetails = () => {
 
                     </div>
 
-                )}
+                )
+                }
 
-            </Grid>
+            </Grid >
 
 
 
@@ -157,12 +168,12 @@ export const HotelDetails = () => {
                         isDetailLoading(false)
                     }} />
 
-                    <FastFoodDetails cartColor="green" setDishDetails={setDishDetails} dish_id={dish_id} />
+                    <FastFoodDetails cartColor="green" hotel_name={hotel_name} setDishDetails={setDishDetails} dish_id={dish_id} />
 
                 </>
             }
 
-        </div>
+        </div >
 
     )
 }

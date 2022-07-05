@@ -44,7 +44,7 @@ export const Cart = ({ nextPage }) => {
   }
 
   const CheckOut = () => {
-    
+
 
     nextPage()
   }
@@ -80,11 +80,9 @@ export const Cart = ({ nextPage }) => {
 
               <Card margin="10px 0" padding="10px 0" >
 
-
                 <Flex backgroundColor="white" width="100%" justifyContent="space-between">
 
-
-                  < Navigator route={`/product/${cartItem._id}`}>
+                  <Flex width="fit-content" position="relative" margin="10px">
 
                     <img style={{
                       width: "100px",
@@ -93,35 +91,42 @@ export const Cart = ({ nextPage }) => {
                       flex: "1",
                     }} src={cartItem.product_image} class="card-img-top" alt="..." />
 
-                  </Navigator>
 
+                    <Flex position="absolute" top="0" left="0">
+
+                      <H4 backgroundColor="red" padding="2px 10px" borderRadius="0"
+                        textTransform="lowercase" color="white" fontWeight="bold">{cartItem.weight}</H4>
+
+                    </Flex>
+
+                  </Flex>
 
                   <Flex flex="3" width="fit-content" flexDirection="column" justifyContent="start" alignItems="start">
 
                     <H4 maxWidth="100px" fontWeight="bold" maxHeight="1.2rem" margin="5px 20px">{cartItem.product_name}</H4>
 
-
-                    <H4 margin="5px 20px" borderRadius="5px" padding="3px 10px"
-                      backgroundColor="rgba(255, 99, 71, 0.162)" textTransform="lowercase" color="tomato" fontWeight="bold" >{cartItem.weight}</H4>
-
-
                     <H4 fontWeight="bold" color="green" margin="5px 20px">₹ {cartItem.price * cartItem.cartQuanity}</H4>
+
+
+                    {cartItem.hotel_name && <H4 backgroundColor="tomato" padding="4px 10px" color="white" margin="10px" textTransform="lowercase"
+                      fontWeight="bolder">{cartItem.hotel_name}</H4>
+                    }
 
                   </Flex>
 
                   <Flex flex="3">
 
+                    <Button color="white" margin="5px" height="10px" onClick={() => handleDecreaseCart(cartItem)}>-</Button>
 
-                    <Button color="white" width="10px" margin="10px" onClick={() => handleDecreaseCart(cartItem)}>-</Button>
 
-                    {cartItem.cartQuanity}
+                    <H4 backgroundColor="rgb(234, 194, 187)" padding="3px 10px" color="white">{cartItem.cartQuanity}</H4>
 
 
                     {cartItem.isQty ?
 
-                      <Button color="white" width="10px" margin="10px" onClick={() => handleIncreaseCart(cartItem)}>+</Button>
+                      <Button color="white" margin="5px" height="10px" onClick={() => handleIncreaseCart(cartItem)}>+</Button>
                       :
-                      <Button width="10px" margin="10px">+</Button>
+                      <Button height="10px" margin="5px">+</Button>
                     }
 
 

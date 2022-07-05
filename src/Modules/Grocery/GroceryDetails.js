@@ -17,8 +17,6 @@ export const GroceryDetails = (props) => {
 
   const { fetchData: product } = useQueryFetchId('product', dish_id)
 
-  console.log("hotelsss", product)
-
 
   const dispatch = useDispatch()
 

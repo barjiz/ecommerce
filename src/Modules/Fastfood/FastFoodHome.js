@@ -58,7 +58,7 @@ export const FastFoodHome = () => {
 
                         <Flex width="90%" justifyContent="center">
 
-                            <img width="100%" height={window.innerWidth <= 460 ? "180px" : "320px"}
+                            <img width="100%" height={window.innerWidth <= 460 ? "180px" : "400px"}
 
                                 style={{ cursor: "pointer", borderRadius: "30px" }}
                                 src={require(`../../Assets/Images/food/${data.image}`)} alt="" />
@@ -95,7 +95,7 @@ export const FastFoodHome = () => {
             </Grid>
 
 
-            <div className='category'>
+            <div>
 
                 <Flex>
 

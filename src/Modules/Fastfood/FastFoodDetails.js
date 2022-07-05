@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {  H4, H5 } from '../../Components/Text/Text'
+import { H4, H5 } from '../../Components/Text/Text'
 import { RadioCard } from '../../Components/Radio/RadioCard'
 import { addToCart, decreaseCart } from '../../Redux/cartSlice'
-import {  ButtonText } from '../../Components/Button/Button'
+import { ButtonText } from '../../Components/Button/Button'
 import { useQueryFetchId } from '../../Utils/useQueryFetch'
 import { useDetailLoading } from '../../Utils/useLoading'
 import { Flex } from '../../Components/UI/Flex/Flex'
@@ -11,20 +11,19 @@ import "./FastFoodDetails.css"
 
 export const FastFoodDetails = (props) => {
 
-  const { dish_id, setDishDetails, cartColor } = props
+  const { dish_id, hotel_name, setDishDetails, cartColor } = props
 
   const cart = useSelector((state) => state.cart)
 
+  const { fetchData: fastfoods } = useQueryFetchId('hotelfoods', dish_id)
 
-  const { fetchData: product } = useQueryFetchId('hotel', dish_id)
 
-  console.log("fastfood", product)
-
+  console.log("fastfoods", fastfoods?.data?.hotelFood?.food_name)
 
   const dispatch = useDispatch()
 
 
-  const thePrice = product?.data && JSON.parse(product?.data?.price)
+  const thePrice = fastfoods?.data && JSON.parse(fastfoods?.data?.hotelFood?.price)
 
   const [the_id, setTheId] = useState()
 
@@ -51,7 +50,7 @@ export const FastFoodDetails = (props) => {
     }
 
 
-    product?.data && isDetailLoading(false)
+    fastfoods?.data && isDetailLoading(false)
 
 
   })
@@ -74,14 +73,16 @@ export const FastFoodDetails = (props) => {
 
   return (
 
-    <div onClick={setDishDetails(true)} className='dish_details' key={product?.data?._id}>
+    <div onClick={setDishDetails(true)} className='dish_details' key={fastfoods?.data?.hotelFood?.food_name}>
+
+
 
       <Flex width="100%"
         justifyContent="space-between" alignItems="start">
 
         <Flex width="fit-content" position="relative" margin="10px">
 
-          <img className='product_image' src={product?.data?.productImage} alt="" />
+          <img className='product_image' src={fastfoods?.data?.hotelFood?.food_image} alt="" />
 
           <Flex position="absolute" top="0" left="0">
 
@@ -94,9 +95,13 @@ export const FastFoodDetails = (props) => {
 
         <Flex margin="10px" width="fit-content" flexDirection="column" justifyContent="start" alignItems="start">
 
-          <H5 width="150px" margin="0px 10px" fontWeight="bold">{product?.data?.product_name}</H5>
+          <H5 width="150px" margin="0px 10px" fontWeight="bold">{fastfoods?.data?.hotelFood?.food_name}</H5>
 
           <H4 margin="10px" textTransform="lowercase" fontWeight="bolder" color="black">₹ {price}</H4>
+
+          <H4 backgroundColor="tomato" padding="4px 10px" color="white" margin="10px" textTransform="lowercase"
+            fontWeight="bolder">{hotel_name}</H4>
+
 
         </Flex>
 
@@ -144,7 +149,7 @@ export const FastFoodDetails = (props) => {
 
                 cart && cart.cartItems.filter(fil => fil._id === pr._id).map(cartItem => (
 
-                  product?.data.qty === true ?
+                  fastfoods?.data?.hotelFood?.qty === true ?
 
                     <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px"
                       color="white" onClick={() => checked === index && handleDecreaseCart(cartItem)}> Remove</ButtonText>
@@ -169,14 +174,15 @@ export const FastFoodDetails = (props) => {
 
                 :
 
-                <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px" color={cartColor}
+                <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px" color="orange"
 
                   onClick={() => checked === index && handleAddToCart({
-                    product_id: product?.data?._id,
+                    product_id: fastfoods?.data?.hotelFood?._id,
                     _id: the_id,
-                    isQty: product?.data?.qty,
-                    product_image: product?.data?.productImage,
-                    product_name: product?.data?.product_name,
+                    hotel_name:hotel_name,
+                    isQty: fastfoods?.data?.hotelFood?.qty,
+                    product_image: fastfoods?.data?.hotelFood?.food_image,
+                    product_name: fastfoods?.data?.hotelFood?.food_name,
                     price: price,
                     weight: weight,
 

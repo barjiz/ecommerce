@@ -9,6 +9,7 @@ export const Button = (props) => {
 
     const AllProperties = {
         width: props.width,
+        height:props.height,
         padding: props.padding,
         margin: props.margin,
         position: props.position,
