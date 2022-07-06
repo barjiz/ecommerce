@@ -12,7 +12,7 @@ import { useQueryFetch, useQueryFetchId } from '../../Utils/useQueryFetch'
 import { FastFoodDetails } from '../Fastfood/FastFoodDetails'
 import { Header } from "../../Components/Header/Header"
 
-export const HotelDetails = () => {
+export const HotelDetails = (props) => {
 
     const cart = useSelector((state) => state.cart.cartItems)
 
@@ -47,119 +47,102 @@ export const HotelDetails = () => {
 
     return (
 
-        <div style={{ marginTop: "60px" }}>
+        <div style={{ margin: "60px 0" }}>
 
 
-            <Header icon={true} navigate={``} title={hotel?.data?.hotel_name} />
+            <Header icon={true} navigate={``} title={hotel_name} />
 
 
-            <Grid>
+            {hotelfoods?.hotelFood.filter(fil => fil.hotel_id === id ).map(data =>
 
-                {hotelfoods?.hotelFood.filter(fil => fil.hotel_id === id).map(data =>
+                JSON.parse(data.price).filter((fil, index) => index === 0).map(dd =>
 
-                    <div style={{ margin: "10px 0" }} className="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2  col-xxl-2" key={data._id} >
+                    <Flex borderBottom="1px solid grey" >
 
-                        <img onClick={() => {
-                            setDishDetails(true)
-                            isDetailLoading(true);
-                            setDishId(data._id)
-                        }}
+                        <Flex flexDirection="column" margin="20px 0" justifyContent="center" alignItems="center">
 
-                            style={{
-                                width: "100%",
-                                height: "150px",
-                                backgroundColor: "Red",
-                                objectFit: "cover"
-                            }} src={data.food_image} className="card-img-top" alt="..." />
+                            <img onClick={() => {
+                                setDishDetails(true)
+                                isDetailLoading(true);
+                                setDishId(data._id)
+                            }}
+
+                                style={{
+                                    boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+                                    borderRadius: "10px",
+                                    width: "150px",
+                                    height: "150px",
+                                    backgroundColor: "Red",
+                                    objectFit: "cover"
+                                }} src={data.image} className="card-img-top" alt="..." />
 
 
-                        <H4 fontWeight="bold" margin="10px 0">{data.food_name}</H4>
+                        </Flex>
 
-                        {JSON.parse(data.price).filter((fil, index) => index === 0).map(dd =>
+                        <Flex flexDirection="column" justifyContent="flex-start" alignItems="start">
 
-                            <>
+                            <H4 fontWeight="bold" margin="10px 0">{data.name}</H4>
 
-                                <Flex onClick={() => {
-                                    setDishDetails(true)
-                                    isDetailLoading(true);
-                                    setDishId(data._id)
-                                }}
-                                    backgroundColor="rgba(255, 99, 71, 0.162)" padding="3px 10px"
-                                    margin="10px 0px" borderRadius="5px">
+                            {dd.offer.length > 0 ?
 
-                                    <H5 textTransform="lowercase" color="tomato" fontWeight="bold" >{dd.weight}</H5>
-                                    <i style={{ fontSize: "1rem" }} class="fa-solid fa-chevron-down"></i>
+                                <Flex margin="10px" justifyContent="flex-start">
+
+                                    <H5 fontWeight="bold" color="green" ><del> ₹ {dd.price}</del></H5>
+
+                                    <H5 borderRadius="30px" backgroundColor="#7B68EE" padding="2px 8px" fontWeight="bold" color="white" margin="0 10px">₹ {dd.offer}</H5>
 
                                 </Flex>
 
-                                {dd.offer.length > 0 ?
-                                    <Flex margin="10px" justifyContent="flex-start">
-                                        <H5 fontWeight="bold" color="green" >
-                                            {/* <del>  */}
-                                            ₹ {dd.price}
-                                            {/* </del> */}
-                                        </H5>
-                                        <H5 borderRadius="30px" backgroundColor="#7B68EE" padding="2px 8px" fontWeight="bold" color="white" margin="0 10px">₹ {dd.offer}</H5>
+                                :
 
-                                    </Flex>
+                                <Flex margin="16px 10px" justifyContent="flex-start">
 
-                                    :
+                                    <H5 fontWeight="bold" color="green">₹ {dd.price}</H5>
 
-                                    <Flex margin="16px 10px" justifyContent="flex-start">
-                                        <H5 fontWeight="bold" color="green">₹ {dd.price}</H5>
-                                    </Flex>
+                                </Flex>}
 
-                                }
+                            {cart.some(ca => ca.product_id === data._id) ?
 
+                                <Button width="150px" margin="10px 0"
+                                    color="remove"
+                                    onClick={() => {
 
-                                {cart.some(ca => ca.product_id === data._id) ?
+                                        setDishDetails(true)
+                                        isDetailLoading(true);
+                                        setDishId(data._id)
 
-                                    <Button width="100%"
-                                        color="white"
-                                        onClick={() => {
+                                    }}> Remove</Button>
 
-                                            setDishDetails(true)
-                                            isDetailLoading(true);
-                                            setDishId(data._id)
+                                :
 
-                                        }}> Remove</Button>
+                                <Button width="150px" margin="10px 0" color="tomato"
 
-                                    :
+                                    onClick={() => handleAddToCart({
+                                        product_id: data?._id,
+                                        hotel_name: hotel_name,
+                                        _id: dd._id,
+                                        isQty: data?.qty,
+                                        product_image: data?.image,
+                                        product_name: data?.name,
+                                        price: dd.price,
+                                        weight: dd.weight,
 
-                                    <Flex>
+                                    })}>Add</Button>
 
-                                        <Button width="100%" color="orange"
+                            }
 
-                                            onClick={() => handleAddToCart({
-                                                product_id: data?._id,
-                                                hotel_name: hotel_name,
-                                                _id: dd._id,
-                                                isQty: data?.qty,
-                                                product_image: data?.food_image,
-                                                product_name: data?.food_name,
-                                                price: dd.price,
-                                                weight: dd.weight,
-
-                                            })}>Add</Button>
-
-                                    </Flex>
-
-                                }
-                            </>
-
-                        )}
+                        </Flex>
 
 
-                    </div>
-
-                )
-                }
-
-            </Grid >
+                    </Flex>
 
 
 
-            {dishDetails &&
+                ))}
+
+
+            {
+                dishDetails &&
 
                 <>
 

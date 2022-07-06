@@ -15,7 +15,7 @@ export const Fastfood = (props) => {
 
   const [dishDetails, setDishDetails] = useState(false)
 
-  const [dish_id, setDishId] = useState();
+  const [dish_id, setDishId] = useState("617839c21e0d94f601e2d6f4");
 
 
   const cart = useSelector((state) => state.cart.cartItems)
@@ -64,10 +64,10 @@ export const Fastfood = (props) => {
               width: "150px",
               height: "170px",
               objectFit: "cover"
-            }} src={data.productImage} class="card-img-top" alt="..." />
+            }} src={data.image} class="card-img-top" alt="..." />
 
 
-            <H4 fontWeight="bolder" margin="10px 5px">{data.product_name}</H4>
+            <H4 fontWeight="bolder" margin="10px 5px">{data.name}</H4>
 
           </div>
 

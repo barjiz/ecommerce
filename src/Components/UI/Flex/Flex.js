@@ -9,6 +9,7 @@ export const Flex = (props) => {
     return (
 
         <div onClick={props.onClick} style={{
+            borderBottom: props.borderBottom,
             top: props.top,
             left: props.left,
             bottom: props.bottom,
@@ -29,7 +30,7 @@ export const Flex = (props) => {
             overflowY: props.overflowY,
             overflowX: props.overflowX,
             borderRadius: props.borderRadius,
-            zIndex:props.zIndex
+            zIndex: props.zIndex
         }} key={props.key} className={`${props.className} flex`}>
             {props.children}
         </div>

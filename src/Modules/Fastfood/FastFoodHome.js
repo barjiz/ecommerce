@@ -8,6 +8,8 @@ import { SwiperCarousel } from '../../Components/Slider/SwiperCarousel/SwiperCar
 import { Fastfood } from './Fastfood'
 import { dishescategories } from '../../LocalData/dishescategories'
 import { Hotel } from '../Hotel/Hotel'
+import { PoplularDish } from './PoplularDish'
+import { fastfoodCategory } from '../../LocalData/Category'
 
 
 export const FastFoodHome = () => {
@@ -56,11 +58,11 @@ export const FastFoodHome = () => {
 
                     <SwiperSlide>
 
-                        <Flex width="90%" justifyContent="center">
+                        <Flex width="96%" justifyContent="center">
 
                             <img width="100%" height={window.innerWidth <= 460 ? "180px" : "400px"}
 
-                                style={{ cursor: "pointer", borderRadius: "30px" }}
+                                style={{ cursor: "pointer", borderRadius: "15px" }}
                                 src={require(`../../Assets/Images/food/${data.image}`)} alt="" />
 
                         </Flex>
@@ -71,28 +73,6 @@ export const FastFoodHome = () => {
 
 
             </SwiperCarousel>
-
-
-            <Grid>
-
-                {dishescategories.map(data =>
-
-                    <div className='col-4 col-sm-3 col-md-3 col-lg-3 col-xl-2  col-xxl-2'>
-
-                        <Flex margin="10px 0" backgroundColor="#FAD7A0" borderRadius="10px"
-                            alignItems="center" flexDirection="column">
-
-                            <i style={{ fontSize: "1.7rem", margin: "10px 0" }} class={data.icon}></i>
-
-                            <H6 fontWeight="bold" margin="10px 0">{data.product_name}</H6>
-
-                        </Flex>
-
-                    </div>
-
-                )}
-
-            </Grid>
 
 
             <div>
@@ -106,10 +86,15 @@ export const FastFoodHome = () => {
 
                 <Flex overflowX="scroll" >
 
-                    <Fastfood
-                        width={window.innerWidth <= 460 ? "130px" : "160px"}
-                        height="180px"
-                        category="3" flexDirection="column" />
+                    {fastfoodCategory.map(data =>
+
+                        <PoplularDish
+                            category={data.category}
+                            width={window.innerWidth <= 460 ? "130px" : "160px"}
+                            height="10px"
+                            flexDirection="column" />
+
+                    )}
 
                 </Flex>
 

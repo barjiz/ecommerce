@@ -60,7 +60,27 @@
     border: 1px solid red;
 }
 
+.remove {
+    text-transform: uppercase;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 1px solid black;
+    font-size: 1.1rem;
+    padding: 5px;
+}
+
+.tomato {
+    text-transform: uppercase;
+    background-color: tomato;
+    color: white;
+    font-weight: bold;
+    border: 1px solid tomato;
+    font-size: 1.1rem;
+    padding: 5px;
+}
+
 .orange {
-    background-color: orange;
-    border: 1px solid orange;
+    background-color: tomato;
+    border: 1px solid tomato;
 }

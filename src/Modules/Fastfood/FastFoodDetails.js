@@ -82,7 +82,7 @@ export const FastFoodDetails = (props) => {
 
         <Flex width="fit-content" position="relative" margin="10px">
 
-          <img className='product_image' src={fastfoods?.data?.hotelFood?.food_image} alt="" />
+          <img className='product_image' src={fastfoods?.data?.hotelFood?.image} alt="" />
 
           <Flex position="absolute" top="0" left="0">
 
@@ -95,7 +95,7 @@ export const FastFoodDetails = (props) => {
 
         <Flex margin="10px" width="fit-content" flexDirection="column" justifyContent="start" alignItems="start">
 
-          <H5 width="150px" margin="0px 10px" fontWeight="bold">{fastfoods?.data?.hotelFood?.food_name}</H5>
+          <H5 width="150px" margin="0px 10px" fontWeight="bold">{fastfoods?.data?.hotelFood?.name}</H5>
 
           <H4 margin="10px" textTransform="lowercase" fontWeight="bolder" color="black">₹ {price}</H4>
 
@@ -174,15 +174,15 @@ export const FastFoodDetails = (props) => {
 
                 :
 
-                <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px" color="orange"
+                <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px" color="tomato"
 
                   onClick={() => checked === index && handleAddToCart({
                     product_id: fastfoods?.data?.hotelFood?._id,
                     _id: the_id,
                     hotel_name:hotel_name,
                     isQty: fastfoods?.data?.hotelFood?.qty,
-                    product_image: fastfoods?.data?.hotelFood?.food_image,
-                    product_name: fastfoods?.data?.hotelFood?.food_name,
+                    product_image: fastfoods?.data?.hotelFood?.image,
+                    product_name: fastfoods?.data?.hotelFood?.name,
                     price: price,
                     weight: weight,
 

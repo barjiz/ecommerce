@@ -4,7 +4,7 @@ import { H4 } from '../../Components/Text/Text';
 import { Grid } from '../../Components/UI/Grid/Grid';
 import { useQueryFetch } from '../../Utils/useQueryFetch';
 
-export const Hotel = () => {
+export const Hotel = (props) => {
 
     const navigate = useNavigate();
 
@@ -20,15 +20,19 @@ export const Hotel = () => {
 
                 {hotel?.map(data =>
 
-                    <div style={{ margin: "10px 0" }} className="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2  col-xxl-2" key={data._id} >
+                    <div style={{ margin: "10px 0", }} className="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2  col-xxl-2" key={data._id} >
 
-                        <img onClick={() => navigate(`hotel/${data._id}`)} style={{
+                        <img onClick={() => navigate(`/hotel/${data._id}`)} style={{
+                            boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
+                            borderRadius: "10px",
                             width: "100%",
                             height: "150px",
                             objectFit: "cover"
                         }} src={data.image} className="card-img-top" alt="..." />
 
-                        <H4 margin="15px" fontWeight="bold">{data.hotel_name}</H4>
+                        <H4 margin="10px 0" fontWeight="bold">{data.hotel_name}</H4>
+
+                        <H4 margin="5px 0">Kozhikode</H4>
 
                     </div>
 
