@@ -25,7 +25,7 @@ export const Header = (props) => {
 
 
       {props.icon ?
-        <i onClick={props.onClick} class="fa-solid fa-chevron-left"></i>
+        <i onClick={props.onClick} class="fa-solid fa-arrow-left"></i>
 
         :
 
@@ -33,7 +33,7 @@ export const Header = (props) => {
 
       }
 
-      <H3 fontWeight="bold" >{props.title}</H3>
+      <H3 fontSize="1.5rem" fontWeight="bold" >{props.title}</H3>
 
       <i style={{ color: 'white' }} class="fa-solid fa-chevron-left"></i>
 

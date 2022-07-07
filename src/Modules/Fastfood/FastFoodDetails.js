@@ -27,6 +27,8 @@ export const FastFoodDetails = (props) => {
 
   const [price, setPrice] = useState()
 
+  const [offer, setOffer] = useState()
+
   const [weight, setWeight] = useState()
 
   const [checked, setChecked] = useState(0);
@@ -41,6 +43,8 @@ export const FastFoodDetails = (props) => {
       setTheId(thePrice?.filter((fil, index) => index === 0).map((pr, index) => pr._id).toString())
 
       setPrice(thePrice?.filter((fil, index) => index === 0).map(pr => pr.price))
+
+      setOffer(thePrice?.filter((fil, index) => index === 0).map(pr => pr.offer))
 
       setWeight(thePrice?.filter((fil, index) => index === 0).map(pr => pr.weight))
 
@@ -98,7 +102,7 @@ export const FastFoodDetails = (props) => {
 
               <H4 margin="10px"><del> ₹ {price}</del></H4>
 
-              <H4 margin="10px" fontWeight="bold">₹ {price}</H4>
+              <H4 margin="10px" fontWeight="bold">₹ {offer}</H4>
 
             </Flex>
 
@@ -183,6 +187,7 @@ export const FastFoodDetails = (props) => {
                     product_image: fastfoods?.data?.hotelFood?.image,
                     product_name: fastfoods?.data?.hotelFood?.name,
                     price: price,
+                    offer: offer,
                     weight: weight,
 
                   })}>Add</ButtonText>

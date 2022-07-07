@@ -52,37 +52,26 @@ export const ConfirmOrder = ({ prevPage, address }) => {
         <div className='confirmOrder'>
 
 
-            <Header navigate="profile" title="confirm order" />
+            <Header icon={true} onClick={prevPage} title="confirm order" />
+
+            <Flex flexDirection="column" justifyContent="start" alignItems="start">
 
 
-            <RadioCard  >
+                <H4 margin="15px" fontWeight="bold">Payment Method</H4>
 
+                <Flex width="95%" justifyContent="start"
+                    boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+                    margin="auto" backgroundColor="white" padding="10px">
 
-            </RadioCard >
-
-
-            <Card width="100%">
-
-                <Flex flexDirection="column" width="100%" >
-                    <Flex flexDirection="column" width="100%" >
-
-                        <H4 margin="10px" fontWeight="bold">Product Cost {total}</H4>
-                    </Flex>
-
-
-                    <H4 margin="10px" fontWeight="bold">Delivery Charge 10</H4>
-
-                    <H4 margin="10px" fontWeight="bold">Total {total + 10}</H4>
-
-
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                    <H4 margin="10px">Pay on Delivery</H4>
                 </Flex>
-            </Card>
+
+            </Flex>
 
 
 
-            <Flex width="100%" position="fixed" bottom="0" left="0" padding="60px 0">
-
-                <Button color="white" onClick={prevPage} margin="10px">Back</Button>
+            <Flex width="100%" position="fixed" bottom="0" left="0">
 
                 <Button color="blue" onClick={PlaceOrder} width="100%" margin="10px" >Confirm Order</Button>
 

@@ -4,7 +4,7 @@ import "./RadioCard.css"
 export const RadioCard = (props) => {
     return (
 
-        <label  >
+        <label style={{ margin: props.margin }}  >
 
             <input checked={props.checked} className='card_input_element' type="radio" name="radio" id={props.id} onChange={props.onChange}
                 defaultChecked={props.defaultChecked} value={props.value} />

@@ -13,19 +13,23 @@ import { Navigator } from '../../Components/Route/Router'
 import { ResponsiveWrap } from '../../Components/UI/ResponsiveWrap/ResponsiveWrap'
 import { useEffect } from 'react'
 import { useLoading } from '../../Utils/useLoading'
+import { ManageAddress } from '../DeliveryForm/ManageAddress'
+import { OpacityBg } from '../../Components/UI/OpacityBg/OpacityBg'
 
-export const Cart = ({ nextPage }) => {
+export const Cart = (props) => {
+
+  const { nextPage, setAddress, address } = props;
 
   const cart = useSelector((state) => state.cart)
-
 
 
   let navigate = useNavigate()
 
   const dispatch = useDispatch()
 
+  const [selectAddress, setSelectAddress] = useState(false);
 
-  const isLoading = useLoading()
+  console.log("address", address)
 
 
   useEffect(() => {
@@ -51,10 +55,10 @@ export const Cart = ({ nextPage }) => {
 
   return (
 
-    <ResponsiveWrap>
+    <div className='cart'>
 
 
-      <Header icon={false} title="cart" />
+      <Header icon={true} onClick={() => navigate("/")} title="cart" />
 
 
       {cart.cartItems.length === 0 ? (
@@ -71,16 +75,15 @@ export const Cart = ({ nextPage }) => {
 
       ) : (
 
-        <div>
-
+        <div className='cart_items'>
 
           {cart.cartItems.map(cartItem => (
 
             <React.Fragment key={cartItem._id}>
 
-              <Card margin="10px 0" padding="10px 0" >
+              <Card margin="10px" padding="0" >
 
-                <Flex backgroundColor="white" width="100%" justifyContent="space-between">
+                <Flex width="100%" justifyContent="space-between">
 
                   <Flex width="fit-content" position="relative" margin="10px">
 
@@ -121,24 +124,22 @@ export const Cart = ({ nextPage }) => {
 
                   </Flex>
 
-                  <Flex flex="3">
+                  <Flex justifyContent="center" flex="3" margin="0 10px"
+                    borderRadius="5px" padding="10px 0" border="2px solid tomato" >
 
-                    <Button color="white" margin="5px" height="10px" onClick={() => handleDecreaseCart(cartItem)}>-</Button>
+                    <Flex justifyContent="center" alignItems="center" onClick={() => handleDecreaseCart(cartItem)}>
+                      <i style={{ fontSize: "1rem", color: "tomato" }} class="fa-solid fa-minus"></i>
+                    </Flex>
 
+                    <Flex justifyContent="center" alignItems="center">
+                      <H4 >{cartItem.cartQuanity}</H4>
+                    </Flex>
 
-                    <H4 >{cartItem.cartQuanity}</H4>
-
-
-                    {cartItem.isQty ?
-
-                      <Button color="white" margin="5px" height="10px" onClick={() => handleIncreaseCart(cartItem)}>+</Button>
-                      :
-                      <Button height="10px" margin="5px">+</Button>
-                    }
-
+                    <Flex justifyContent="center" alignItems="center" onClick={() => handleIncreaseCart(cartItem)}>
+                      <i style={{ fontSize: "1rem", color: "tomato" }} class="fa-solid fa-plus"></i>
+                    </Flex>
 
                   </Flex>
-
 
                 </Flex>
 
@@ -153,24 +154,72 @@ export const Cart = ({ nextPage }) => {
           ))}
 
 
+          <H4 margin="15px" fontWeight="bold">Bill Details</H4>
 
-          <div className='check_out'>
-
-
-            <H3>Total: {cart.cartTotalAmount} </H3>
-
-            <Button width="fit-content" color="blue" onClick={CheckOut}>Check out</Button>
+          <Card margin="10px">
 
 
-          </div>
+            <Flex backgroundColor="White" flexDirection="column" >
+
+              <Flex padding="10px" justifyContent="space-between" bottomBorder="1px solid grey">
+                <H4>Item Total</H4>
+                <H4>₹{cart.cartTotalAmount} </H4>
+              </Flex>
+
+              <Flex padding="10px" justifyContent="space-between" bottomBorder="1px solid grey">
+                <H4>Delivery Charge</H4>
+                <H4>₹20</H4>
+
+              </Flex>
+
+
+              <Flex padding="10px" justifyContent="space-between" bottomBorder="1px solid grey">
+                <H4 fontWeight="bold">Pay</H4>
+                <H4 fontWeight="bold">₹{cart.cartTotalAmount + 20} </H4>
+              </Flex>
+
+            </Flex>
+
+            <Flex position="fixed" backgroundColor="white"
+              bottom="0" left="0" justifyContent="center" padding="10px">
+
+              {address.length === 0 ?
+
+                <Button fontWeight="bold" width="90%" color="red"
+                  onClick={() => setSelectAddress(true)}>Select Address</Button>
+                :
+
+                <Button fontWeight="bold" width="90%" color="green" onClick={CheckOut}>Check out</Button>
+              }
+
+            </Flex>
+
+          </Card>
+
+
+
+
+
+          {selectAddress &&
+
+
+            <OpacityBg>
+
+              <ManageAddress
+                nextPage={nextPage}
+                setSelectAddress={setSelectAddress}
+                setAddress={setAddress}
+              />
+
+            </OpacityBg>}
+
 
 
         </div>
 
-
       )
       }
 
-    </ResponsiveWrap >
+    </div >
   )
 }

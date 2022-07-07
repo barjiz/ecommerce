@@ -1,15 +1,10 @@
 import React, { useState } from 'react'
-import { Button } from '../../Components/Button/Button'
-import { Flex } from '../../Components/UI/Flex/Flex'
-
 import { Cart } from '../Cart/Cart'
 import { ConfirmOrder } from '../ConfirmOrder/ConfirmOrder'
-import { ManageAddress } from './ManageAddress'
 
 export const DeliveryForm = () => {
 
     const [tabs, setTabs] = useState(1)
-
 
     const [address, setAddress] = useState([]);
 
@@ -18,7 +13,6 @@ export const DeliveryForm = () => {
         setTabs(tabs + 1)
 
     }
-
 
     const prevPage = () => {
 
@@ -32,20 +26,16 @@ export const DeliveryForm = () => {
         <div>
 
             {
-                tabs === 1 ? <Cart nextPage={nextPage} /> :
+                tabs === 1 ? <Cart
+                    address={address}
+                    nextPage={nextPage}
+                    setAddress={setAddress} /> :
 
-                    tabs === 2 ? <ManageAddress
-                        nextPage={nextPage}
-                        setAddress={setAddress}
-
-                        prevPage={prevPage} /> :
-
-                        tabs === 3 ? <ConfirmOrder
-                            address={address}
-                            prevPage={prevPage}
-                            setTabs={setTabs} /> : null
+                    tabs === 2 ? <ConfirmOrder
+                        address={address}
+                        prevPage={prevPage}
+                        setTabs={setTabs} /> : null
             }
-
 
         </div>
 

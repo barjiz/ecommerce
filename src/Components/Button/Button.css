@@ -78,6 +78,7 @@
     border: 1px solid tomato;
     font-size: 1.1rem;
     padding: 5px;
+    transform: rotate3d(90);
 }
 
 .orange {

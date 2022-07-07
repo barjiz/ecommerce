@@ -1,0 +1,29 @@
+.manage_address {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 150;
+    padding: 10px 0;
+}
+
+.manage_address i {
+    font-size: 5rem;
+    color: rgb(9, 165, 4);
+    margin: 20px 0;
+}
+
+.manage_address .empty_address {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+}

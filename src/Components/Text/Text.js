@@ -47,7 +47,7 @@ export const H3 = (props) => {
 
     return (
         <h1 className='font_size s3' style={{
-
+            fontSize: props.fontSize,
             width: props.width,
             backgroundColor: props.backgroundColor,
             borderRadius: props.borderRadius,
