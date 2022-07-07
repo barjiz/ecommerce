@@ -1,0 +1,15 @@
+.propluardish_foods {
+    position: fixed;
+    width: 100%;
+    height: fit-content;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: rgb(235, 235, 235);
+}
+
+.propluardish_foods_scroll {
+    padding-top: 60px;
+    overflow-y: scroll;
+    height: 100vh;
+}

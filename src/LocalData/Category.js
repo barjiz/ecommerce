@@ -90,37 +90,36 @@ export const fastfoodCategory = [
     {
         id: 1,
         category: "chicken",
+        image: "https://www.rockrecipes.com/wp-content/uploads/2020/02/Spice-Rack-Chicken-square-cropped-featured-image-of-uncarved-chicken-on-a-white-platter.jpg"
     },
     {
         id: 2,
         category: "rice",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmbRf6t7KLlRR818U3g2C2NMpc5JYqI_8ZoQ&usqp=CAU"
     },
     {
         id: 3,
         category: "breakfast",
+        image: "https://www.vegrecipesofindia.com/wp-content/uploads/2017/11/puttu-recipe-1a-500x500.jpg"
     },
     {
         id: 4,
         category: "burger",
-    },
-    {
-        id: 5,
-        category: "fry",
+        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnVyZ2VyfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
     },
     {
         id: 6,
         category: "fish",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnKpSOaK6yoi-NWzalh-xk-vlKHODl0i67PA&usqp=CAU"
     },
     {
         id: 7,
         category: "beef",
-    },
-    {
-        id: 8,
-        category: "prawns",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT824gNucBO86JGq2HVXpupkPf3B97nhsmjrw&usqp=CAU"
     },
     {
         id: 8,
         category: "mutton",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0jkynoUleATgz-xoB8gC8IVibfMpEcwXb4Q&usqp=CAU"
     }
 ]

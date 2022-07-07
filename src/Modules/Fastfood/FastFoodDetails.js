@@ -18,8 +18,6 @@ export const FastFoodDetails = (props) => {
   const { fetchData: fastfoods } = useQueryFetchId('hotelfoods', dish_id)
 
 
-  console.log("fastfoods", fastfoods?.data?.hotelFood?.food_name)
-
   const dispatch = useDispatch()
 
 
@@ -75,37 +73,42 @@ export const FastFoodDetails = (props) => {
 
     <div onClick={setDishDetails(true)} className='dish_details' key={fastfoods?.data?.hotelFood?.food_name}>
 
+      <Flex padding="10px" justifyContent="space-between" alignItems="start">
 
+        <Flex justifyContent="start" alignItems="start">
 
-      <Flex width="100%"
-        justifyContent="space-between" alignItems="start">
+          <Flex width="fit-content" position="relative" >
 
-        <Flex width="fit-content" position="relative" margin="10px">
+            <img className='product_image' src={fastfoods?.data?.hotelFood?.image} alt="" />
 
-          <img className='product_image' src={fastfoods?.data?.hotelFood?.image} alt="" />
+            <Flex position="absolute" top="0" left="0">
 
-          <Flex position="absolute" top="0" left="0">
+              <H4 backgroundColor="red" padding="2px 10px" borderRadius="0"
+                textTransform="lowercase" color="white" fontWeight="bold">{weight}</H4>
 
-            <H4 backgroundColor="red" padding="2px 10px" borderRadius="0"
-              textTransform="lowercase" color="white" fontWeight="bold">{weight}</H4>
+            </Flex>
+
+          </Flex>
+
+          <Flex width="fit-content" flexDirection="column" justifyContent="start" alignItems="start">
+
+            <H5 width="150px" margin="0px 10px" fontWeight="bold">{fastfoods?.data?.hotelFood?.name}</H5>
+
+            <Flex width="fit-content">
+
+              <H4 margin="10px"><del> ₹ {price}</del></H4>
+
+              <H4 margin="10px" fontWeight="bold">₹ {price}</H4>
+
+            </Flex>
+
+            <H4 color="tomato" margin="10px" textTransform="lowercase" fontWeight="bolder">{hotel_name}</H4>
 
           </Flex>
 
         </Flex>
 
-        <Flex margin="10px" width="fit-content" flexDirection="column" justifyContent="start" alignItems="start">
-
-          <H5 width="150px" margin="0px 10px" fontWeight="bold">{fastfoods?.data?.hotelFood?.name}</H5>
-
-          <H4 margin="10px" textTransform="lowercase" fontWeight="bolder" color="black">₹ {price}</H4>
-
-          <H4 backgroundColor="tomato" padding="4px 10px" color="white" margin="10px" textTransform="lowercase"
-            fontWeight="bolder">{hotel_name}</H4>
-
-
-        </Flex>
-
-        <Flex margin="10px" width="fit-content">
+        <Flex width="fit-content">
 
           <div onClick={() => setDishDetails(false)} style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "40px", height: "40px", borderRadius: "100%", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}>
 
@@ -116,9 +119,6 @@ export const FastFoodDetails = (props) => {
         </Flex>
 
       </Flex>
-
-
-
 
       <div className='dish_items'>
 
@@ -133,7 +133,6 @@ export const FastFoodDetails = (props) => {
             setTheId(pr._id)
 
             setChecked(index)
-
 
           }} id={pr._id}>
 
@@ -179,7 +178,7 @@ export const FastFoodDetails = (props) => {
                   onClick={() => checked === index && handleAddToCart({
                     product_id: fastfoods?.data?.hotelFood?._id,
                     _id: the_id,
-                    hotel_name:hotel_name,
+                    hotel_name: hotel_name,
                     isQty: fastfoods?.data?.hotelFood?.qty,
                     product_image: fastfoods?.data?.hotelFood?.image,
                     product_name: fastfoods?.data?.hotelFood?.name,

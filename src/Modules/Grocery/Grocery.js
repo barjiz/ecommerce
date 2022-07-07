@@ -14,7 +14,7 @@ import { GroceryDetails } from './GroceryDetails'
 
 export const Grocery = (props) => {
 
-    const { category, className  } = props;
+    const { category, className } = props;
 
     const [dishDetails, setDishDetails] = useState(false)
 
@@ -33,6 +33,11 @@ export const Grocery = (props) => {
         dispatch(addToCart(data))
     }
 
+    // var price = 100;
+    // var offer = 90;
+    // var percent = ;
+    // console.log(percent); // 90.0 
+
 
     return (
 
@@ -40,100 +45,117 @@ export const Grocery = (props) => {
 
             {product?.filter(fil => fil.category === category).map(data => (
 
-                <div className={className} >
 
-                    <div key={data._id} class="card" style={{ display: "flex", flexDirection: "column", margin: props.margin }}>
+                JSON.parse(data.price).filter((fil, index) => index === 0).map(dd =>
 
-                        <img onClick={() => {
-                            setDishDetails(true)
-                            isDetailLoading(true);
-                            setDishId(data._id)
-                        }}
-                            style={{
-                                width: props.width,
-                                height: props.height,
-                                objectFit: "cover"
-                            }} src={data.productImage} class="card-img-top" alt="..." />
 
-                        <H5 width="100%" maxWidth="100px" fontWeight="bold" maxHeight="1.4rem" margin="10px 5px">{data.product_name}</H5>
+                    <div className={className} >
 
-                        {JSON.parse(data.price).filter((fil, index) => index === 0).map(dd =>
+                        <div key={data._id} class="card" style={{ display: "flex", flexDirection: "column", margin: props.margin }}>
 
-                            <>
 
-                                <Flex onClick={() => {
-                                    setDishDetails(true)
-                                    isDetailLoading(true);
-                                    setDishId(data._id)
-                                }}
-                                    backgroundColor="rgba(255, 99, 71, 0.162)" padding="3px 10px"
-                                    margin="10px 0px" borderRadius="5px">
 
-                                    <H5 textTransform="lowercase" color="tomato" fontWeight="bold" >{dd.weight}</H5>
-                                    <i style={{ fontSize: "1rem" }} class="fa-solid fa-chevron-down"></i>
+                            <Flex position="relative">
+                                <Flex>
+                                    <img onClick={() => {
+                                        setDishDetails(true)
+                                        isDetailLoading(true);
+                                        setDishId(data._id)
+                                    }}
+                                        style={{
+                                            width: props.width,
+                                            height: props.height,
+                                            objectFit: "cover"
+                                        }} src={data.productImage} class="card-img-top" alt="..." />
 
                                 </Flex>
 
-                                {dd.offer.length > 0 ?
-                                    <Flex margin="10px" justifyContent="flex-start">
-                                        <H5 fontWeight="bold" color="green" >
-                                            {/* <del>  */}
+                                <Flex position="absolute" top="0" left="0" >
+                                    <H5 padding="5px 10px"
+                                        backgroundColor="green" color="white" fontWeight="bold">{dd.offer * 100 / dd.price}% off</H5>
+                                </Flex>
+
+                            </Flex>
+
+                            <H5 width="100%" maxWidth="100px" fontWeight="bold" maxHeight="1.4rem" margin="10px 5px">{data.product_name}</H5>
+
+
+                            <Flex onClick={() => {
+                                setDishDetails(true)
+                                isDetailLoading(true);
+                                setDishId(data._id)
+                            }}
+                                width="fit-content" justifyContent="start"
+                                backgroundColor="rgba(255, 99, 71, 0.162)" padding="3px 10px"
+                                margin="10px 0px" borderRadius="5px">
+
+                                <H5 textTransform="lowercase" color="tomato" fontWeight="bold" >{dd.weight}</H5>
+                                <i style={{ fontSize: "1rem", marginLeft: "10px" }} class="fa-solid fa-chevron-down"></i>
+
+                            </Flex>
+
+                            {dd.offer != dd.price ?
+
+                                <Flex margin="10px" justifyContent="flex-start">
+
+                                    <H5 fontWeight="bold" margin="0 10px 0 0">₹ {dd.offer}</H5>
+
+                                    <H5>
+                                        <del>
                                             ₹ {dd.price}
-                                            {/* </del> */}
-                                        </H5>
-                                        <H5 borderRadius="30px" backgroundColor="#7B68EE" padding="2px 8px" fontWeight="bold" color="white" margin="0 10px">₹ {dd.offer}</H5>
+                                        </del>
+                                    </H5>
 
-                                    </Flex>
+                                </Flex>
 
-                                    :
+                                :
 
-                                    <Flex margin="16px 10px" justifyContent="flex-start">
-                                        <H5 fontWeight="bold" color="green">₹ {dd.price}</H5>
-                                    </Flex>
+                                <Flex margin="16px 10px" justifyContent="flex-start">
+                                    <H5 fontWeight="bold" color="green">₹ {dd.price}</H5>
+                                </Flex>
 
-                                }
+                            }
 
 
-                                {cart.some(ca => ca.product_id === data._id) ?
+                            {cart.some(ca => ca.product_id === data._id) ?
 
-                                    <Button width="100%"
-                                        color="white"
-                                        onClick={() => {
+                                <Button width="100%"
+                                    color="white"
+                                    onClick={() => {
 
-                                            setDishDetails(true)
-                                            isDetailLoading(true);
-                                            setDishId(data._id)
+                                        setDishDetails(true)
+                                        isDetailLoading(true);
+                                        setDishId(data._id)
 
-                                        }}> Remove</Button>
+                                    }}> Remove</Button>
 
-                                    :
+                                :
 
-                                    <Flex>
+                                <Flex>
 
-                                        <Button width="100%" color="green"
+                                    <Button width="100%" color="green"
 
-                                            onClick={() => handleAddToCart({
-                                                product_id: data?._id,
-                                                _id: dd._id,
-                                                isQty: data?.qty,
-                                                product_image: data?.productImage,
-                                                product_name: data?.product_name,
-                                                price: dd.price,
-                                                weight: dd.weight,
+                                        onClick={() => handleAddToCart({
+                                            product_id: data?._id,
+                                            _id: dd._id,
+                                            isQty: data?.qty,
+                                            product_image: data?.productImage,
+                                            product_name: data?.product_name,
+                                            price: dd.price,
+                                            offer: dd.offer,
+                                            weight: dd.weight,
 
-                                            })}>Add</Button>
+                                        })}>Add</Button>
 
-                                    </Flex>
+                                </Flex>
 
-                                }
-                            </>
+                            }
 
-                        )}
 
+
+                        </div>
                     </div>
-                </div>
-
-            ))}
+                )))}
 
 
             {dishDetails &&

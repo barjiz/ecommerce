@@ -21,25 +21,26 @@ const Home = () => {
       <Flex width="100%">
 
 
-
         <Button
           onClick={() => dispatch(setGrocery(true))}
           borderRadius="0"
-          color={isGrocery === true ? "orange" : "gray"}
-          width="100%">fast food</Button>
+          color={isGrocery === true ? "green" : "gray"}
+          width="100%">grocery</Button>
+
 
         <Button
           onClick={() => dispatch(setGrocery(false))}
           borderRadius="0"
-          color={isGrocery === false ? "green" : "gray"}
-          width="100%">grocery</Button>
+          color={isGrocery === false ? "orange" : "gray"}
+          width="100%">fast food</Button>
+
 
 
 
       </Flex>
 
 
-      {isGrocery ? <FastFoodHome /> : <GroceryHome />}
+      {isGrocery ? <GroceryHome /> : <FastFoodHome />}
 
 
     </div >

@@ -6,11 +6,10 @@ import { Categories } from "../../Modules/Categories/Categories"
 import { CategoriesDetails } from "../../Modules/Categories/CategoriesDetails"
 import { DeliveryForm } from "../../Modules/DeliveryForm/DeliveryForm"
 import { FastFoodHome } from "../../Modules/Fastfood/FastFoodHome"
-import { PoplularDishDetails } from "../../Modules/Fastfood/PoplularDishDetails"
+import { PoplularDishFoods } from "../../Modules/Fastfood/PoplularDishFoods"
 import { GroceryHome } from "../../Modules/Grocery/GroceryHome"
 import Home from "../../Modules/Home/Home"
 import { Hotel } from "../../Modules/Hotel/Hotel"
-import { HotelDetails } from "../../Modules/Hotel/HotelDetails"
 import { Order } from "../../Modules/Orders/Order"
 import { OrderDetails } from "../../Modules/Orders/OrderDetails"
 import OrderSuccess from "../../Modules/OrderSuccess/OrderSuccess"
@@ -36,18 +35,14 @@ export const elements = [
     },
     {
         isAuth: false,
-        path: "popular/:id",
-        element: <PoplularDishDetails />
-    },
-    {
-        isAuth: false,
-        path: "hotel",
+        path: "/:id",
         element: <Hotel />
     },
+
     {
         isAuth: false,
         path: "hotel/:id",
-        element: <HotelDetails />
+        element: <PoplularDishFoods />
     },
     {
         isAuth: false,

@@ -9,6 +9,7 @@ export const Flex = (props) => {
     return (
 
         <div onClick={props.onClick} style={{
+            boxShadow: props.boxShadow,
             borderBottom: props.borderBottom,
             top: props.top,
             left: props.left,

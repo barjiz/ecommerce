@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { H3 } from '../Text/Text'
 
@@ -8,6 +9,8 @@ export const Header = (props) => {
 
 
   const navigate = useNavigate()
+
+
 
   return (
 
@@ -22,7 +25,7 @@ export const Header = (props) => {
 
 
       {props.icon ?
-        <i onClick={() => navigate(`/${props.navigate}`)} class="fa-solid fa-chevron-left"></i>
+        <i onClick={props.onClick} class="fa-solid fa-chevron-left"></i>
 
         :
 

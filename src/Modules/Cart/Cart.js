@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../Components/Button/Button'
 import { Card } from '../../Components/Card/Card'
-import { H3, H4 } from '../../Components/Text/Text'
+import { H3, H4, H5 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
 import { addToCart, decreaseCart, getTotals } from '../../Redux/cartSlice'
 import { useDispatch } from 'react-redux'
@@ -103,10 +103,17 @@ export const Cart = ({ nextPage }) => {
 
                   <Flex flex="3" width="fit-content" flexDirection="column" justifyContent="start" alignItems="start">
 
-                    <H4 maxWidth="100px" fontWeight="bold" maxHeight="1.2rem" margin="5px 20px">{cartItem.product_name}</H4>
+                    <H4 maxWidth="100px" margin="5px" fontWeight="bold" maxHeight="1.2rem">{cartItem.product_name}</H4>
 
-                    <H4 fontWeight="bold" color="green" margin="5px 20px">₹ {cartItem.price * cartItem.cartQuanity}</H4>
+                    <H5 margin="5px" >
+                      <del>
+                        ₹{cartItem.price * cartItem.cartQuanity}
+                      </del>
+                    </H5>
 
+                    <H5 fontWeight="bold" margin="5px">
+                      ₹{cartItem.offer * cartItem.cartQuanity}
+                    </H5>
 
                     {cartItem.hotel_name && <H4 backgroundColor="tomato" padding="4px 10px" color="white" margin="10px" textTransform="lowercase"
                       fontWeight="bolder">{cartItem.hotel_name}</H4>
@@ -119,7 +126,7 @@ export const Cart = ({ nextPage }) => {
                     <Button color="white" margin="5px" height="10px" onClick={() => handleDecreaseCart(cartItem)}>-</Button>
 
 
-                    <H4 backgroundColor="rgb(234, 194, 187)" padding="3px 10px" color="white">{cartItem.cartQuanity}</H4>
+                    <H4 >{cartItem.cartQuanity}</H4>
 
 
                     {cartItem.isQty ?

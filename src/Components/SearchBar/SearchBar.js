@@ -74,7 +74,7 @@ export const SearchBar = (props) => {
 
                 <div className="search_input">
 
-                    <i class="fas fa-search"></i>
+                    <i style={{ color: props.color }} class="fas fa-search"></i>
 
                     <input type="text" placeholder={props.placeholder} value={searchTerm}
                         onChange={theSearch} />
