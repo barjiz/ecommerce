@@ -15,12 +15,12 @@ import "./PoplularDishFoods.css"
 
 export const PoplularDishFoods = (props) => {
 
-    const { hotel_name, hotel_id, category } = props;
+    const { hotel_name, hotel_id, category, setPopular, popular } = props;
+
+    console.log("popular", popular)
 
     const cart = useSelector((state) => state.cart.cartItems)
 
-
-    const { id } = useParams();
 
     const [dishDetails, setDishDetails] = useState(false)
 
@@ -40,21 +40,6 @@ export const PoplularDishFoods = (props) => {
         dispatch(addToCart(data))
     }
 
-
-
-
-    // useEffect(() => {
-
-
-    //     if (expand.length <= cates.length) {
-
-    //         setExpand([...expand, { id: expand.length + 1, bool: false }])
-
-    //     }
-
-    // })
-
-
     const [expand, setExpand] = useState([
         { bool: true },
         { bool: true },
@@ -68,7 +53,7 @@ export const PoplularDishFoods = (props) => {
 
     console.log("Data", expand)
 
-    const naviagte = useNavigate();
+    const navigate = useNavigate();
 
 
     const updateFieldChanged = index => e => {
@@ -117,7 +102,7 @@ export const PoplularDishFoods = (props) => {
         <div className='propluardish_foods'>
 
 
-            <Header icon={true} onClick={() => props.setPopular(false)} title={hotel_name} />
+            <Header back={() => setPopular(false)} title={hotel_name} />
 
             {menu && <OpacityBg onClick={() => setMenu(false)}>
 
@@ -135,15 +120,15 @@ export const PoplularDishFoods = (props) => {
             <Flex justifyContent="space-between" alignItems="center"
                 position="fixed" bottom="0" left="0" zIndex="100" onClick={() => setMenu(!menu)}>
 
-                <Flex width="50px" height="50px" margin="10px"
-                    borderRadius="100%" backgroundColor="black" justifyContent="center" alignItems="center">
+                <Flex width="60px" height="60px" margin="10px"
+                    borderRadius="100%" backgroundColor="tomato" justifyContent="center" alignItems="center">
                     <i style={{ color: "white", fontSize: "1.3rem" }} class={menu ? "fa-solid fa-xmark" : "fa-solid fa-book-open"}></i>
                 </Flex>
 
-                {!menu && <Flex onClick={() => naviagte("/cart")} width="fit-content" height="50px" margin="10px"
+                {cart.length > 0 && !menu && <Flex onClick={() => navigate("/cart")} width="fit-content" height="50px" margin="10px"
                     borderRadius="10px" padding="0 10px" backgroundColor="green" justifyContent="center" alignItems="center">
                     <i style={{ color: "white", fontSize: "1rem", margin: "0 5px" }} class="fa-solid fa-cart-shopping"></i>
-                    <H4 color="white" margin="0 5px" fontWeight="bold">100</H4>
+                    <H4 color="white" margin="0 5px" fontWeight="bold">{cart.length}</H4>
                 </Flex>}
 
             </Flex>

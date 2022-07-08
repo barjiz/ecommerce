@@ -1,6 +1,6 @@
 import React from 'react'
 import "./App.css"
-import { BottomNav } from './Components/BottomNav/BottomNav';
+// import { BottomNav } from './Components/BottomNav/BottomNav';
 import { QueryClient, QueryClientProvider } from "react-query"
 import { NavBar } from './Components/NavBar/NavBar';
 import { AllRoutes } from './Components/Routes/Routes';
@@ -29,7 +29,7 @@ function App() {
 
         <NavBar />
 
-        <BottomNav />
+        {/* <BottomNav /> */}
 
 
         {/* AllRoutes */}

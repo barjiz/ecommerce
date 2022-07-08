@@ -25,7 +25,7 @@ export const OrderDetails = () => {
     <div className='order_details'>
 
 
-      <Header icon={true} navigate="orders" title="order details" />
+      <Header back={() => navigate("/orders")} title="order details" />
 
 
       {orders?.order?.filter(fil => fil._id === id).map(data =>
@@ -81,18 +81,7 @@ export const OrderDetails = () => {
 
         </div >
 
-      )
-      }
-
-      <Flex position="fixed" bottom="80px">
-
-
-        <Button width="95%" color="dark" onClick={() => navigate(`/orders`)}
-          margin="0px auto" >Back</Button>
-
-
-
-      </Flex>
+      )}
 
     </div >
   )

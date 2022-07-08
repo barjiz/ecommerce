@@ -40,10 +40,10 @@ export const Hotel = (props) => {
 
         <div style={{ marginTop: marginTop }}>
 
-            {id != null && <Header icon={true} onClick={() => navigate("/")} title={id} />}
+            {id != null && <Header back={() => navigate("/")} title={id} />}
 
 
-            {popular ? <PoplularDishFoods hotel_name={hotel_name} hotel_id={hotel_id} category={id} setPopular={setPopular} /> :
+            {popular ? <PoplularDishFoods hotel_name={hotel_name} popular={popular} hotel_id={hotel_id} category={id} setPopular={setPopular} /> :
 
 
                 <Grid>

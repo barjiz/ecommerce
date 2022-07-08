@@ -39,7 +39,9 @@ export const Order = () => {
     <ResponsiveWrap>
 
 
-      <Header title="my orders" />
+      <Header back={() => navigate("/profile")} title="my orders" />
+
+      
 
 
       {orders?.order?.filter(fil => fil.user_id === user_id).length === 0 ?

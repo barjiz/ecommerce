@@ -54,7 +54,7 @@ export const EditProfile = () => {
         <ResponsiveWrap>
 
 
-            <Header icon={true} navigate="profile" title="edit profile" />
+            <Header back={() => navigate("/profile")} title="edit profile" />
 
 
             <Flex width="90%" margin="0 auto" flexDirection="column" justifyContent="flex-start">

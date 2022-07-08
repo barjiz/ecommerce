@@ -70,7 +70,7 @@ export const Profile = () => {
         <ResponsiveWrap>
 
 
-            <Header title="my profile" />
+            <Header back={() => navigate("/")} title="my profile" />
 
 
             <Flex width="100%">

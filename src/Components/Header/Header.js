@@ -8,10 +8,6 @@ import "./Header.css"
 export const Header = (props) => {
 
 
-  const navigate = useNavigate()
-
-
-
   return (
 
     <div style={{
@@ -21,22 +17,11 @@ export const Header = (props) => {
 
       className='header'>
 
-      {props.children}
-
-
-      {props.icon ?
-        <i onClick={props.onClick} class="fa-solid fa-arrow-left"></i>
-
-        :
-
-        <i style={{ color: 'white' }} class="fa-solid fa-chevron-left"></i>
-
-      }
+      <i onClick={props.back} class="fa-solid fa-arrow-left"></i>
 
       <H3 fontSize="1.5rem" fontWeight="bold" >{props.title}</H3>
 
       <i style={{ color: 'white' }} class="fa-solid fa-chevron-left"></i>
-
 
     </div >
   )

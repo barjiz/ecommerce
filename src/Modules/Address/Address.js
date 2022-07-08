@@ -21,14 +21,9 @@ export const Address = ({ nextPage, prevPage }) => {
         <ResponsiveWrap>
 
 
-
-            <Header icon={true} navigate="profile" title="Saved Address" />
-
+            <Header back={() => navigate("/profile")} navigate="profile" title="Address" />
 
             <UserAddress nextbtn={nextbtn} setAddress={setAddress} />
-
-
-            <Button color="dark" onClick={() => navigate('/profile')} margin="10px auto">Back</Button>
 
         </ResponsiveWrap>
     )

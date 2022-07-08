@@ -58,7 +58,7 @@ export const Cart = (props) => {
     <div className='cart'>
 
 
-      <Header icon={true} onClick={() => navigate("/")} title="cart" />
+      <Header back={() => navigate("/")} title="cart" />
 
 
       {cart.cartItems.length === 0 ? (
