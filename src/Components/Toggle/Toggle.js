@@ -10,3 +10,13 @@ export const Toggle = (props) => {
 
     )
 }
+
+export const ToggleSmall = (props) => {
+    return (
+        <div className={`toggle_small ${props.className}`}>
+            <input checked={props.checked} defaultChecked={props.defaultChecked} onClick={props.onClick} type="checkbox" id={props.id} /><label for={props.id}>Toggle</label>
+        </div>
+
+    )
+}
+

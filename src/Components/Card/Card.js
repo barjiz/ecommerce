@@ -6,7 +6,7 @@ export const Card = (props) => {
 
     return (
 
-        <div style={{ flexDirection: props.flexDirection, margin: props.margin, padding: props.padding }} key={props.key} className='card'>
+        <div style={{ width: props.width, flexDirection: props.flexDirection, margin: props.margin, padding: props.padding }} key={props.key} className='card'>
             {props.children}
         </div>
 

@@ -1,32 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Flex } from '../../Components/UI/Flex/Flex'
 import './Home.css'
-import { Button } from '../../Components/Button/Button'
 import { GroceryHome } from '../Grocery/GroceryHome'
 import { FastFoodHome } from '../Fastfood/FastFoodHome'
-import { useDispatch, useSelector } from 'react-redux'
-import { setGrocery } from '../../Redux/featuresSlice'
-import { H4 } from '../../Components/Text/Text'
 import { useNavigate } from 'react-router-dom'
 import { Toggle } from '../../Components/Toggle/Toggle'
 import { Basket } from '../../Components/Basket/Basket'
+import { useEffect } from 'react'
 
 const Home = () => {
 
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
-  const isGrocery = useSelector((state) => state.features.isGrocery)
+  const boolean = JSON.parse(localStorage.getItem('isGrocery'));
+
+  const [isGrocery, setIsGrocery] = useState(boolean)
+
+  console.log("isGrocery", isGrocery)
 
 
-  const cart = useSelector((state) => state.cart.cartItems)
+  useEffect(() => {
 
-  navigator.geolocation.getCurrentPosition(function (position) {
-    console.log("Latitude is :", position.coords.latitude);
-    console.log("Longitude is :", position.coords.longitude);
-  });
+    if (isGrocery) {
 
+      localStorage.setItem('isGrocery', true);
+
+    }
+    else {
+      localStorage.setItem('isGrocery', false);
+
+    }
+
+  })
 
 
   return (
@@ -45,8 +50,10 @@ const Home = () => {
 
         <Flex width="fit-content" margin="0 10px">
 
-          <Toggle id="1" onClick={() => dispatch(setGrocery(!isGrocery))}
-            defaultChecked={isGrocery ? false : true}></Toggle>
+          <Toggle id="1" onClick={() => setIsGrocery(!isGrocery)}
+
+            defaultChecked={isGrocery ? true : false}
+          ></Toggle>
 
 
           <i onClick={() => navigate("/profile")} style={{ fontSize: "2rem", color: "black" }} class="fa-solid fa-circle-user"></i>
@@ -55,10 +62,9 @@ const Home = () => {
         </Flex>
 
       </Flex>
+    
 
-
-      {isGrocery ? <GroceryHome /> : <FastFoodHome />}
-
+      {isGrocery != null ? isGrocery ? <FastFoodHome /> : <GroceryHome /> : <GroceryHome />}
 
       <Basket />
 

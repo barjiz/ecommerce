@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { Button } from '../../Components/Button/Button'
-import { H4, H5 } from '../../Components/Text/Text'
+import { H3, H4, H5 } from '../../Components/Text/Text'
 import { Flex } from '../../Components/UI/Flex/Flex'
 import { Grid } from '../../Components/UI/Grid/Grid'
 import { OpacityBg } from '../../Components/UI/OpacityBg/OpacityBg'
@@ -14,6 +14,8 @@ import { Header } from "../../Components/Header/Header"
 import "./FastFood.css"
 import { LazyImage } from "../../Components/LazyImage/LazyImage"
 import { Basket } from '../../Components/Basket/Basket'
+import { Toggle, ToggleSmall } from '../../Components/Toggle/Toggle'
+import { Card } from '../../Components/Card/Card'
 
 export const FastFood = (props) => {
 
@@ -27,6 +29,10 @@ export const FastFood = (props) => {
     const [dish_id, setDishId] = useState();
 
     const [menu, setMenu] = useState();
+
+    const [foodType, setFoddType] = useState(false)
+
+    const [allFood, setAllFood] = useState(true);
 
 
     const dispatch = useDispatch()
@@ -97,20 +103,37 @@ export const FastFood = (props) => {
 
     const hotel_filter =
         cates.map((cate, index) =>
-            hotelfoods?.hotelFood.filter(fil => fil.category === cate.category &&
-                category === undefined ? fil.hotel_id === hotel_id : fil.hotel_id === hotel_id
-            && fil.category === category).map(data => data._id).length === 0)
+            hotelfoods?.hotelFood.filter(fil =>
 
-    console.log("hotel_filter", hotel_filter.length > 0)
+                fil.isveg === foodType
 
-    console.log("hotel_filter", hotel_filter[3])
+                    && fil.category === cate.category &&
+                    category === undefined ? fil.hotel_id === hotel_id : fil.hotel_id === hotel_id
+                && fil.category === category).map(data => data._id).length === 0)
+
+
+
+    console.log("foodType", foodType)
+
 
     return (
 
         <div className='propluardish_foods'>
 
 
-            <Header back={() => setPopular(false)} title={hotel_name} />
+            <Header back={() => setPopular(false)} />
+
+
+            <Flex margin="10px" width="fit-content">
+
+                <select name="" id="" onChange={(e) => setFoddType(JSON.parse(e.target.value))}>
+                    <option value={false}>Non Veg</option>
+                    <option value={true}>Veg</option>
+
+                </select>
+
+            </Flex>
+
 
             {menu && <OpacityBg onClick={() => setMenu(false)}>
 
@@ -123,6 +146,7 @@ export const FastFood = (props) => {
                 </Flex>
 
             </OpacityBg>}
+
 
 
             <Flex width="fit-content" justifyContent="space-between" alignItems="center"
@@ -142,6 +166,23 @@ export const FastFood = (props) => {
 
 
             <div className='propluardish_foods_scroll'>
+
+
+
+                <Card width="95%" margin="10px auto" >
+
+                    <Flex justifyContent="start" alignItems="start" flexDirection="column">
+
+                        <H3 margin="5px 0">{hotel_name}</H3>
+
+                        <H4>Location</H4>
+
+
+                    </Flex>
+
+                </Card>
+
+
 
 
                 {cates.map((cate, index) =>
@@ -167,12 +208,12 @@ export const FastFood = (props) => {
 
                                         <Flex margin="20px 0" position="relative" justifyContent="center" alignItems="start">
 
-
-                                            <LazyImage
-                                                width="130px"
-                                                height="130px"
-                                                objectFit="cover"
-                                                src={data.image}
+                                            {console.log("data.image", data.image)}
+                                            <img style={{
+                                                width: "130px",
+                                                height: "130px",
+                                                objectFit: "cover"
+                                            }} src={data.image}
 
                                                 //    onclick
                                                 onClick={() => {

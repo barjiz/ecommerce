@@ -46,3 +46,57 @@
 .toggle label:active:after {
     width: 65px;
 }
+
+
+.toggle_small {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0.6);
+}
+
+.toggle_small input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.toggle_small label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 50px;
+    height: 25px;
+    background: grey;
+    display: block;
+    border-radius: 50px;
+    position: relative;
+}
+
+.toggle_small label:after {
+    content: 'f';
+    position: absolute;
+    top: 1.25px;
+    left: 1.25px;
+    width: 22.5px;
+    height: 22.5px;
+    background: rgb(255, 255, 255);
+    border-radius: 45px;
+    transition: 0.3s;
+}
+
+.veg input:checked+label {
+    background: green;
+}
+
+.non_veg input:checked+label {
+    background: tomato;
+}
+
+.toggle_small input:checked+label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+.toggle_small label:active:after {
+    width: 40px;
+}
