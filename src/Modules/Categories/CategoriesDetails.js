@@ -1,8 +1,10 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import { Basket } from '../../Components/Basket/Basket'
 import { Grid } from "../../Components/UI/Grid/Grid"
+import Grocery from '../Grocery/Grocery'
 import "./CategoriesDetails.css"
-import { Grocery } from '../Grocery/Grocery'
+
 
 export const CategoriesDetails = () => {
 
@@ -22,6 +24,8 @@ export const CategoriesDetails = () => {
                     flexDirection="column" />
 
             </Grid>
+
+            <Basket />
 
 
         </div >

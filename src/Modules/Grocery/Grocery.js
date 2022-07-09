@@ -10,9 +10,9 @@ import { useNavigate } from 'react-router-dom'
 import { useDetailLoading, useLoading } from '../../Utils/useLoading'
 import { OpacityBg } from '../../Components/UI/OpacityBg/OpacityBg'
 import { GroceryDetails } from './GroceryDetails'
+import { LazyImage } from '../../Components/LazyImage/LazyImage'
 
-
-export const Grocery = (props) => {
+const Grocery = (props) => {
 
     const { category, className } = props;
 
@@ -54,21 +54,25 @@ export const Grocery = (props) => {
                         <div key={data._id} class="card" style={{ display: "flex", flexDirection: "column", margin: props.margin }}>
 
 
-
                             <Flex position="relative">
                                 <Flex>
-                                    <img onClick={() => {
-                                        setDishDetails(true)
-                                        isDetailLoading(true);
-                                        setDishId(data._id)
-                                    }}
-                                        style={{
-                                            width: props.width,
-                                            height: props.height,
-                                            objectFit: "cover"
-                                        }} src={data.productImage} class="card-img-top" alt="..." />
+                                    <LazyImage
+                                        width={props.width}
+                                        height={props.height}
+                                        objectFit="cover"
+                                        src={data.productImage}
+
+                                        //    onclick    
+                                        onClick={() => {
+                                            setDishDetails(true)
+                                            isDetailLoading(true);
+                                            setDishId(data._id)
+                                        }}
+
+                                    />
 
                                 </Flex>
+
 
                                 <Flex position="absolute" top="0" left="0" >
                                     <H5 padding="5px 10px"
@@ -136,6 +140,7 @@ export const Grocery = (props) => {
                                     <Button width="100%" color="green"
 
                                         onClick={() => handleAddToCart({
+                                            category: data?.category,
                                             product_id: data?._id,
                                             _id: dd._id,
                                             isQty: data?.qty,
@@ -155,10 +160,12 @@ export const Grocery = (props) => {
 
                         </div>
                     </div>
-                )))}
+                )))
+            }
 
 
-            {dishDetails &&
+            {
+                dishDetails &&
 
                 <>
 
@@ -178,3 +185,5 @@ export const Grocery = (props) => {
 
     )
 }
+
+export default Grocery;

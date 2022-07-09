@@ -6,7 +6,7 @@ import { Categories } from "../../Modules/Categories/Categories"
 import { CategoriesDetails } from "../../Modules/Categories/CategoriesDetails"
 import { DeliveryForm } from "../../Modules/DeliveryForm/DeliveryForm"
 import { FastFoodHome } from "../../Modules/Fastfood/FastFoodHome"
-import { PoplularDishFoods } from "../../Modules/Fastfood/PoplularDishFoods"
+import { FastFood } from "../../Modules/Fastfood/FastFood"
 import { GroceryHome } from "../../Modules/Grocery/GroceryHome"
 import Home from "../../Modules/Home/Home"
 import { Hotel } from "../../Modules/Hotel/Hotel"
@@ -42,7 +42,7 @@ export const elements = [
     {
         isAuth: false,
         path: "hotel/:id",
-        element: <PoplularDishFoods />
+        element: <FastFood />
     },
     {
         isAuth: false,

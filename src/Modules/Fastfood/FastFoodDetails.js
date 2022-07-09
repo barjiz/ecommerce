@@ -180,6 +180,7 @@ export const FastFoodDetails = (props) => {
                 <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px" color="tomato"
 
                   onClick={() => checked === index && handleAddToCart({
+                    category: fastfoods?.data?.hotelFood?.category,
                     product_id: fastfoods?.data?.hotelFood?._id,
                     _id: the_id,
                     hotel_name: hotel_name,

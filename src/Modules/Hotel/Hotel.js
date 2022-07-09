@@ -4,7 +4,7 @@ import { Header } from '../../Components/Header/Header';
 import { H4 } from '../../Components/Text/Text';
 import { Grid } from '../../Components/UI/Grid/Grid';
 import { useQueryFetch } from '../../Utils/useQueryFetch';
-import { PoplularDishFoods } from '../Fastfood/PoplularDishFoods';
+import { FastFood } from '../Fastfood/FastFood';
 
 export const Hotel = (props) => {
 
@@ -20,8 +20,7 @@ export const Hotel = (props) => {
     const [hotel_name, setHotelName] = useState();
 
     const { id } = useParams();
-
-
+    
 
     const onSubmit = (htl) => {
 
@@ -43,7 +42,7 @@ export const Hotel = (props) => {
             {id != null && <Header back={() => navigate("/")} title={id} />}
 
 
-            {popular ? <PoplularDishFoods hotel_name={hotel_name} popular={popular} hotel_id={hotel_id} category={id} setPopular={setPopular} /> :
+            {popular ? <FastFood hotel_name={hotel_name} popular={popular} hotel_id={hotel_id} category={id} setPopular={setPopular} /> :
 
 
                 <Grid>

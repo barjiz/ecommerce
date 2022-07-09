@@ -49,11 +49,7 @@ export const Login = () => {
 
       <div className='auth_container'>
 
-        <Header position="fixed">
-
-          <i onClick={() => navigate('/')} class="fa-solid fa-close"></i>
-
-        </Header>
+        <Header back={() => navigate("/")} />
 
         <i onClick={() => navigate('/')} class="fa-solid fa-close close_auth"></i>
 
@@ -75,7 +71,7 @@ export const Login = () => {
         </Flex>
 
         <Button color="primary" width="100%" onClick={onSubmit} margin="30px 0">Login</Button>
-        
+
 
         <Flex width="100%" justifyContent="center">
 

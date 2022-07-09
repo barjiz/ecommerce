@@ -15,6 +15,7 @@ import { useEffect } from 'react'
 import { useLoading } from '../../Utils/useLoading'
 import { ManageAddress } from '../DeliveryForm/ManageAddress'
 import { OpacityBg } from '../../Components/UI/OpacityBg/OpacityBg'
+import { category } from '../../LocalData/Category'
 
 export const Cart = (props) => {
 
@@ -22,15 +23,14 @@ export const Cart = (props) => {
 
   const cart = useSelector((state) => state.cart)
 
+  console.log("Cart", cart.cartItems)
+
 
   let navigate = useNavigate()
 
   const dispatch = useDispatch()
 
   const [selectAddress, setSelectAddress] = useState(false);
-
-  console.log("address", address)
-
 
   useEffect(() => {
 
@@ -77,81 +77,91 @@ export const Cart = (props) => {
 
         <div className='cart_items'>
 
-          {cart.cartItems.map(cartItem => (
+          {/* {category.map(cate =>
 
-            <React.Fragment key={cartItem._id}>
-
-              <Card margin="10px" padding="0" >
-
-                <Flex width="100%" justifyContent="space-between">
-
-                  <Flex width="fit-content" position="relative" margin="10px">
-
-                    <img style={{
-                      width: "100px",
-                      height: "100px",
-                      objectFit: "cover",
-                      flex: "1",
-                    }} src={cartItem.product_image} class="card-img-top" alt="..." />
+            <> */}
 
 
-                    <Flex position="absolute" top="0" left="0">
+              {
+                // cart.cartItems.filter(fil => fil.category === cate.category).map(cartItem => (
+                  cart.cartItems.map(cartItem => (
 
-                      <H4 backgroundColor="red" padding="2px 10px" borderRadius="0"
-                        textTransform="lowercase" color="white" fontWeight="bold">{cartItem.weight}</H4>
+                  <React.Fragment key={cartItem._id}>
 
-                    </Flex>
+                    <Card margin="10px" padding="0" >
 
-                  </Flex>
+                      <Flex width="100%" justifyContent="space-between">
 
-                  <Flex flex="3" width="fit-content" flexDirection="column" justifyContent="start" alignItems="start">
+                        <Flex width="fit-content" position="relative" margin="10px">
 
-                    <H4 maxWidth="100px" margin="5px" fontWeight="bold" maxHeight="1.2rem">{cartItem.product_name}</H4>
-
-                    <H5 margin="5px" >
-                      <del>
-                        ₹{cartItem.price * cartItem.cartQuanity}
-                      </del>
-                    </H5>
-
-                    <H5 fontWeight="bold" margin="5px">
-                      ₹{cartItem.offer * cartItem.cartQuanity}
-                    </H5>
-
-                    {cartItem.hotel_name && <H4 backgroundColor="tomato" padding="4px 10px" color="white" margin="10px" textTransform="lowercase"
-                      fontWeight="bolder">{cartItem.hotel_name}</H4>
-                    }
-
-                  </Flex>
-
-                  <Flex justifyContent="center" flex="3" margin="0 10px"
-                    borderRadius="5px" padding="10px 0" border="2px solid tomato" >
-
-                    <Flex justifyContent="center" alignItems="center" onClick={() => handleDecreaseCart(cartItem)}>
-                      <i style={{ fontSize: "1rem", color: "tomato" }} class="fa-solid fa-minus"></i>
-                    </Flex>
-
-                    <Flex justifyContent="center" alignItems="center">
-                      <H4 >{cartItem.cartQuanity}</H4>
-                    </Flex>
-
-                    <Flex justifyContent="center" alignItems="center" onClick={() => handleIncreaseCart(cartItem)}>
-                      <i style={{ fontSize: "1rem", color: "tomato" }} class="fa-solid fa-plus"></i>
-                    </Flex>
-
-                  </Flex>
-
-                </Flex>
-
-              </Card>
+                          <img style={{
+                            width: "100px",
+                            height: "100px",
+                            objectFit: "cover",
+                            flex: "1",
+                          }} src={cartItem.product_image} class="card-img-top" alt="..." />
 
 
+                          <Flex position="absolute" top="0" left="0">
 
-            </React.Fragment >
+                            <H4 backgroundColor="red" padding="2px 10px" borderRadius="0"
+                              textTransform="lowercase" color="white" fontWeight="bold">{cartItem.weight}</H4>
+
+                          </Flex>
+
+                        </Flex>
+
+                        <Flex flex="3" width="fit-content" flexDirection="column" justifyContent="start" alignItems="start">
+
+                          <H4 maxWidth="100px" margin="5px" fontWeight="bold" maxHeight="1.2rem">{cartItem.product_name}</H4>
+
+                          <H5 margin="5px" >
+                            <del>
+                              ₹{cartItem.price * cartItem.cartQuanity}
+                            </del>
+                          </H5>
+
+                          <H5 fontWeight="bold" margin="5px">
+                            ₹{cartItem.offer * cartItem.cartQuanity}
+                          </H5>
+
+                          {cartItem.hotel_name && <H4 backgroundColor="tomato" padding="4px 10px" color="white" margin="10px" textTransform="lowercase"
+                            fontWeight="bolder">{cartItem.hotel_name}</H4>
+                          }
+
+                        </Flex>
+
+                        <Flex justifyContent="center" flex="3" margin="0 10px"
+                          borderRadius="5px" backgroundColor="tomato" >
+
+                          <Flex justifyContent="center" alignItems="center" onClick={() => handleDecreaseCart(cartItem)}>
+                            <i style={{ fontSize: "1rem", color: "white" }} class="fa-solid fa-minus"></i>
+                          </Flex>
+
+                          <Flex backgroundColor="white" padding="10px 0" justifyContent="center" alignItems="center">
+                            <H4 >{cartItem.cartQuanity}</H4>
+                          </Flex>
+
+                          <Flex justifyContent="center" alignItems="center" onClick={() => handleIncreaseCart(cartItem)}>
+                            <i style={{ fontSize: "1rem", color: "white" }} class="fa-solid fa-plus"></i>
+                          </Flex>
+
+                        </Flex>
+
+                      </Flex>
+
+                    </Card>
 
 
 
-          ))}
+                  </React.Fragment >
+
+                ))
+              }
+{/* 
+            </>
+          )} */}
+
 
 
           <H4 margin="15px" fontWeight="bold">Bill Details</H4>

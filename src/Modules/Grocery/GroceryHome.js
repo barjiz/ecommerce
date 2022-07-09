@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, lazy, Suspense } from 'react'
 import { Flex } from '../../Components/UI/Flex/Flex'
 import { category } from '../../LocalData/Category'
 import { H3, H4, H5, H6 } from '../../Components/Text/Text'
@@ -9,7 +9,8 @@ import { Grid } from '../../Components/UI/Grid/Grid'
 import { SwiperSlide } from 'swiper/react'
 import { SwiperCarousel } from '../../Components/Slider/SwiperCarousel/SwiperCarousel'
 import { useDetailLoading } from '../../Utils/useLoading'
-import { Grocery } from './Grocery'
+// import { Grocery } from './Grocery'
+const Grocery = lazy(() => import('./Grocery'))
 
 
 export const GroceryHome = () => {
@@ -51,92 +52,94 @@ export const GroceryHome = () => {
 
 
     return (
-        <div>
+        <Suspense fallback={<div>...loading</div>}>
+
+            <div>
+
+                <SearchBar margin="10px" placeholder="search for products" />
+
+                <SwiperCarousel>
 
 
-            <SearchBar margin="10px" placeholder="search for products" />
+                    {banner.map(data => (
+
+                        <SwiperSlide>
+
+                            <Flex width="98%" justifyContent="center">
+
+                                <img width="100%" height={window.innerWidth <= 460 ? "200px" : "400px"}
+
+                                    style={{ cursor: "pointer", borderRadius: "10px" }} src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
+
+                            </Flex>
+
+                        </SwiperSlide>
+
+                    ))}
 
 
-            <SwiperCarousel>
+                </SwiperCarousel>
 
 
-                {banner.map(data => (
-
-                    <SwiperSlide>
-
-                        <Flex width="98%" justifyContent="center">
-
-                            <img width="100%" height={window.innerWidth <= 460 ? "200px" : "400px"}
-
-                                style={{ cursor: "pointer", borderRadius: "10px" }} src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
-
-                        </Flex>
-
-                    </SwiperSlide>
-
-                ))}
+                <H3 margin="20px 10px">Shop By Categories</H3>
 
 
-            </SwiperCarousel>
+                <Grid>
+
+                    {category.map(data =>
+
+                        <div className='col-4 col-sm-3 col-md-3 col-lg-3 col-xl-2  col-xxl-2'>
+                            <Navigator route={`/categories/${data.category}`}>
+                                <img width="90%" className="cate-img" src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
+
+                                <H6 fontWeight="bold" margin="10px 0">{data.product_name}</H6>
+
+                            </Navigator>
+
+                        </div>
+
+                    )}
+
+                </Grid>
 
 
-            <H3 margin="20px 10px">Shop By Categories</H3>
+                {
+                    category.map(cate => (
+
+                        <div key={cate.category}>
+
+                            <Flex width="100%" justifyContent="center">
+
+                                <img width="98%" height={window.innerWidth <= 460 ? "200px" : "400px"} onClick={() => navigate(`/categories/${cate.category}`)}
+                                    style={{ cursor: "pointer", borderRadius: "10px" }} src={require(`../../Assets/Images/product_banner/${cate.banner_wide}`)} alt="" />
+                            </Flex>
+
+                            <Flex>
+
+                                <H4 fontWeight="bold" margin="10px">{cate.product_name}</H4>
+
+                                <H5 color="tomato" fontWeight="bold" margin="10px" onClick={() => navigate(`/categories/${cate.category}`)}>Load More</H5>
+
+                            </Flex>
 
 
-            <Grid>
+                            <Flex overflowX="scroll" >
 
-                {category.map(data =>
+                                <Grocery
+                                    margin="5px"
+                                    width={window.innerWidth <= 460 ? "130px" : "160px"}
+                                    height="180px"
+                                    category={cate.category} flexDirection="column" />
 
-                    <div className='col-4 col-sm-3 col-md-3 col-lg-3 col-xl-2  col-xxl-2'>
-                        <Navigator route={`/categories/${data.category}`}>
-                            <img width="90%" className="cate-img" src={require(`../../Assets/Images/product_banner/${data.image}`)} alt="" />
+                            </Flex>
 
-                            <H6 fontWeight="bold" margin="10px 0">{data.product_name}</H6>
+                        </div >
 
-                        </Navigator>
+                    ))
+                }
 
-                    </div>
+            </div>
 
-                )}
-
-            </Grid>
-
-
-            {
-                category.map(cate => (
-
-                    <div key={cate.category}>
-
-                        <Flex width="100%" justifyContent="center">
-
-                            <img width="98%" height={window.innerWidth <= 460 ? "200px" : "400px"} onClick={() => navigate(`/categories/${cate.category}`)}
-                                style={{ cursor: "pointer", borderRadius: "10px" }} src={require(`../../Assets/Images/product_banner/${cate.banner_wide}`)} alt="" />
-                        </Flex>
-
-                        <Flex>
-
-                            <H4 fontWeight="bold" margin="10px">{cate.product_name}</H4>
-
-                            <H5 color="tomato" fontWeight="bold" margin="10px" onClick={() => navigate(`/categories/${cate.category}`)}>Load More</H5>
-
-                        </Flex>
-
-
-                        <Flex overflowX="scroll" >
-
-                            <Grocery
-                                margin="5px"
-                                width={window.innerWidth <= 460 ? "130px" : "160px"}
-                                height="180px"
-                                category={cate.category} flexDirection="column" />
-
-                        </Flex>
-
-                    </div >
-
-                ))
-            }
-
-        </div>
+        </Suspense >
     )
 }

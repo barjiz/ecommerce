@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {  H4, H5 } from '../../Components/Text/Text'
+import { H4, H5 } from '../../Components/Text/Text'
 import { RadioCard } from '../../Components/Radio/RadioCard'
 import { addToCart, decreaseCart } from '../../Redux/cartSlice'
 import { ButtonText } from '../../Components/Button/Button'
@@ -29,6 +29,9 @@ export const GroceryDetails = (props) => {
 
   const [weight, setWeight] = useState()
 
+  const [offer, setOffer] = useState()
+
+
   const [checked, setChecked] = useState(0);
 
   const isDetailLoading = useDetailLoading()
@@ -43,6 +46,8 @@ export const GroceryDetails = (props) => {
       setPrice(thePrice?.filter((fil, index) => index === 0).map(pr => pr.price))
 
       setWeight(thePrice?.filter((fil, index) => index === 0).map(pr => pr.weight))
+
+      setOffer(thePrice?.filter((fil, index) => index === 0).map(pr => pr.offer))
 
 
     }
@@ -169,12 +174,14 @@ export const GroceryDetails = (props) => {
                 <ButtonText width="40%" borderRadius="0" padding="10px 25px" margin="5px" color={cartColor}
 
                   onClick={() => checked === index && handleAddToCart({
+                    category: product?.data?.category,
                     product_id: product?.data?._id,
                     _id: the_id,
                     isQty: product?.data?.qty,
                     product_image: product?.data?.productImage,
                     product_name: product?.data?.product_name,
                     price: price,
+                    offer: offer,
                     weight: weight,
 
                   })}>Add</ButtonText>
